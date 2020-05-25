@@ -1,0 +1,86 @@
+<div *ngIf = "dataSource">
+  <div [@load]>
+    <h3 class = "text-center">Employee List</h3>
+    <br>
+
+    <mat-table [dataSource] = "dataSource">
+      <!--    Select Column -->
+      <ng-container matColumnDef = "select">
+        <mat-header-cell *matHeaderCellDef> Select</mat-header-cell>
+        <mat-cell *matCellDef = "let element">
+          <mat-radio-group [(ngModel)] = "selectedReq">
+            <mat-radio-button [value] = "element"
+                              color = "warn"></mat-radio-button>
+          </mat-radio-group>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Employee ID Column -->
+      <ng-container matColumnDef = "userId">
+        <mat-header-cell *matHeaderCellDef>Employee Id.</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.userId }} </mat-cell>
+      </ng-container>
+
+      <!-- Title Column -->
+      <ng-container matColumnDef = "abv">
+        <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.abv }} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef = "userName">
+        <mat-header-cell *matHeaderCellDef>Employee Name</mat-header-cell>
+        <mat-cell
+          *matCellDef = "let element"> {{ element.userName }} </mat-cell>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef = "userEmail">
+        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+        <mat-cell
+          *matCellDef = "let element"> {{ element.userEmail }} </mat-cell>
+      </ng-container>
+
+      <!-- IsAdim Column -->
+      <ng-container matColumnDef = "isAdmin">
+        <mat-header-cell *matHeaderCellDef>Admin?</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.isAdmin }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef = "adminStatus">
+        <mat-header-cell *matHeaderCellDef>Admin Status</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.adminStatus }}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef = "displayedColumns"></mat-header-row>
+      <mat-row *matRowDef = "let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <br>
+    <br>
+    <div class = "text-center">
+      <button (click) = "changeAdmin(true)" [disabled] = "!selectedReq"
+              [textContent] = "'Approve'" color = "primary" mat-raised-button>
+      </button>
+      ||
+      <button (click) = "changeAdmin(false)" [disabled] = "!selectedReq"
+              [textContent] = "'Decline'" color = "accent" mat-raised-button>
+      </button>
+      <!--      ||-->
+      <!--      <button mat-raised-button (click) = "removeEmployee()"-->
+      <!--              [disabled] = "!selectedReq||selectedReq.isAdmin" color="warn"-->
+      <!--              [textContent] = "'Remove'">-->
+      <!--      </button>-->
+    </div>
+  </div>
+</div>
+<!--<div *ngIf = "!dataSource" [@load]>-->
+<!--  <br><br><br><br><br>-->
+<!--  <mat-card>-->
+<!--    <mat-card-title class = "text-center">-->
+<!--      No Admin Requests at this time!-->
+<!--    </mat-card-title>-->
+<!--  </mat-card>-->
+<!--</div>-->

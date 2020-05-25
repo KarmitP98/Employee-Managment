@@ -1,0 +1,20 @@
+<mat-toolbar color = "primary">
+  <mat-card-title style = "margin-right: 25px">ABC Company</mat-card-title>
+  <button mat-button routerLink = "/home" routerLinkActive = "selected">Home
+  </button>
+  <button mat-button routerLink = "/time-sheet" routerLinkActive = "selected">
+    Timesheet
+  </button>
+  <button mat-button routerLink = "/annual-leave" routerLinkActive = "selected">
+    Annual Leave
+  </button>
+  <button *ngIf = "isAdmin" mat-button routerLink = "/admin"
+          routerLinkActive = "selected">Admin
+  </button>
+  <button mat-button routerLink = "/database" routerLinkActive = "selected">
+    Database
+  </button>
+  <button (click) = "onLogout()" mat-button routerLinkActive = "selected">
+    Logout
+  </button>
+</mat-toolbar>

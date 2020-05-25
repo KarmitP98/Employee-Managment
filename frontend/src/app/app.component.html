@@ -1,0 +1,9 @@
+<app-header *ngIf = "isAuth"></app-header>
+<div class = "container">
+  <div class = "row">
+    <div class = "col-md-12">
+      <router-outlet [@load]></router-outlet>
+    </div>
+  </div>
+</div>
+<div class = "spacer"></div>

@@ -1,0 +1,12 @@
+.center-vertical {
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 50%;
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}

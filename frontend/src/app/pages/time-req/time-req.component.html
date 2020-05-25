@@ -1,0 +1,80 @@
+<div *ngIf = "timeSheets">
+  <div [@load]><h3 class = "text-center">Time Requests</h3>
+    <br>
+    <mat-table [dataSource] = "dataSource">
+      <!--    Select Column -->
+      <ng-container matColumnDef = "select">
+        <mat-header-cell *matHeaderCellDef> Select</mat-header-cell>
+        <mat-cell *matCellDef = "let element">
+          <mat-radio-group [(ngModel)] = "selectedReq">
+            <mat-radio-button [value] = "element"
+                              color = "warn"></mat-radio-button>
+          </mat-radio-group>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Employee ID Column -->
+      <ng-container matColumnDef = "userId">
+        <mat-header-cell *matHeaderCellDef>Employee Id.</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.userId }} </mat-cell>
+      </ng-container>
+
+      <!-- Log Date Column -->
+      <ng-container matColumnDef = "logDate">
+        <mat-header-cell *matHeaderCellDef>Log Date</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.logDate }} </mat-cell>
+      </ng-container>
+
+      <!-- Work Column -->
+      <ng-container matColumnDef = "work">
+        <mat-header-cell *matHeaderCellDef>Work</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.work }} </mat-cell>
+      </ng-container>
+
+      <!-- Start Time Column -->
+      <ng-container matColumnDef = "startTime">
+        <mat-header-cell *matHeaderCellDef>Start Time</mat-header-cell>
+        <mat-cell
+          *matCellDef = "let element"> {{ element.startTime }} </mat-cell>
+      </ng-container>
+
+      <!-- End Time Column -->
+      <ng-container matColumnDef = "endTime">
+        <mat-header-cell *matHeaderCellDef>End Time</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.endTime }} </mat-cell>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef = "status">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.status }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef = "displayedColumns"></mat-header-row>
+      <mat-row *matRowDef = "let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <br>
+    <br>
+    <div class = "text-center">
+      <button (click) = "changeStatus(true)" [disabled] = "!selectedReq"
+              [textContent] = "'Approve'"
+              color = "primary" mat-raised-button></button>
+      ||
+      <button (click) = "changeStatus(false)" [disabled] = "!selectedReq"
+              [textContent] = "'Decline'"
+              color = "accent" mat-raised-button></button>
+      ||
+      <button (click) = "removeReq()" [disabled] = "!selectedReq"
+              [textContent] = "'Remove'"
+              color = "warn" mat-raised-button></button>
+    </div>
+  </div>
+</div>
+<!--<div *ngIf = "!timeSheets" [@load]>-->
+<!--  <br><br><br><br><br>-->
+<!--  <mat-card>-->
+<!--    <mat-card-title class = "text-center">-->
+<!--      No Time Sheets at this time!-->
+<!--    </mat-card-title>-->
+<!--  </mat-card>-->
+<!--</div>-->

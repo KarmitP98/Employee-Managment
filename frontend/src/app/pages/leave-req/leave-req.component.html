@@ -1,0 +1,86 @@
+<div *ngIf = "leaves" [@load]>
+  <div>
+    <h3 class = "text-center">Leave Requests</h3>
+    <br>
+
+    <!--    <div *ngIf = "!leaves" [@load]>-->
+    <!--      <br><br><br><br><br>-->
+    <!--      <mat-card>-->
+    <!--        <mat-card-title class = "text-center">No Leave Requests at this-->
+    <!--                                              time!-->
+    <!--        </mat-card-title>-->
+    <!--      </mat-card>-->
+    <!--    </div>-->
+
+    <mat-table [dataSource] = "dataSource">
+
+      <!--    Select Column -->
+      <ng-container matColumnDef = "select">
+        <mat-header-cell *matHeaderCellDef> Select</mat-header-cell>
+        <mat-cell *matCellDef = "let element">
+          <mat-radio-group [(ngModel)] = "selectedReq">
+            <mat-radio-button [value] = "element"
+                              color = "warn"></mat-radio-button>
+          </mat-radio-group>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef = "userId">
+        <mat-header-cell *matHeaderCellDef mat-header-cell>User Id
+        </mat-header-cell>
+        <mat-cell *matCellDef = "let element"
+                  mat-cell>{{element.userId}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef = "startDate">
+        <mat-header-cell *matHeaderCellDef mat-header-cell>Start Date
+        </mat-header-cell>
+        <mat-cell *matCellDef = "let element"
+                  mat-cell>{{element.startDate}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef = "endDate">
+        <mat-header-cell *matHeaderCellDef mat-header-cell>End Date
+        </mat-header-cell>
+        <mat-cell *matCellDef = "let element"
+                  mat-cell>{{element.endDate}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef = "reason">
+        <mat-header-cell *matHeaderCellDef mat-header-cell>Reason
+        </mat-header-cell>
+        <mat-cell *matCellDef = "let element"
+                  mat-cell>{{element.reason}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef = "status">
+        <mat-header-cell *matHeaderCellDef mat-header-cell>Status
+        </mat-header-cell>
+        <mat-cell *matCellDef = "let element"
+                  mat-cell>{{element.status}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef = "displayedColumns"
+                      mat-header-row></mat-header-row>
+      <mat-row *matRowDef = "let row; columns: displayedColumns;"
+               mat-row></mat-row>
+
+    </mat-table>
+
+    <br>
+    <br>
+    <div class = "text-center">
+      <button (click) = "changeStatus(true)" [disabled] = "!selectedReq"
+              [textContent] = "'Approve'"
+              color = "primary" mat-raised-button></button>
+      ||
+      <button (click) = "changeStatus(false)" [disabled] = "!selectedReq"
+              [textContent] = "'Decline'"
+              color = "accent" mat-raised-button></button>
+      ||
+      <button (click) = "removeReq()" [disabled] = "!selectedReq"
+              [textContent] = "'Remove'"
+              color = "warn" mat-raised-button></button>
+    </div>
+  </div>
+</div>

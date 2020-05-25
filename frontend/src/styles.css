@@ -1,0 +1,29 @@
+
+.approved {
+  background: rgba(204, 255, 204, 0.3);
+  border: 1px solid #006400;
+}
+
+.declined {
+  background: rgba(255, 204, 204, 0.3);
+  border: 1px solid #8b0000;
+}
+
+.error {
+  background: rgba(255, 204, 204, 0.3);
+  border: 5px solid #8b0000;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.half {
+  width: 50%;
+}
+

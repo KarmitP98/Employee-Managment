@@ -1,0 +1,92 @@
+<div [@load] class = "row">
+  <div class = "col-xs-12 col-md-6 col-lg-offset-3">
+    <hr>
+    <div class = "text-center">
+      <h3>Leave Application</h3><br>
+    </div>
+    <form #leaveForm = "ngForm" (ngSubmit) = "onSubmit()" class = "text-center">
+      <mat-form-field appearance = "outline" class = "half">
+        <mat-label>Start Date</mat-label>
+        <input [(ngModel)] = "date" [matDatepicker] = "startDate"
+               [min] = "minDate"
+               matInput name = "startDate" required>
+        <mat-datepicker-toggle [for] = "startDate" matSuffix>
+        </mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance = "outline" class = "half">
+        <mat-label>End Date</mat-label>
+        <input [matDatepicker] = "endDate" [min] = "date" matInput
+               name = "endDate"
+               ngModel required>
+        <mat-datepicker-toggle [for] = "endDate"
+                               matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance = "outline" class = "half">
+        <mat-label>Reason</mat-label>
+        <mat-select name = "reason" ngModel = "Sick Leave" required>
+          <mat-option value = "Sick Leave">Sick Leave</mat-option>
+          <mat-option value = "Religious Leave">Religious Leave</mat-option>
+          <mat-option value = "Vacation Leave">Vacation Leave</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-action-row>
+        <button [disabled] = "!leaveForm.valid" color = "primary"
+                mat-raised-button type = "submit">Apply for Leave!
+        </button>
+      </mat-action-row>
+    </form>
+    <hr>
+  </div>
+</div>
+<br>
+<hr>
+<div *ngIf = "leaves" [@load] class = "center">
+
+  <mat-table [dataSource] = "dataSource">
+    <!-- User Id Column -->
+    <ng-container matColumnDef = "userId">
+      <mat-header-cell *matHeaderCellDef> Employee Id.</mat-header-cell>
+      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.userId}} </mat-cell>
+    </ng-container>
+
+    <!-- Start Date Column -->
+    <ng-container matColumnDef = "startDate">
+      <mat-header-cell *matHeaderCellDef> Start Date</mat-header-cell>
+      <mat-cell
+        *matCellDef = "let timeSheet"> {{timeSheet.startDate}} </mat-cell>
+    </ng-container>
+
+    <!-- End Date Column -->
+    <ng-container matColumnDef = "endDate">
+      <mat-header-cell *matHeaderCellDef> End Date</mat-header-cell>
+      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.endDate}} </mat-cell>
+    </ng-container>
+
+    <!-- Reason Column -->
+    <ng-container matColumnDef = "reason">
+      <mat-header-cell *matHeaderCellDef> Reason</mat-header-cell>
+      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.reason}} </mat-cell>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef = "status">
+      <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
+      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.status}} </mat-cell>
+    </ng-container>
+
+    <!-- Leave Id Column -->
+    <ng-container matColumnDef = "leaveId">
+      <mat-header-cell *matHeaderCellDef> Leave Id.</mat-header-cell>
+      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.leaveId}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef = "displayedColumns"></mat-header-row>
+    <mat-row *matRowDef = "let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+

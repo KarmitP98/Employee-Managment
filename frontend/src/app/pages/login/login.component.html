@@ -1,0 +1,60 @@
+<div [@load] class = "row" style = "margin-top: 10%">
+  <div class = "col-xs-12 col-md-6 col-lg-offset-3">
+    <div class = "text-center">
+      <img class = "image" mat-card-lg-image
+           src = "assets/background_square.jpg">
+      <h1>Welcome to {{ companyName }}</h1>
+      <form #f = "ngForm" (ngSubmit) = "onSubmit()">
+        <div *ngIf = "!isLoginMode">
+          <mat-form-field appearance = "outline">
+            <mat-label>Title</mat-label>
+            <mat-select name = "abv" ngModel = "Mr." required>
+              <mat-option value = "Mr.">Mr.</mat-option>
+              <mat-option value = "Mrs.">Mrs.</mat-option>
+              <mat-option value = "Miss">Miss</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div *ngIf = "!isLoginMode">
+          <mat-form-field appearance = "outline" class = "mat-form-field">
+            <mat-label>Full Name</mat-label>
+            <input #name matInput name = "name"
+                   ngModel placeholder = "Full Name" required type = "text">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance = "outline" class = "mat-form-field">
+            <mat-label>Email</mat-label>
+            <input #email email matInput
+                   name = "email" ngModel placeholder = "Email" required
+                   type = "email">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance = "outline" class = "mat-form-field">
+            <mat-label>Password</mat-label>
+            <input #password autocomplete matInput
+                   name = "password" ngModel placeholder = "Password" required
+                   minlength = "6" type = "password">
+          </mat-form-field>
+        </div>
+        <div *ngIf = "!isLoginMode" class = "form-group">
+          <mat-slide-toggle [(ngModel)] = "admin" color = "warn"
+                            name = "isAdmin">Admin
+          </mat-slide-toggle>
+        </div>
+        <div class = "example-button-row">
+          <button [disabled] =
+                    "f.invalid" color = "primary"
+                  mat-raised-button type = "submit">
+            {{ isLoginMode ? "Login" : "Sign-up" }}</button>
+          ||
+          <button (click) = "switchModes()" color = "accent" mat-raised-button
+                  type = "button"> {{
+            isLoginMode ?
+              "Sign-up" : "Back" }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

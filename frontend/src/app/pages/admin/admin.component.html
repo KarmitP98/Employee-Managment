@@ -1,0 +1,31 @@
+<div [@load] class = "container">
+  <div class = "row">
+    <div class = "col-md-8 col-lg-offset-2">
+      <hr>
+      <div class = "text-center">
+        <button [routerLinkActive] = "'selected'" color = "accent"
+                mat-raised-button
+                routerLink = "/admin/time-req">View Time-Sheet Requests
+        </button>
+        ||
+        <button [routerLinkActive] = "'selected'" color = "accent"
+                mat-raised-button
+                routerLink = "/admin/leave-req">View Leave Requests
+        </button>
+        ||
+        <button [routerLinkActive] = "'selected'" color = "accent"
+                mat-raised-button
+                routerLink = "/admin/admin-req"> View Admin Requests
+        </button>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <hr>
+  <br><br>
+  <div class = "row">
+    <div class = "col-lg-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<br>
+<br>
+<div [@load] class = "container">
+  <div class = "row">
+    <div class = "col-xs-12 col-md-6 col-lg-offset-3 text-center">
+      <hr>
+      <button [routerLink] = "['/time-sheet']"
+              class = "big-button" color = "accent" mat-raised-button>
+        Time-Sheet
+      </button>
+      <hr>
+    </div>
+  </div>
+  <br>
+  <div class = "row">
+    <div class = "col-xs-12 col-md-6 col-lg-offset-3 text-center">
+      <hr>
+      <button [routerLink] = "['/annual-leave']"
+              class = "big-button" color = "accent" mat-raised-button> Annual
+                                                                       Leave
+      </button>
+      <hr>
+    </div>
+  </div>
+  <br>
+  <div *ngIf = "isAdmin" class = "row">
+    <div class = "col-xs-12 col-md-6 col-lg-offset-3 text-center">
+      <hr>
+      <button [routerLink] = "['/admin']" class = "big-button"
+              color = "accent" mat-raised-button> Admin
+      </button>
+      <hr>
+    </div>
+  </div>
+</div>

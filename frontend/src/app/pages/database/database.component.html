@@ -1,0 +1,169 @@
+<br>
+<br>
+<div [@load] class = "text-center">
+  <div class = "row">
+    <h3>Employee Data</h3>
+    <mat-table [dataSource] = "empDataSource" class = "mat-elevation-z8"
+               style = "width: 100%">
+      <!-- Employee ID Column -->
+      <ng-container matColumnDef = "userId">
+        <mat-header-cell *matHeaderCellDef>Employee Id.</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.userId }} </mat-cell>
+      </ng-container>
+
+      <!-- Log Date Column -->
+      <ng-container matColumnDef = "abv">
+        <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.abv }} </mat-cell>
+      </ng-container>
+
+      <!-- Work Column -->
+      <ng-container matColumnDef = "userName">
+        <mat-header-cell *matHeaderCellDef>Employee Name</mat-header-cell>
+        <mat-cell
+          *matCellDef = "let element"> {{ element.userName }} </mat-cell>
+      </ng-container>
+
+      <!-- Start Time Column -->
+      <ng-container matColumnDef = "userEmail">
+        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+        <mat-cell
+          *matCellDef = "let element"> {{ element.userEmail }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef = "password">
+        <mat-header-cell *matHeaderCellDef>Password</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.password }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- End Time Column -->
+      <ng-container matColumnDef = "isAdmin">
+        <mat-header-cell *matHeaderCellDef>Admin?</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.isAdmin }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef = "adminStatus">
+        <mat-header-cell *matHeaderCellDef>Admin Status</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.adminStatus }}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef = "empDisplay"></mat-header-row>
+      <mat-row *matRowDef = "let row; columns: empDisplay"></mat-row>
+    </mat-table>
+    <br>
+  </div>
+
+  <hr>
+
+  <div class = "row">
+    <h3>Time Sheet Data</h3>
+    <mat-table [dataSource] = "timeDataSource" class = "mat-elevation-z8"
+               style = "width: 100%">
+      <!-- Employee ID Column -->
+      <ng-container matColumnDef = "userId">
+        <mat-header-cell *matHeaderCellDef>Employee Id.</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.userId }} </mat-cell>
+      </ng-container>
+
+      <!-- Log Date Column -->
+      <ng-container matColumnDef = "logDate">
+        <mat-header-cell *matHeaderCellDef>Log Date</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.logDate }} </mat-cell>
+      </ng-container>
+
+      <!-- Work Column -->
+      <ng-container matColumnDef = "work">
+        <mat-header-cell *matHeaderCellDef>Work</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.work }} </mat-cell>
+      </ng-container>
+
+      <!-- Start Time Column -->
+      <ng-container matColumnDef = "startTime">
+        <mat-header-cell *matHeaderCellDef>Start Time</mat-header-cell>
+        <mat-cell
+          *matCellDef = "let element"> {{ element.startTime }} </mat-cell>
+      </ng-container>
+
+      <!-- End Time Column -->
+      <ng-container matColumnDef = "endTime">
+        <mat-header-cell *matHeaderCellDef>End Time</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.endTime }} </mat-cell>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef = "status">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.status }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef = "timeSheetId">
+        <mat-header-cell *matHeaderCellDef>Time Sheet Id.</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.timeSheetId }}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef = "timeDisplay"></mat-header-row>
+      <mat-row *matRowDef = "let row; columns: timeDisplay"></mat-row>
+    </mat-table>
+    <br>
+  </div>
+
+  <hr>
+
+  <div class = "row">
+    <h3>Leave Data</h3>
+    <mat-table [dataSource] = "leaveDataSource" class = "mat-elevation-z8"
+               style = "width: 100%">
+
+      <ng-container matColumnDef = "userId">
+        <mat-header-cell *matHeaderCellDef mat-header-cell>Employee Id.
+        </mat-header-cell>
+        <mat-cell *matCellDef = "let element"
+                  mat-cell>{{element.userId}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef = "startDate">
+        <mat-header-cell *matHeaderCellDef mat-header-cell>Start Date
+        </mat-header-cell>
+        <mat-cell *matCellDef = "let element"
+                  mat-cell>{{element.startDate}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef = "endDate">
+        <mat-header-cell *matHeaderCellDef mat-header-cell>End Date
+        </mat-header-cell>
+        <mat-cell *matCellDef = "let element"
+                  mat-cell>{{element.endDate}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef = "reason">
+        <mat-header-cell *matHeaderCellDef mat-header-cell>Reason
+        </mat-header-cell>
+        <mat-cell *matCellDef = "let element"
+                  mat-cell>{{element.reason}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef = "status">
+        <mat-header-cell *matHeaderCellDef mat-header-cell>Status
+        </mat-header-cell>
+        <mat-cell *matCellDef = "let element"
+                  mat-cell>{{element.status}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef = "leaveId">
+        <mat-header-cell *matHeaderCellDef>Leave Id.</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.leaveId }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef = "leaveDisplay"
+                      mat-header-row></mat-header-row>
+      <mat-row *matRowDef = "let row; columns: leaveDisplay;"
+               mat-row></mat-row>
+    </mat-table>
+    <br>
+  </div>
+</div>
