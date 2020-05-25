@@ -11,10 +11,12 @@ import { LeaveReqComponent } from "../pages/leave-req/leave-req.component";
 import { AuthGuard } from "../auth.guard";
 import { DatabaseComponent } from "../pages/database/database.component";
 import { LoginComponent } from "../pages/login/login.component";
+import { SignUpComponent } from "../pages/sign-up/sign-up.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
+  { path: "signUp", component: SignUpComponent },
   { path: "home", component: HomeComponent, canActivate: [ AuthGuard ] },
   { path: "time-sheet", component: TimeSheetComponent, canActivate: [ AuthGuard ] },
   { path: "annual-leave", component: AnnualLeaveComponent, canActivate: [ AuthGuard ] },

@@ -8,3 +8,5 @@ export const loadTrigger: AnimationTriggerMetadata =
       animate( 200 )
     ] )
   ] );
+
+export const COMPANY_NAME: string = "Regency Agency";

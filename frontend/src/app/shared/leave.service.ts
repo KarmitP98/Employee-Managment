@@ -14,20 +14,21 @@ export class LeaveService {
 
   fetchLeaves( current: boolean, empId?: string ) {
     if ( current ) {
-      return this.firestore.list<Leave>( "leaves", ref => ref.orderByChild( "empId" ).equalTo( empId ) ).valueChanges();
+      // return this.firestore.list<Leave>( "leaves", ref => ref.orderByChild( "empId" ).equalTo( empId ) ).valueChanges();
+      return this.firestore.list<Leave>( "employees/" + empId + "/Leaves" ).valueChanges();
     }
     return this.firestore.list<Leave>( "leaves" ).valueChanges();
   }
 
   addLeave( leave: Leave ) {
-    this.firestore.list<Leave>( "leaves" ).push( leave ).then( value => {
+    this.firestore.list<Leave>( "employees/" + leave.empId + "/Leaves" ).push( leave ).then( value => {
       leave.leaveId = value.key;
       this.updateLeave( leave, value.key );
     } );
   }
 
   updateLeave( leave: Leave, leaveId: string ) {
-    this.firestore.list<Leave>( "leaves" ).set( leaveId, leave );
+    this.firestore.list<Leave>( "employees/" + leave.empId + "/Leaves" ).update( leaveId, leave );
   }
 
   removeLeave( leaveId: string ) {

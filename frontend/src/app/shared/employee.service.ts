@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { AngularFireDatabase } from "@angular/fire/database";
 import { environment } from "../../environments/environment";
 import { catchError } from "rxjs/operators";
+import { MatSnackBar } from "@angular/material";
 
 export enum ADMIN_STATUS {
   pending = "Pending",
@@ -54,7 +55,7 @@ export class EmployeeService implements OnInit {
   private tokenExpirationTimer: any;
 
 
-  constructor( private http: HttpClient, private router: Router, private firestore: AngularFireDatabase ) { }
+  constructor( private http: HttpClient, private router: Router, private firestore: AngularFireDatabase, private snackBar: MatSnackBar ) { }
 
   ngOnInit(): void {
   }
@@ -75,10 +76,10 @@ export class EmployeeService implements OnInit {
   }
 
   updateEmployee( emp: Employee, empId: string ) {
-    this.firestore.list( "employees" ).set( empId, emp );
+    this.firestore.list( "employees" ).update( empId, emp );
   }
 
-  login( email: string, password: string, emp: Employee ) {
+  login( email: string, password: string ) {
     this.http.post<AuthResponseData>( this.loginUrl + this.API_KEY, { email: email, password: password, returnSecureToken: true } )
         .pipe(
           catchError( this.handleError ) ).subscribe( resData => {
@@ -139,21 +140,25 @@ export class EmployeeService implements OnInit {
   }
 
   private handleError( errRes: HttpErrorResponse ) {
-    let errorMsg = "An unknown error occured!";
+    let errorMsg = "An unknown error occurred!";
     if ( !errRes.error || !errRes.error.error ) {
       return throwError( errorMsg );
     }
     switch ( errRes.error.error.message ) {
       case "EMAIL_EXISTS":
-        errorMsg = "The email exists";
+        errorMsg = "Account already exists!";
         break;
       case "EMAIL_NOT_FOUND":
-        errorMsg = "This email is invald";
+        errorMsg = "Invalid Email!";
         break;
       case "INVALID_PASSWORD":
-        errorMsg = "Pasword is incorrect";
+        errorMsg = "Incorrect Password!";
         break;
     }
+
+    this.snackBar.open( errorMsg, "Close", {
+      duration: 2000
+    } );
     return throwError( errorMsg );
   }
 }

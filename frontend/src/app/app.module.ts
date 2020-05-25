@@ -39,6 +39,7 @@ import {
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { environment } from "../environments/environment";
+import { SignUpComponent } from "./pages/sign-up/sign-up.component";
 
 @NgModule( {
              declarations: [
@@ -53,7 +54,8 @@ import { environment } from "../environments/environment";
                LeaveReqComponent,
                AdminReqComponent,
                LoadingSpinnerComponent,
-               DatabaseComponent
+               DatabaseComponent,
+               SignUpComponent
 
              ],
              imports: [
