@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { LeaveService } from "../../shared/leave.service";
-import { EmployeeService } from "../../shared/employee.service";
+import { DataStorageService } from "../../shared/data-storage.service";
 import { Subscription } from "rxjs";
 import { Leave } from "../../shared/model/leaves.model";
 import { NgForm } from "@angular/forms";
 import { MatTableDataSource } from "@angular/material";
 import { loadTrigger } from "../../shared/shared";
+import { Employee } from "../../shared/model/employee.model";
 
 export const MONTHS = [ "January",
                         "February",
@@ -28,51 +28,54 @@ export const MONTHS = [ "January",
             } )
 export class AnnualLeaveComponent implements OnInit, OnDestroy {
 
-  leaveSub: Subscription;
+  empSubject: Subscription;
   empSub: Subscription;
   leaves: Leave[] = [];
   empId: string;
+  employee: Employee;
   @ViewChild( "leaveForm", { static: false } ) leaveForm: NgForm;
-  displayedColumns = [ "userId", "startDate", "endDate", "reason", "status", "leaveId" ];
-  dataSource: MatTableDataSource<Leave>;
-  minDate = new Date();
-  date: Date;
 
-  constructor( private leaveService: LeaveService, private employeeService: EmployeeService ) { }
+  displayedColumns = [ "empId", "startDate", "endDate", "reason", "status", "leaveId" ];
+  dataSource: MatTableDataSource<Leave>;
+  stDate = new Date();
+  edDate = new Date();
+  reason: string = "Sick Leave";
+
+  constructor( private dataStorageService: DataStorageService ) { }
 
   ngOnInit() {
 
-    this.empSub = this.employeeService.employeeSubject.subscribe( value => {
+    this.empSubject = this.dataStorageService.employeeSubject.subscribe( value => {
       if ( value ) {
         this.empId = value.empId;
+        this.leaves = Object.values( value.Leaves );
+        this.loadValues();
+        // this.empSub = this.dataStorageService.fetchEmployees( "empId", this.empId ).subscribe( value1 => {
+        //   this.employee = value1[0];
+        //   this.leaves = Object.values( value1[0].Leaves );
+        //   this.loadValues();
+        // } );
       }
     } );
 
-    this.leaveSub = this.leaveService.fetchLeaves( true, this.empId ).subscribe( value => {
-      if ( value ) {
-        this.leaves = value;
-        this.loadValues();
-      }
-    } );
+
   }
 
   ngOnDestroy(): void {
-    this.empSub.unsubscribe();
-    this.leaveSub.unsubscribe();
+    this.empSubject.unsubscribe();
+    // this.empSub.unsubscribe();
   }
 
   onSubmit(): void {
-    const startDate = new Date( this.leaveForm.value.startDate );
-    const endDate = new Date( this.leaveForm.value.endDate );
     const tempLeave =
       new Leave( this.empId, "placeholder",
-                 MONTHS[startDate.getMonth()] + " " + startDate.getDate() + ", " + startDate.getFullYear(),
-                 MONTHS[endDate.getMonth()] + " " + endDate.getDate() + ", " + endDate.getFullYear(), this.leaveForm.value.reason,
+                 MONTHS[this.stDate.getMonth()] + " " + this.stDate.getDate() + ", " + this.stDate.getFullYear(),
+                 MONTHS[this.edDate.getMonth()] + " " + this.edDate.getDate() + ", " + this.edDate.getFullYear(), this.reason,
                  "Pending", false );
-    this.leaveService.addLeave( tempLeave );
-    this.leaves.push( tempLeave );
+    console.log( tempLeave );
+    this.dataStorageService.addLeave( tempLeave );
     this.loadValues();
-    this.leaveForm.resetForm();
+    this.leaveForm.reset();
   }
 
   loadValues(): void {

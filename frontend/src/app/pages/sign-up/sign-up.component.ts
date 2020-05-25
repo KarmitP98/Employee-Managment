@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { COMPANY_NAME, loadTrigger } from "../../shared/shared";
-import { EmployeeService } from "../../shared/employee.service";
+import { DataStorageService } from "../../shared/data-storage.service";
 import { Employee } from "../../shared/model/employee.model";
 import { NgForm } from "@angular/forms";
 
@@ -26,7 +26,7 @@ export class SignUpComponent implements OnInit {
   DOB: Date;
   adminAccount: boolean;
 
-  constructor( private employeeService: EmployeeService ) { }
+  constructor( private dataStorageService: DataStorageService ) { }
 
   ngOnInit() {
   }
@@ -35,7 +35,7 @@ export class SignUpComponent implements OnInit {
     const newEmp = new Employee( "temp", this.title, this.firstName + " " + this.lastName, this.email, this.DOB,
                                  this.proPicUrl, false, "Pending", this.password, 0, [], [] );
     console.log( newEmp );
-    this.employeeService.signUp( this.email, this.password, newEmp );
+    this.dataStorageService.signUp( this.email, this.password, newEmp );
     this.signUpForm.reset();
   }
 }

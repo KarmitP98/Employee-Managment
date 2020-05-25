@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { LeaveService } from "../../shared/leave.service";
 import { Leave } from "../../shared/model/leaves.model";
 import { Subscription } from "rxjs";
-import { ADMIN_STATUS } from "../../shared/employee.service";
+import { ADMIN_STATUS, DataStorageService } from "../../shared/data-storage.service";
 import { MatTableDataSource } from "@angular/material";
 import { loadTrigger } from "../../shared/shared";
 
@@ -15,38 +14,40 @@ import { loadTrigger } from "../../shared/shared";
 export class LeaveReqComponent implements OnInit, OnDestroy {
 
   leaves: Leave[] = [];
-  leaveSub: Subscription;
+  storageSub: Subscription;
   displayedColumns: string[] = [ "select", "userId", "startDate", "endDate", "reason", "status" ];
   selectedReq: Leave;
   dataSource: MatTableDataSource<Leave>;
 
-  constructor( private leaveService: LeaveService ) { }
+  constructor( private dataStorageService: DataStorageService ) { }
 
   ngOnInit() {
-    this.leaveSub = this.leaveService.fetchLeaves( false ).subscribe( value => {
-      if ( value.length > 0 ) {
-        this.leaves = value;
-        this.loadValues();
+    this.storageSub = this.dataStorageService.fetchEmployees().subscribe( value => {
+      if ( value ) {
+        for ( let e of value ) {
+          this.leaves.push( ...e.Leaves );
+        }
       }
+      this.dataSource = new MatTableDataSource<Leave>( this.leaves );
     } );
   }
 
   ngOnDestroy(): void {
-    this.leaveSub.unsubscribe();
+    this.storageSub.unsubscribe();
   }
 
   changeStatus( b: boolean ): void {
     this.selectedReq.status = b ? ADMIN_STATUS.approved : ADMIN_STATUS.declined;
-    this.leaveService.updateLeave( this.selectedReq, this.selectedReq.leaveId );
+    this.dataStorageService.updateLeave( this.selectedReq, this.selectedReq.leaveId );
     this.selectedReq = null;
   }
 
   removeReq(): void {
-    this.leaveService.removeLeave( this.selectedReq.empId );
-    this.leaves = this.leaves.filter( value => {
-      return value.empId !== this.selectedReq.empId;
-    } );
-    this.loadValues();
+    this.dataStorageService.removeLeave( this.selectedReq );
+    // this.leaves = this.leaves.filter( value => {
+    //   return value.empId !== this.selectedReq.empId;
+    // } );
+    // this.loadValues();
     this.selectedReq = null;
   }
 

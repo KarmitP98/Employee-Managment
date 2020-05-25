@@ -1,12 +1,10 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ADMIN_STATUS, EmployeeService } from "../../shared/employee.service";
+import { ADMIN_STATUS, DataStorageService } from "../../shared/data-storage.service";
 import { Employee } from "../../shared/model/employee.model";
 import { Subscription } from "rxjs";
 import { MatTableDataSource } from "@angular/material";
 import { TimeSheetService } from "../../shared/time-sheet.service";
 import { LeaveService } from "../../shared/leave.service";
-import { Leave } from "../../shared/model/leaves.model";
-import { TimeSheet } from "../../shared/model/time-sheet";
 import { loadTrigger } from "../../shared/shared";
 
 @Component( {
@@ -25,18 +23,17 @@ export class AdminReqComponent implements OnInit, OnDestroy {
   selectedReq: Employee;
   displayedColumns = [ "select", "userId", "abv", "userName", "userEmail", "adminStatus" ];
   dataSource: MatTableDataSource<Employee>;
-  leaves: Leave[];
-  timesheets: TimeSheet[];
 
-  constructor( private employeeService: EmployeeService, private leaveService: LeaveService, private timeSheetService: TimeSheetService ) { }
+  constructor( private dataStorageService: DataStorageService, private leaveService: LeaveService, private timeSheetService: TimeSheetService ) { }
 
   ngOnInit() {
 
-    this.curEmpSub = this.employeeService.employeeSubject.subscribe( value => {
+    this.curEmpSub = this.dataStorageService.employeeSubject.subscribe( value => {
       this.curEmp = value;
+      this.empId = value.empId;
     } );
 
-    this.empSub = this.employeeService.fetchEmployees().subscribe( ( value ) => {
+    this.empSub = this.dataStorageService.fetchEmployees().subscribe( value => {
       this.emps = value.filter( value1 => {
         return value1.empId !== this.curEmp.empId;
       } );
@@ -54,7 +51,7 @@ export class AdminReqComponent implements OnInit, OnDestroy {
     this.selectedReq.adminStatus = response ? ADMIN_STATUS.approved : ADMIN_STATUS.declined;
     this.selectedReq.isAdmin = response;
 
-    this.employeeService.updateEmployee( this.selectedReq, this.selectedReq.empId );
+    this.dataStorageService.updateEmployee( this.selectedReq, this.selectedReq.empId );
     this.selectedReq = null;
   }
 

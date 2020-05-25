@@ -10,3 +10,5 @@ export const loadTrigger: AnimationTriggerMetadata =
   ] );
 
 export const COMPANY_NAME: string = "Regency Agency";
+
+export const EXT = ".json";

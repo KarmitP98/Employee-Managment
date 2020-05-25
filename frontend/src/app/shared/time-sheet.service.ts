@@ -14,25 +14,26 @@ export class TimeSheetService {
   // @current and @userId is used to check if you need timesheets for current employee
   fetchTimeSheets( current: boolean, empId?: string ) {
     if ( current ) {
-      return this.firestore.list<TimeSheet>( "time-sheets", ref => ref.orderByChild( "empId" ).equalTo( empId ) ).valueChanges();
+      // return this.firestore.list<TimeSheet>( "time-sheets", ref => ref.orderByChild( "empId" ).equalTo( empId ) ).valueChanges();
+      return this.firestore.list<TimeSheet>( "employees/" + empId + "/TimeSheets" ).valueChanges();
     }
     return this.firestore.list<TimeSheet>( "time-sheets" ).valueChanges();
   }
 
   // Add new TimeSheet and add update the name to key
   addTimeSheet( sheet: TimeSheet ) {
-    this.firestore.list<TimeSheet>( "time-sheets" ).push( sheet ).then( value => {
+    this.firestore.list<TimeSheet>( "employees/" + sheet.empId + "/TimeSheets" ).push( sheet ).then( value => {
       sheet.sheetId = value.key;
       this.updateTimeSheet( sheet, value.key );
     } );
   }
 
   updateTimeSheet( sheet: TimeSheet, sheetId: string ) {
-    this.firestore.list<TimeSheet>( "time-sheets" ).update( sheetId, sheet );
+    this.firestore.list<TimeSheet>( "employees/" + sheet.empId + "/TimeSheets" ).update( sheetId, sheet );
   }
 
-  removeTimeSheet( sheetName: string ) {
-    this.firestore.list<TimeSheet>( "time-sheets" ).remove( sheetName );
+  removeTimeSheet( sheet: TimeSheet ) {
+    this.firestore.list<TimeSheet>( "employees/" + sheet.empId + "/TimeSheets" ).remove( sheet.sheetId );
   }
 
 }

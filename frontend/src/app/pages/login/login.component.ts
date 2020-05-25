@@ -3,7 +3,7 @@ import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { COMPANY_NAME, loadTrigger } from "../../shared/shared";
-import { EmployeeService } from "../../shared/employee.service";
+import { DataStorageService } from "../../shared/data-storage.service";
 
 @Component( {
               selector: "app-login",
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   email: string;
   password: string;
 
-  constructor( private employeeService: EmployeeService, private router: Router, private snackBar: MatSnackBar ) { }
+  constructor( private dataStorageService: DataStorageService, private router: Router, private snackBar: MatSnackBar ) { }
 
   ngOnInit() {
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    this.employeeService.login( this.email, this.password );
+    this.dataStorageService.login( this.email, this.password );
   }
 
 

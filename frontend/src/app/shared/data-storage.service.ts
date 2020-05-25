@@ -7,6 +7,8 @@ import { AngularFireDatabase } from "@angular/fire/database";
 import { environment } from "../../environments/environment";
 import { catchError } from "rxjs/operators";
 import { MatSnackBar } from "@angular/material";
+import { Leave } from "./model/leaves.model";
+import { TimeSheet } from "./model/time-sheet";
 
 export enum ADMIN_STATUS {
   pending = "Pending",
@@ -43,7 +45,7 @@ export class User {
 @Injectable( {
                providedIn: "root"
              } )
-export class EmployeeService implements OnInit {
+export class DataStorageService implements OnInit {
 
   employeeChanged = new Subject<Employee[]>();
   employeeServerUrl = "https://employee-managment-f5252.firebaseio.com/employees";
@@ -155,10 +157,55 @@ export class EmployeeService implements OnInit {
         errorMsg = "Incorrect Password!";
         break;
     }
-
-    this.snackBar.open( errorMsg, "Close", {
-      duration: 2000
-    } );
     return throwError( errorMsg );
   }
+
+  fetchLeaves( empId?: string ) {
+    if ( empId ) {
+      // return this.firestore.list<Leave>( "leaves", ref => ref.orderByChild( "empId" ).equalTo( empId ) ).valueChanges();
+      return this.firestore.list<Leave>( "employees/" + empId + "/Leaves" ).valueChanges();
+    }
+    return this.firestore.list<Leave>( "employees/" + empId + "/Leaves" ).valueChanges();
+  }
+
+  addLeave( leave: Leave ) {
+    this.firestore.list<Leave>( "employees/" + leave.empId + "/Leaves" ).push( leave ).then( value => {
+      leave.leaveId = value.key;
+      this.updateLeave( leave, value.key );
+    } );
+  }
+
+  updateLeave( leave: Leave, leaveId: string ) {
+    this.firestore.list<Leave>( "employees/" + leave.empId + "/Leaves" ).update( leaveId, leave );
+  }
+
+  removeLeave( leave: Leave ) {
+    this.firestore.list<Leave>( "employees/" + leave.empId + "/Leaves" ).remove( leave.leaveId );
+  }
+
+  // @userId is used to check if you need timesheets for current employee
+  fetchTimeSheets( empId?: string ) {
+    if ( empId ) {
+      // return this.firestore.list<TimeSheet>( "time-sheets", ref => ref.orderByChild( "empId" ).equalTo( empId ) ).valueChanges();
+      return this.firestore.list<TimeSheet>( "employees/" + empId + "/TimeSheets" ).valueChanges();
+    }
+    return this.firestore.list<TimeSheet>( "employees/" + empId + "/TimeSheets" ).valueChanges();
+  }
+
+// Add new TimeSheet and add update the name to key
+  addTimeSheet( sheet: TimeSheet ) {
+    this.firestore.list<TimeSheet>( "employees/" + sheet.empId + "/TimeSheets" ).push( sheet ).then( value => {
+      sheet.sheetId = value.key;
+      this.updateTimeSheet( sheet, value.key );
+    } );
+  }
+
+  updateTimeSheet( sheet: TimeSheet, sheetId: string ) {
+    this.firestore.list<TimeSheet>( "employees/" + sheet.empId + "/TimeSheets" ).update( sheetId, sheet );
+  }
+
+  removeTimeSheet( sheet: TimeSheet ) {
+    this.firestore.list<TimeSheet>( "employees/" + sheet.empId + "/TimeSheets" ).remove( sheet.sheetId );
+  }
+
 }

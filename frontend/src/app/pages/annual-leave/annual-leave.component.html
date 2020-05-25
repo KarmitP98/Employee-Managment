@@ -7,8 +7,8 @@
     <form #leaveForm = "ngForm" (ngSubmit) = "onSubmit()" class = "text-center">
       <mat-form-field appearance = "outline" class = "half">
         <mat-label>Start Date</mat-label>
-        <input [(ngModel)] = "date" [matDatepicker] = "startDate"
-               [min] = "minDate"
+        <input [(ngModel)] = "stDate" [matDatepicker] = "startDate"
+               [min] = "stDate"
                matInput name = "startDate" required>
         <mat-datepicker-toggle [for] = "startDate" matSuffix>
         </mat-datepicker-toggle>
@@ -17,9 +17,9 @@
       <br>
       <mat-form-field appearance = "outline" class = "half">
         <mat-label>End Date</mat-label>
-        <input [matDatepicker] = "endDate" [min] = "date" matInput
-               name = "endDate"
-               ngModel required>
+        <input [(ngModel)] = "edDate" [matDatepicker] = "endDate"
+               [min] = "stDate"
+               matInput name = "endDate" required>
         <mat-datepicker-toggle [for] = "endDate"
                                matSuffix></mat-datepicker-toggle>
         <mat-datepicker #endDate></mat-datepicker>
@@ -49,40 +49,40 @@
 
   <mat-table [dataSource] = "dataSource">
     <!-- User Id Column -->
-    <ng-container matColumnDef = "userId">
+    <ng-container matColumnDef = "empId">
       <mat-header-cell *matHeaderCellDef> Employee Id.</mat-header-cell>
-      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.userId}} </mat-cell>
+      <mat-cell *matCellDef = "let leave"> {{leave.empId}} </mat-cell>
     </ng-container>
 
     <!-- Start Date Column -->
     <ng-container matColumnDef = "startDate">
       <mat-header-cell *matHeaderCellDef> Start Date</mat-header-cell>
       <mat-cell
-        *matCellDef = "let timeSheet"> {{timeSheet.startDate}} </mat-cell>
+        *matCellDef = "let leave"> {{leave.startDate}} </mat-cell>
     </ng-container>
 
     <!-- End Date Column -->
     <ng-container matColumnDef = "endDate">
       <mat-header-cell *matHeaderCellDef> End Date</mat-header-cell>
-      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.endDate}} </mat-cell>
+      <mat-cell *matCellDef = "let leave"> {{leave.endDate}} </mat-cell>
     </ng-container>
 
     <!-- Reason Column -->
     <ng-container matColumnDef = "reason">
       <mat-header-cell *matHeaderCellDef> Reason</mat-header-cell>
-      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.reason}} </mat-cell>
+      <mat-cell *matCellDef = "let leave"> {{leave.reason}} </mat-cell>
     </ng-container>
 
     <!-- Status Column -->
     <ng-container matColumnDef = "status">
       <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
-      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.status}} </mat-cell>
+      <mat-cell *matCellDef = "let leave"> {{leave.status}} </mat-cell>
     </ng-container>
 
     <!-- Leave Id Column -->
     <ng-container matColumnDef = "leaveId">
       <mat-header-cell *matHeaderCellDef> Leave Id.</mat-header-cell>
-      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.leaveId}} </mat-cell>
+      <mat-cell *matCellDef = "let leave"> {{leave.leaveId}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef = "displayedColumns"></mat-header-row>

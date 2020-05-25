@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { TimeSheetService } from "../../shared/time-sheet.service";
 import { TimeSheet } from "../../shared/model/time-sheet";
 import { Subscription } from "rxjs";
-import { ADMIN_STATUS } from "../../shared/employee.service";
+import { ADMIN_STATUS, DataStorageService } from "../../shared/data-storage.service";
 import { MatTableDataSource } from "@angular/material";
 import { loadTrigger } from "../../shared/shared";
 
@@ -16,38 +15,42 @@ import { loadTrigger } from "../../shared/shared";
 export class TimeReqComponent implements OnInit, OnDestroy {
 
   timeSheets: TimeSheet[] = [];
-  timeSheetSub: Subscription;
+  storageSub: Subscription;
   displayedColumns: string[] = [ "select", "userId", "logDate", "startTime", "endTime", "work", "status" ];
   selectedReq: TimeSheet;
   dataSource: MatTableDataSource<TimeSheet>;
 
 
-  constructor( private timeSheetService: TimeSheetService ) { }
+  constructor( private dataStorageService: DataStorageService ) { }
 
   ngOnInit() {
-    this.timeSheetSub = this.timeSheetService.fetchTimeSheets( false ).subscribe( value => {
-      this.timeSheets = value;
-      this.loadValues();
+    this.storageSub = this.dataStorageService.fetchEmployees().subscribe( value => {
+      if ( value ) {
+        for ( const e of value ) {
+          this.timeSheets.push( ...e.TimeSheets );
+        }
+        this.dataSource = new MatTableDataSource<TimeSheet>( this.timeSheets );
+      }
     } );
   }
 
   ngOnDestroy(): void {
-    this.timeSheetSub.unsubscribe();
+    this.storageSub.unsubscribe();
   }
 
   changeStatus( b: boolean ) {
-    const status = b ? ADMIN_STATUS.approved : ADMIN_STATUS.declined;
-    this.selectedReq.status = status;
-    this.timeSheetService.updateTimeSheet( this.selectedReq, this.selectedReq.sheetId );
+    this.selectedReq.status = b ? ADMIN_STATUS.approved : ADMIN_STATUS.declined;
+    console.log( this.selectedReq );
+    this.dataStorageService.updateTimeSheet( this.selectedReq, this.selectedReq.sheetId );
     this.selectedReq = null;
   }
 
   removeReq(): void {
-    this.timeSheetService.removeTimeSheet( this.selectedReq.empId );
-    this.timeSheets = this.timeSheets.filter( value => {
-      return value.empId !== this.selectedReq.empId;
-    } );
-    this.loadValues();
+    this.dataStorageService.removeTimeSheet( this.selectedReq );
+    // this.timeSheets = this.timeSheets.filter( value => {
+    //   return value.empId !== this.selectedReq.empId;
+    // } );
+    // this.loadValues();
     this.selectedReq = null;
   }
 

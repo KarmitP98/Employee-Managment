@@ -8,18 +8,19 @@
     <form #timeForm = "ngForm" (ngSubmit) = "onSubmit()" class = "text-center">
       <mat-form-field appearance = "outline" class = "half">
         <mat-label>Log Date</mat-label>
-        <input [matDatepicker] = "Date" matInput name = "date" ngModel required>
+        <input [(ngModel)] = "today" [matDatepicker] = "Date" matInput
+               name = "date"
+               required>
         <mat-datepicker-toggle [for] = "Date" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #Date></mat-datepicker>
       </mat-form-field>
       <br>
       <mat-form-field appearance = "outline" class = "half">
         <mat-label>Work</mat-label>
-        <input #work [matAutocomplete] = "auto" [value] = "'Default Work'"
-               matInput name = "work"
-               ngModel
+        <input [(ngModel)] = "work" [matAutocomplete] = "auto"
+               [value] = "'Default Work'" matInput name = "work" type = "text"
                placeholder = "Ex. Excel Worksheet, Mailing, etc." required
-               type = "text">
+        >
         <mat-autocomplete #auto = "matAutocomplete">
           <mat-option *ngFor = "let option of options" [value] = "option">
             {{ option }}
@@ -34,13 +35,13 @@
       </mat-form-field>
       <br>
       <mat-form-field appearance = "outline" class = "half">
-        <mat-label>End Time</mat-label>
-        <input [min] = "stTime" [value] = "stTime" matInput
-               name = "endTime" ngModel required type = "time">
+        <mat-label>Hours Logged</mat-label>
+        <input [(ngModel)] = "hours" matInput name = "hoursLogged" required
+               step = "0.5" type = "number">
       </mat-form-field>
       <br>
       <mat-action-row>
-        <button [disabled] = "!timeForm.valid" color = "primary"
+        <button [disabled] = "!timeForm.valid" class = "half" color = "primary"
                 mat-raised-button type = "submit">Log Work!
         </button>
       </mat-action-row>

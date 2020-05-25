@@ -2,7 +2,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
 import { map, take } from "rxjs/operators";
-import { EmployeeService } from "./shared/employee.service";
+import { DataStorageService } from "./shared/data-storage.service";
 
 @Injectable( {
                providedIn: "root"
@@ -10,7 +10,7 @@ import { EmployeeService } from "./shared/employee.service";
 export class AuthGuard
   implements CanActivate {
 
-  constructor( private employeeService: EmployeeService,
+  constructor( private dataStorageService: DataStorageService,
                private router: Router ) {}
 
 
@@ -18,7 +18,7 @@ export class AuthGuard
                state: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     // @ts-ignore
-    return this.employeeService.employeeSubject.pipe( take( 1 ), map( user => {
+    return this.dataStorageService.employeeSubject.pipe( take( 1 ), map( user => {
       const isAuth = !!user;
       if ( isAuth ) {
         return true;
