@@ -8,3 +8,18 @@ export const loadTrigger: AnimationTriggerMetadata =
       animate( 200 )
     ] )
   ] );
+
+export const COMPANY_NAME = "Regency Agency";
+
+export const MONTHS = [ "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December" ];

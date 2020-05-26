@@ -5,7 +5,8 @@ import { TimeSheet } from "../../shared/model/time-sheet";
 import { NgForm } from "@angular/forms";
 import { EmployeeService } from "../../shared/employee.service";
 import { MatTableDataSource } from "@angular/material";
-import { loadTrigger } from "../../shared/shared";
+import { loadTrigger, MONTHS } from "../../shared/shared";
+import { Employee } from "../../shared/model/employee.model";
 
 @Component( {
               selector: "app-time-sheet",
@@ -20,29 +21,35 @@ export class TimeSheetComponent implements OnInit, OnDestroy {
   timeSheets: TimeSheet[] = [];
   @ViewChild( "timeForm", { static: false } ) timeForm: NgForm;
   empId: string;
-  displayedColumns = [ "userId", "logDate", "work", "startTime", "endTime", "status", "timeSheetId" ];
+  employee: Employee;
+  displayedColumns = [ "logDate", "work", "startTime", "hours", "status", "sheetId" ];
   dataSource: MatTableDataSource<TimeSheet>;
   options = [ "ACE 101", "CFF 102", "CFF 209", "ZAS 392", "TTP 119", "DTF 476" ];
   today = new Date();
-  stTime: string = this.today.getHours() + ":" + (this.today.getMinutes() < 10 ? "0" + this.today.getMinutes() : this.today.getMinutes());
-  edTime: string = this.stTime;
+  stTime: string = (this.today.getHours() < 10 ? "0" + this.today.getHours() : this.today.getHours()) + ":" + (this.today.getMinutes() < 10 ? "0" + this.today.getMinutes() : this.today.getMinutes());
+  hours: number;
+  work: string;
 
   constructor( private timeSheetService: TimeSheetService, private employeeService: EmployeeService ) { }
 
   ngOnInit() {
 
+    // Get empId to fetch TimeSheets of that employee
     this.empSub = this.employeeService.employeeSubject.subscribe( value => {
       if ( value ) {
         this.empId = value.empId;
+        this.employee = value;
+
+        // Fetch timesheets of that employee
+        this.timeSheetSub = this.timeSheetService.fetchTimeSheets( true, this.empId ).subscribe( value => {
+          if ( value.length > 0 ) {
+            this.timeSheets = value;
+            this.loadValues();
+          }
+        } );
       }
     } );
 
-    this.timeSheetSub = this.timeSheetService.fetchTimeSheets( true, this.empId ).subscribe( value => {
-      if ( value.length > 0 ) {
-        this.timeSheets = value;
-        this.loadValues();
-      }
-    } );
   }
 
   ngOnDestroy(): void {
@@ -52,19 +59,13 @@ export class TimeSheetComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     const date = this.timeForm.value.date;
-    const startTime: number = this.timeForm.value.startTime;
-    const endTime: number = this.timeForm.value.endTime;
-    // const hours = endTime - startTime;
-    console.log( startTime );
-    console.log( endTime );
-    console.log( endTime - startTime );
-    // const tempSheet: TimeSheet = new TimeSheet( this.empId, "placeholder",
-    //                                             MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(),
-    //                                             startTime, endTime, this.timeForm.value.work, "Pending", false, hours );
-    // this.timeSheetService.addTimeSheet( tempSheet );
-    // this.timeSheets.push( tempSheet );
-    // this.loadValues();
-    // this.timeForm.resetForm();
+    const tempSheet: TimeSheet = new TimeSheet( this.empId, "placeholder",
+                                                MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(),
+                                                this.stTime, this.timeForm.value.work, "Pending", false, this.hours );
+    this.timeSheetService.addTimeSheet( tempSheet );
+    this.employee.totalHours += this.hours;
+    this.employeeService.updateEmployee( this.employee, this.empId );
+    this.timeForm.resetForm();
   }
 
   loadValues(): void {

@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from "@angular/core";
 import { Employee } from "./model/employee.model";
-import { BehaviorSubject, Subject, throwError } from "rxjs";
+import { BehaviorSubject, Subscription, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { AngularFireDatabase } from "@angular/fire/database";
@@ -44,13 +44,11 @@ export class User {
              } )
 export class EmployeeService implements OnInit {
 
-  employeeChanged = new Subject<Employee[]>();
-  employeeServerUrl = "https://employee-managment-f5252.firebaseio.com/employees";
   employeeSubject = new BehaviorSubject<Employee>( null );
+  sub: Subscription;
   loginUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
   signUpUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=";
   API_KEY = environment.APIKey;
-  currentEmployee: Employee;
   private tokenExpirationTimer: any;
 
 
@@ -78,7 +76,7 @@ export class EmployeeService implements OnInit {
     this.firestore.list( "employees" ).set( empId, emp );
   }
 
-  login( email: string, password: string, emp: Employee ) {
+  login( email: string, password: string ) {
     this.http.post<AuthResponseData>( this.loginUrl + this.API_KEY, { email: email, password: password, returnSecureToken: true } )
         .pipe(
           catchError( this.handleError ) ).subscribe( resData => {
@@ -131,9 +129,10 @@ export class EmployeeService implements OnInit {
     // Save the current user data to local sotrage
     localStorage.setItem( "userData", JSON.stringify( user ) );
 
-    this.fetchEmployees( "empEmail", email ).subscribe( value => {
+    this.sub = this.fetchEmployees( "empEmail", email ).subscribe( value => {
       this.employeeSubject.next( value[0] );
       this.router.navigate( [ "/home" ] );
+      this.sub.unsubscribe();
     } );
 
   }

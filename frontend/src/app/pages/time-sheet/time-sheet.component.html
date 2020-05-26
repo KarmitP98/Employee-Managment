@@ -8,18 +8,18 @@
     <form #timeForm = "ngForm" (ngSubmit) = "onSubmit()" class = "text-center">
       <mat-form-field appearance = "outline" class = "half">
         <mat-label>Log Date</mat-label>
-        <input [matDatepicker] = "Date" matInput name = "date" ngModel required>
+        <input [(ngModel)] = "today" [matDatepicker] = "Date" matInput
+               name = "date" required>
         <mat-datepicker-toggle [for] = "Date" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #Date></mat-datepicker>
       </mat-form-field>
       <br>
       <mat-form-field appearance = "outline" class = "half">
         <mat-label>Work</mat-label>
-        <input #work [matAutocomplete] = "auto" [value] = "'Default Work'"
-               matInput name = "work"
-               ngModel
+        <input [(ngModel)] = "work" [matAutocomplete] = "auto"
+               [value] = "'Default Work'" matInput name = "work" type = "text"
                placeholder = "Ex. Excel Worksheet, Mailing, etc." required
-               type = "text">
+        >
         <mat-autocomplete #auto = "matAutocomplete">
           <mat-option *ngFor = "let option of options" [value] = "option">
             {{ option }}
@@ -34,13 +34,14 @@
       </mat-form-field>
       <br>
       <mat-form-field appearance = "outline" class = "half">
-        <mat-label>End Time</mat-label>
-        <input [min] = "stTime" [value] = "stTime" matInput
-               name = "endTime" ngModel required type = "time">
+        <mat-label>Hours Logged</mat-label>
+        <input [(ngModel)] = "hours" matInput name = "hoursLogged"
+               placeholder = "1"
+               required step = "0.5" type = "number">
       </mat-form-field>
       <br>
       <mat-action-row>
-        <button [disabled] = "!timeForm.valid" color = "primary"
+        <button [disabled] = "!timeForm.valid" class = "half" color = "primary"
                 mat-raised-button type = "submit">Log Work!
         </button>
       </mat-action-row>
@@ -52,12 +53,12 @@
 <hr>
 <div *ngIf = "timeSheets" [@load]>
 
-  <mat-table [dataSource] = "dataSource">
+  <mat-table [dataSource] = "dataSource" class = "mat-elevation-z8">
     <!-- User Id Column -->
     <ng-container matColumnDef = "userId">
       <mat-header-cell *matHeaderCellDef> Employee Id.
       </mat-header-cell>
-      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.userId}} </mat-cell>
+      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.empId}} </mat-cell>
     </ng-container>
 
     <!-- Date Column -->
@@ -80,14 +81,15 @@
       <mat-header-cell *matHeaderCellDef> Start Time
       </mat-header-cell>
       <mat-cell
-        *matCellDef = "let timeSheet"> {{timeSheet.startTime}} </mat-cell>
+        *matCellDef = "let timeSheet"> {{timeSheet.startTime}}
+      </mat-cell>
     </ng-container>
 
     <!-- End Time Column -->
-    <ng-container matColumnDef = "endTime">
-      <mat-header-cell *matHeaderCellDef> End Time
+    <ng-container matColumnDef = "hours">
+      <mat-header-cell *matHeaderCellDef> Hours Logged
       </mat-header-cell>
-      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.endTime}} </mat-cell>
+      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.hours}} </mat-cell>
     </ng-container>
 
     <!-- Status Column -->
@@ -98,11 +100,11 @@
     </ng-container>
 
     <!-- Time Sheet Id Column -->
-    <ng-container matColumnDef = "timeSheetId">
+    <ng-container matColumnDef = "sheetId">
       <mat-header-cell *matHeaderCellDef> Time Sheet Id.
       </mat-header-cell>
       <mat-cell
-        *matCellDef = "let timeSheet"> {{timeSheet.timeSheetId}} </mat-cell>
+        *matCellDef = "let timeSheet"> {{timeSheet.sheetId}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef = "displayedColumns"></mat-header-row>

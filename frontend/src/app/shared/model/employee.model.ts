@@ -4,6 +4,8 @@ export class Employee {
                public abv: string,
                public empName: string,
                public empEmail: string,
+               public DOB: Date,
+               public profilePicURL: string,
                public isAdmin: boolean,
                public adminStatus: string,
                public password: string,

@@ -5,20 +5,7 @@ import { Subscription } from "rxjs";
 import { Leave } from "../../shared/model/leaves.model";
 import { NgForm } from "@angular/forms";
 import { MatTableDataSource } from "@angular/material";
-import { loadTrigger } from "../../shared/shared";
-
-export const MONTHS = [ "January",
-                        "February",
-                        "March",
-                        "April",
-                        "May",
-                        "June",
-                        "July",
-                        "August",
-                        "September",
-                        "October",
-                        "November",
-                        "December" ];
+import { loadTrigger, MONTHS } from "../../shared/shared";
 
 @Component( {
               selector: "app-annual-leave",
@@ -33,7 +20,7 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
   leaves: Leave[] = [];
   empId: string;
   @ViewChild( "leaveForm", { static: false } ) leaveForm: NgForm;
-  displayedColumns = [ "userId", "startDate", "endDate", "reason", "status", "leaveId" ];
+  displayedColumns = [ "startDate", "endDate", "reason", "status", "leaveId" ];
   dataSource: MatTableDataSource<Leave>;
   minDate = new Date();
   date: Date;
@@ -42,18 +29,22 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    //Get empId to fetch leaves of that employee
     this.empSub = this.employeeService.employeeSubject.subscribe( value => {
       if ( value ) {
         this.empId = value.empId;
+
+        // Fetch leaves of that employee
+        this.leaveSub = this.leaveService.fetchLeaves( true, this.empId ).subscribe( value => {
+          if ( value ) {
+            this.leaves = value;
+            this.loadValues();
+          }
+        } );
       }
     } );
 
-    this.leaveSub = this.leaveService.fetchLeaves( true, this.empId ).subscribe( value => {
-      if ( value ) {
-        this.leaves = value;
-        this.loadValues();
-      }
-    } );
+
   }
 
   ngOnDestroy(): void {
@@ -70,8 +61,8 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
                  MONTHS[endDate.getMonth()] + " " + endDate.getDate() + ", " + endDate.getFullYear(), this.leaveForm.value.reason,
                  "Pending", false );
     this.leaveService.addLeave( tempLeave );
-    this.leaves.push( tempLeave );
-    this.loadValues();
+    // this.leaves.push( tempLeave );
+    // this.loadValues();
     this.leaveForm.resetForm();
   }
 
