@@ -9,7 +9,7 @@
       <mat-form-field appearance = "outline" class = "half">
         <mat-label>Log Date</mat-label>
         <input [(ngModel)] = "today" [matDatepicker] = "Date" matInput
-               name = "date" required>
+               [matDatepickerFilter] = "myFilter" name = "date" required>
         <mat-datepicker-toggle [for] = "Date" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #Date></mat-datepicker>
       </mat-form-field>
@@ -110,4 +110,8 @@
     <mat-row *matRowDef = "let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
+  <mat-paginator (page) = "updateTable($event)" [length] = "timeSheets.length"
+                 [pageSizeOptions] = "[5, 10, 50]" [pageSize] = "5"
+                 color = "primary"
+                 showFirstLastButtons></mat-paginator>
 </div>

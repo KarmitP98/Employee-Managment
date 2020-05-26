@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Leave } from "../../shared/model/leaves.model";
 import { Subscription } from "rxjs";
-import { MatTableDataSource } from "@angular/material";
+import { MatPaginator, MatTableDataSource, PageEvent } from "@angular/material";
 import { loadTrigger } from "../../shared/shared";
 import { ADMIN_STATUS, EmployeeService } from "../../shared/employee.service";
 import { LeaveService } from "../../shared/leave.service";
@@ -22,7 +22,10 @@ export class LeaveReqComponent implements OnInit, OnDestroy {
   empId: string;
   displayedColumns: string[] = [ "select", "empId", "startDate", "endDate", "reason", "status" ];
   selectedReq: Leave;
-  dataSource: MatTableDataSource<any>;
+  dataSource = new MatTableDataSource<Leave>( this.leaves );
+  @ViewChild( MatPaginator, { static: true } ) paginator: MatPaginator;
+  pageSize = 5;
+  pageIndex = 0;
 
   constructor( private employeeService: EmployeeService, private leaveService: LeaveService ) { }
 
@@ -32,8 +35,9 @@ export class LeaveReqComponent implements OnInit, OnDestroy {
         this.employee = emp;
         this.empId = emp.empId;
 
-        this.leaveSub = this.leaveService.fetchLeaves( "empId", emp.empId ).subscribe( value => {
-          this.dataSource = new MatTableDataSource<any>( value );
+        this.leaveSub = this.leaveService.fetchLeaves().subscribe( value => {
+          this.leaves = value;
+          this.loadValues();
         } );
       }
     } );
@@ -55,4 +59,15 @@ export class LeaveReqComponent implements OnInit, OnDestroy {
     this.selectedReq = null;
   }
 
+  updateTable( $event: PageEvent ): void {
+    this.pageSize = $event.pageSize;
+    this.pageIndex = $event.pageIndex;
+    this.loadValues();
+  }
+
+  private loadValues(): void {
+    this.dataSource = new MatTableDataSource<Leave>( this.leaves.filter( ( value, index ) => {
+      return (index >= this.pageIndex * this.pageSize && index <= (this.pageIndex * this.pageSize + this.pageSize - 1));
+    } ) );
+  }
 }

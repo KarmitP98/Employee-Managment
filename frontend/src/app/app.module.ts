@@ -29,18 +29,21 @@ import {
   MatListModule,
   MatNativeDateModule,
   MatOptionModule,
+  MatPaginatorModule,
   MatRadioModule,
   MatSelectModule,
   MatSlideToggleModule,
   MatSnackBarModule,
   MatSortModule,
   MatTableModule,
+  MatTabsModule,
   MatToolbarModule
 } from "@angular/material";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { environment } from "../environments/environment";
 import { SignUpComponent } from "./pages/sign-up/sign-up.component";
+import { ChartsModule } from "ng2-charts";
 
 @NgModule( {
              declarations: [
@@ -84,7 +87,10 @@ import { SignUpComponent } from "./pages/sign-up/sign-up.component";
                MatListModule,
                AngularFireModule.initializeApp( environment.firebase ),
                AngularFireDatabaseModule,
-               MatBadgeModule
+               MatBadgeModule,
+               MatPaginatorModule,
+               ChartsModule,
+               MatTabsModule
              ],
              providers: [],
              bootstrap: [ AppComponent ]

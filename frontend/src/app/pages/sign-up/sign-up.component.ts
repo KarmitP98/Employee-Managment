@@ -33,7 +33,7 @@ export class SignUpComponent implements OnInit {
 
   onSignUp(): void {
     const date = this.signUpForm.value.DOB;
-    const newEmp = new Employee( "temp", this.title, this.firstName + " " + this.lastName, this.email,
+    const newEmp = new Employee( "temp", this.title, this.firstName + " " + (this.lastName === undefined ? "" : this.lastName), this.email,
                                  MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(),
                                  this.proPicUrl, false, "Pending", this.password, 0 );
     console.log( newEmp );

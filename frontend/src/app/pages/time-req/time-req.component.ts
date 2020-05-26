@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Subscription } from "rxjs";
-import { MatTableDataSource } from "@angular/material";
+import { MatPaginator, MatTableDataSource, PageEvent } from "@angular/material";
 import { loadTrigger } from "../../shared/shared";
 import { ADMIN_STATUS, EmployeeService } from "../../shared/employee.service";
 import { TimeSheetService } from "../../shared/time-sheet.service";
@@ -23,19 +23,25 @@ export class TimeReqComponent implements OnInit, OnDestroy {
   empId: string;
   displayedColumns: string[] = [ "select", "userId", "logDate", "startTime", "endTime", "work", "status" ];
   selectedReq: Timesheet;
-  dataSource: MatTableDataSource<Timesheet>;
-
+  dataSource = new MatTableDataSource<Timesheet>( this.timeSheets );
+  @ViewChild( MatPaginator, { static: true } ) paginator: MatPaginator;
+  pageSize = 5;
+  pageIndex = 0;
 
   constructor( private employeeService: EmployeeService, private timeSheetService: TimeSheetService ) { }
 
   ngOnInit() {
+
+    this.dataSource.paginator = this.paginator;
+
     this.empSub = this.employeeService.employeeSubject.subscribe( emp => {
       if ( emp ) {
         this.employee = emp;
         this.empId = emp.empId;
 
-        this.sheetSub = this.timeSheetService.fetchTimeSheets( "empId", emp.empId ).subscribe( value => {
-          this.dataSource = new MatTableDataSource<Timesheet>( value );
+        this.sheetSub = this.timeSheetService.fetchTimeSheets().subscribe( value => {
+          this.timeSheets = value;
+          this.loadValues();
         } );
       }
     } );
@@ -59,6 +65,14 @@ export class TimeReqComponent implements OnInit, OnDestroy {
   }
 
   loadValues() {
-    this.dataSource = new MatTableDataSource<Timesheet>( this.timeSheets );
+    this.dataSource = new MatTableDataSource<Timesheet>( this.timeSheets.filter( ( value, index ) => {
+      return (index >= this.pageIndex * this.pageSize && index <= (this.pageIndex * this.pageSize + this.pageSize - 1));
+    } ) );
+  }
+
+  updateTable( $event: PageEvent ): void {
+    this.pageSize = $event.pageSize;
+    this.pageIndex = $event.pageIndex;
+    this.loadValues();
   }
 }

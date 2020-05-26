@@ -4,7 +4,7 @@ import { EmployeeService } from "../../shared/employee.service";
 import { Subscription } from "rxjs";
 import { Leave } from "../../shared/model/leaves.model";
 import { NgForm } from "@angular/forms";
-import { MatTableDataSource } from "@angular/material";
+import { MatPaginator, MatTableDataSource, PageEvent } from "@angular/material";
 import { loadTrigger, MONTHS } from "../../shared/shared";
 
 @Component( {
@@ -21,13 +21,23 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
   empId: string;
   @ViewChild( "leaveForm", { static: false } ) leaveForm: NgForm;
   displayedColumns = [ "startDate", "endDate", "reason", "status", "leaveId" ];
-  dataSource: MatTableDataSource<Leave>;
+  dataSource = new MatTableDataSource<Leave>( this.leaves );
   minDate = new Date();
   date: Date;
+  @ViewChild( MatPaginator, { static: true } ) paginator: MatPaginator;
+  pageSize = 5;
+  pageIndex = 0;
+
+  myFilter = ( d: Date | null ): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
 
   constructor( private leaveService: LeaveService, private employeeService: EmployeeService ) { }
 
   ngOnInit() {
+    this.dataSource.paginator = this.paginator;
 
     //Get empId to fetch leaves of that employee
     this.empSub = this.employeeService.employeeSubject.subscribe( value => {
@@ -67,7 +77,14 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
   }
 
   loadValues(): void {
-    this.dataSource = new MatTableDataSource<Leave>( this.leaves );
+    this.dataSource = new MatTableDataSource<Leave>( this.leaves.filter( ( value, index ) => {
+      return (index >= this.pageIndex * this.pageSize && index <= (this.pageIndex * this.pageSize + this.pageSize - 1));
+    } ) );
   }
 
+  updateTable( $event: PageEvent ): void {
+    this.pageSize = $event.pageSize;
+    this.pageIndex = $event.pageIndex;
+    this.loadValues();
+  }
 }

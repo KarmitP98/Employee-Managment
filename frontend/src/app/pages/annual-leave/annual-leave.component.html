@@ -8,7 +8,8 @@
       <mat-form-field appearance = "outline" class = "half">
         <mat-label>Start Date</mat-label>
         <input [(ngModel)] = "minDate" [matDatepicker] = "startDate"
-               [min] = "minDate" matInput name = "startDate" required>
+               [matDatepickerFilter] = "myFilter" [min] = "minDate" matInput
+               name = "startDate" required>
         <mat-datepicker-toggle [for] = "startDate" matSuffix>
         </mat-datepicker-toggle>
         <mat-datepicker #startDate></mat-datepicker>
@@ -17,8 +18,8 @@
       <mat-form-field appearance = "outline" class = "half">
         <mat-label>End Date</mat-label>
         <input [(ngModel)] = "minDate" [matDatepicker] = "endDate"
-               [min] = "minDate"
-               matInput name = "endDate" required>
+               [matDatepickerFilter] = "myFilter" [min] = "minDate" matInput
+               name = "endDate" required>
         <mat-datepicker-toggle [for] = "endDate"
                                matSuffix></mat-datepicker-toggle>
         <mat-datepicker #endDate></mat-datepicker>
@@ -86,6 +87,11 @@
 
     <mat-header-row *matHeaderRowDef = "displayedColumns"></mat-header-row>
     <mat-row *matRowDef = "let row; columns: displayedColumns;"></mat-row>
+
   </mat-table>
+  <mat-paginator (page) = "updateTable($event)" [length] = "leaves.length"
+                 [pageSizeOptions] = "[5, 10, 50]" [pageSize] = "5"
+                 color = "primary"
+                 showFirstLastButtons></mat-paginator>
 </div>
 
