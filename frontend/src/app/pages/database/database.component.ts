@@ -3,7 +3,7 @@ import { MatTableDataSource } from "@angular/material";
 import { Employee } from "../../shared/model/employee.model";
 import { Leave } from "../../shared/model/leaves.model";
 import { TimeSheet } from "../../shared/model/time-sheet";
-import { EmployeeService } from "../../shared/employee.service";
+import { DataStorageService } from "../../shared/data-storage.service";
 import { LeaveService } from "../../shared/leave.service";
 import { TimeSheetService } from "../../shared/time-sheet.service";
 import { loadTrigger } from "../../shared/shared";
@@ -23,10 +23,10 @@ export class DatabaseComponent implements OnInit {
   timeDisplay = [ "userId", "logDate", "startTime", "endTime", "work", "status" ];
   leaveDisplay = [ "userId", "startDate", "endDate", "reason", "status" ];
 
-  constructor( private employeeService: EmployeeService, private leaveService: LeaveService, private timeSheetService: TimeSheetService ) { }
+  constructor( private dataStorageService: DataStorageService, private leaveService: LeaveService, private timeSheetService: TimeSheetService ) { }
 
   ngOnInit() {
-    this.employeeService.fetchEmployees().subscribe( value => {
+    this.dataStorageService.fetchEmployees().subscribe( value => {
       if ( value ) {
         this.empDataSource = new MatTableDataSource<Employee>( value );
       }

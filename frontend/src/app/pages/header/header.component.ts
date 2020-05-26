@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
-import { EmployeeService } from "../../shared/employee.service";
+import { DataStorageService } from "../../shared/data-storage.service";
 import { Employee } from "../../shared/model/employee.model";
 
 @Component( {
@@ -15,10 +15,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private userSub: Subscription;
   private emp: Employee;
 
-  constructor( public employeeService: EmployeeService ) { }
+  constructor( public dataStorageService: DataStorageService ) { }
 
   ngOnInit() {
-    this.userSub = this.employeeService.employeeSubject.subscribe( ( value: Employee ) => {
+    this.userSub = this.dataStorageService.employeeSubject.subscribe( ( value: Employee ) => {
       this.isAuth = !!value;
       if ( this.isAuth ) {
         this.emp = value;
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogout(): void {
-    this.employeeService.logout();
+    this.dataStorageService.logout();
   }
 
   ngOnDestroy(): void {
