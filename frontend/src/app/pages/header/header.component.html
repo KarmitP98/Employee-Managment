@@ -9,11 +9,12 @@
     Annual Leave
   </button>
   <button *ngIf = "isAdmin" mat-button routerLink = "/admin"
-          routerLinkActive = "selected">Admin
+          [matBadge] = "adminReq + sheetReq +
+          leaveReq > 0 ? adminReq + sheetReq +
+          leaveReq: ''" matBadgeColor = "warn" matBadgePosition = "above after"
+          routerLinkActive = "selected">
+    Admin
   </button>
-  <!--  <button mat-button routerLink = "/database" routerLinkActive = "selected">-->
-  <!--    Database-->
-  <!--  </button>-->
   <button (click) = "onLogout()" mat-button routerLinkActive = "selected">
     Logout
   </button>

@@ -4,17 +4,20 @@
       <hr>
       <div class = "text-center">
         <button [routerLinkActive] = "'selected'" color = "accent"
-                mat-raised-button
+                [matBadge] = "sheetReq > 0 ? sheetReq : ''" mat-raised-button
+                matBadgeColor = "warn" matBadgePosition = "above after"
                 routerLink = "/admin/time-req">View Time-Sheet Requests
         </button>
         ||
         <button [routerLinkActive] = "'selected'" color = "accent"
-                mat-raised-button
+                [matBadge] = "leaveReq > 0 ? leaveReq : ''" mat-raised-button
+                matBadgeColor = "warn" matBadgePosition = "above after"
                 routerLink = "/admin/leave-req">View Leave Requests
         </button>
         ||
         <button [routerLinkActive] = "'selected'" color = "accent"
-                mat-raised-button
+                [matBadge] = "adminReq > 0 ? adminReq : ''" mat-raised-button
+                matBadgeColor = "warn" matBadgePosition = "above after"
                 routerLink = "/admin/admin-req"> View Admin Requests
         </button>
       </div>

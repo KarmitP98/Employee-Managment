@@ -3,7 +3,7 @@
     <h3 class = "text-center">Employee List</h3>
     <br>
 
-    <mat-table [dataSource] = "dataSource">
+    <mat-table [dataSource] = "dataSource" class = "mat-elevation-z8">
       <!--    Select Column -->
       <ng-container matColumnDef = "select">
         <mat-header-cell *matHeaderCellDef> Select</mat-header-cell>
@@ -16,29 +16,29 @@
       </ng-container>
 
       <!-- Employee ID Column -->
-      <ng-container matColumnDef = "userId">
+      <ng-container matColumnDef = "empId">
         <mat-header-cell *matHeaderCellDef>Employee Id.</mat-header-cell>
-        <mat-cell *matCellDef = "let element"> {{ element.userId }} </mat-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.empId }} </mat-cell>
       </ng-container>
 
       <!-- Title Column -->
-      <ng-container matColumnDef = "abv">
-        <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
-        <mat-cell *matCellDef = "let element"> {{ element.abv }} </mat-cell>
+      <ng-container matColumnDef = "DOB">
+        <mat-header-cell *matHeaderCellDef>Date of Birth</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.DOB }} </mat-cell>
       </ng-container>
 
       <!-- Name Column -->
-      <ng-container matColumnDef = "userName">
+      <ng-container matColumnDef = "empName">
         <mat-header-cell *matHeaderCellDef>Employee Name</mat-header-cell>
         <mat-cell
-          *matCellDef = "let element"> {{ element.userName }} </mat-cell>
+          *matCellDef = "let element"> {{ element.empName }} </mat-cell>
       </ng-container>
 
       <!-- Email Column -->
-      <ng-container matColumnDef = "userEmail">
+      <ng-container matColumnDef = "empEmail">
         <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
         <mat-cell
-          *matCellDef = "let element"> {{ element.userEmail }} </mat-cell>
+          *matCellDef = "let element"> {{ element.empEmail }} </mat-cell>
       </ng-container>
 
       <!-- IsAdim Column -->

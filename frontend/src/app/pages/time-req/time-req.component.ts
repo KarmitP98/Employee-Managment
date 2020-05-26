@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { TimeSheet } from "../../shared/model/time-sheet";
 import { Subscription } from "rxjs";
-import { ADMIN_STATUS, DataStorageService } from "../../shared/data-storage.service";
 import { MatTableDataSource } from "@angular/material";
 import { loadTrigger } from "../../shared/shared";
+import { ADMIN_STATUS, EmployeeService } from "../../shared/employee.service";
+import { TimeSheetService } from "../../shared/time-sheet.service";
+import { Timesheet } from "../../shared/model/timesheet.model";
+import { Employee } from "../../shared/model/employee.model";
 
 
 @Component( {
@@ -14,47 +16,49 @@ import { loadTrigger } from "../../shared/shared";
             } )
 export class TimeReqComponent implements OnInit, OnDestroy {
 
-  timeSheets: TimeSheet[] = [];
-  storageSub: Subscription;
+  timeSheets: Timesheet[] = [];
+  empSub: Subscription;
+  sheetSub: Subscription;
+  employee: Employee;
+  empId: string;
   displayedColumns: string[] = [ "select", "userId", "logDate", "startTime", "endTime", "work", "status" ];
-  selectedReq: TimeSheet;
-  dataSource: MatTableDataSource<TimeSheet>;
+  selectedReq: Timesheet;
+  dataSource: MatTableDataSource<Timesheet>;
 
 
-  constructor( private dataStorageService: DataStorageService ) { }
+  constructor( private employeeService: EmployeeService, private timeSheetService: TimeSheetService ) { }
 
   ngOnInit() {
-    this.storageSub = this.dataStorageService.fetchEmployees().subscribe( value => {
-      if ( value ) {
-        for ( const e of value ) {
-          this.timeSheets.push( ...e.TimeSheets );
-        }
-        this.dataSource = new MatTableDataSource<TimeSheet>( this.timeSheets );
+    this.empSub = this.employeeService.employeeSubject.subscribe( emp => {
+      if ( emp ) {
+        this.employee = emp;
+        this.empId = emp.empId;
+
+        this.sheetSub = this.timeSheetService.fetchTimeSheets( "empId", emp.empId ).subscribe( value => {
+          this.dataSource = new MatTableDataSource<Timesheet>( value );
+        } );
       }
     } );
   }
 
   ngOnDestroy(): void {
-    this.storageSub.unsubscribe();
+    this.empSub.unsubscribe();
+    this.sheetSub.unsubscribe();
   }
 
   changeStatus( b: boolean ) {
     this.selectedReq.status = b ? ADMIN_STATUS.approved : ADMIN_STATUS.declined;
     console.log( this.selectedReq );
-    this.dataStorageService.updateTimeSheet( this.selectedReq, this.selectedReq.sheetId );
+    this.timeSheetService.updateTimeSheet( this.selectedReq, this.selectedReq.sheetId );
     this.selectedReq = null;
   }
 
   removeReq(): void {
-    this.dataStorageService.removeTimeSheet( this.selectedReq );
-    // this.timeSheets = this.timeSheets.filter( value => {
-    //   return value.empId !== this.selectedReq.empId;
-    // } );
-    // this.loadValues();
+    this.timeSheetService.removeTimeSheet( this.selectedReq );
     this.selectedReq = null;
   }
 
   loadValues() {
-    this.dataSource = new MatTableDataSource<TimeSheet>( this.timeSheets );
+    this.dataSource = new MatTableDataSource<Timesheet>( this.timeSheets );
   }
 }

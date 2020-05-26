@@ -1,7 +1,7 @@
 <div *ngIf = "timeSheets">
   <div [@load]><h3 class = "text-center">Time Requests</h3>
     <br>
-    <mat-table [dataSource] = "dataSource">
+    <mat-table [dataSource] = "dataSource" class = "mat-elevation-z8">
       <!--    Select Column -->
       <ng-container matColumnDef = "select">
         <mat-header-cell *matHeaderCellDef> Select</mat-header-cell>
@@ -16,7 +16,8 @@
       <!-- Employee ID Column -->
       <ng-container matColumnDef = "userId">
         <mat-header-cell *matHeaderCellDef>Employee Id.</mat-header-cell>
-        <mat-cell *matCellDef = "let element"> {{ element.userId }} </mat-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.empId }}
+        </mat-cell>
       </ng-container>
 
       <!-- Log Date Column -->
@@ -39,9 +40,9 @@
       </ng-container>
 
       <!-- End Time Column -->
-      <ng-container matColumnDef = "endTime">
-        <mat-header-cell *matHeaderCellDef>End Time</mat-header-cell>
-        <mat-cell *matCellDef = "let element"> {{ element.endTime }} </mat-cell>
+      <ng-container matColumnDef = endTime>
+        <mat-header-cell *matHeaderCellDef>Hours Logged</mat-header-cell>
+        <mat-cell *matCellDef = "let element"> {{ element.hours }} </mat-cell>
       </ng-container>
 
       <!-- Status Column -->

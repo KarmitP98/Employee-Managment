@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { DataStorageService } from "../../shared/data-storage.service";
 import { Subscription } from "rxjs";
 import { loadTrigger } from "../../shared/shared";
+import { EmployeeService } from "../../shared/employee.service";
 
 @Component( {
               selector: "app-home",
@@ -13,10 +13,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;
   private sub: Subscription;
 
-  constructor( private dataStorageService: DataStorageService ) { }
+  constructor( private employeeService: EmployeeService ) { }
 
   ngOnInit() {
-    this.sub = this.dataStorageService.employeeSubject.subscribe( value => {
+    this.sub = this.employeeService.employeeSubject.subscribe( value => {
       const isAuth = !!value;
       if ( isAuth ) {
         this.isAdmin = value.isAdmin;

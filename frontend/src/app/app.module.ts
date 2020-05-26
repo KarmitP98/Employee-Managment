@@ -19,6 +19,7 @@ import { LoadingSpinnerComponent } from "./shared/loading-spinner/loading-spinne
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   MatAutocompleteModule,
+  MatBadgeModule,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
@@ -82,7 +83,8 @@ import { SignUpComponent } from "./pages/sign-up/sign-up.component";
                MatAutocompleteModule,
                MatListModule,
                AngularFireModule.initializeApp( environment.firebase ),
-               AngularFireDatabaseModule
+               AngularFireDatabaseModule,
+               MatBadgeModule
              ],
              providers: [],
              bootstrap: [ AppComponent ]

@@ -27,3 +27,13 @@ body {
   width: 50%;
 }
 
+
+.mat-header-cell {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mat-cell {
+  text-align: center;
+  justify-content: center;
+}

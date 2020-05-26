@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { COMPANY_NAME, loadTrigger } from "../../shared/shared";
+import { COMPANY_NAME, loadTrigger, MONTHS } from "../../shared/shared";
 import { Employee } from "../../shared/model/employee.model";
 import { NgForm } from "@angular/forms";
 import { EmployeeService } from "../../shared/employee.service";
@@ -32,7 +32,9 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignUp(): void {
-    const newEmp = new Employee( "temp", this.title, this.firstName + " " + this.lastName, this.email, this.DOB,
+    const date = this.signUpForm.value.DOB;
+    const newEmp = new Employee( "temp", this.title, this.firstName + " " + this.lastName, this.email,
+                                 MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(),
                                  this.proPicUrl, false, "Pending", this.password, 0 );
     console.log( newEmp );
     this.employeeService.signUp( this.email, this.password, newEmp );

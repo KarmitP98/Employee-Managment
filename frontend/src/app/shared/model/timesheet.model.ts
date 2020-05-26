@@ -1,4 +1,4 @@
-export class TimeSheet {
+export class Timesheet {
 
   constructor( public empId: string,
                public sheetId: string,

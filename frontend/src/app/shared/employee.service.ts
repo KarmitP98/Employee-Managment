@@ -114,8 +114,9 @@ export class EmployeeService implements OnInit {
   }
 
   autoLogin( email: string ): void {
-    this.fetchEmployees( "empEmail", email ).subscribe( value => {
+    this.sub = this.fetchEmployees( "empEmail", email ).subscribe( value => {
       this.employeeSubject.next( value[0] );
+      this.sub.unsubscribe();
     } );
 
   }

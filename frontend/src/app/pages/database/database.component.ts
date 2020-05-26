@@ -2,11 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
 import { Employee } from "../../shared/model/employee.model";
 import { Leave } from "../../shared/model/leaves.model";
-import { TimeSheet } from "../../shared/model/time-sheet";
-import { DataStorageService } from "../../shared/data-storage.service";
 import { LeaveService } from "../../shared/leave.service";
 import { TimeSheetService } from "../../shared/time-sheet.service";
 import { loadTrigger } from "../../shared/shared";
+import { EmployeeService } from "../../shared/employee.service";
+import { Timesheet } from "../../shared/model/timesheet.model";
 
 @Component( {
               selector: "app-database",
@@ -18,29 +18,29 @@ export class DatabaseComponent implements OnInit {
 
   empDataSource: MatTableDataSource<Employee>;
   leaveDataSource: MatTableDataSource<Leave>;
-  timeDataSource: MatTableDataSource<TimeSheet>;
+  timeDataSource: MatTableDataSource<Timesheet>;
   empDisplay = [ "userId", "abv", "userName", "userEmail", "password", "adminStatus" ];
   timeDisplay = [ "userId", "logDate", "startTime", "endTime", "work", "status" ];
   leaveDisplay = [ "userId", "startDate", "endDate", "reason", "status" ];
 
-  constructor( private dataStorageService: DataStorageService, private leaveService: LeaveService, private timeSheetService: TimeSheetService ) { }
+  constructor( private employeeService: EmployeeService, private leaveService: LeaveService, private timeSheetService: TimeSheetService ) { }
 
   ngOnInit() {
-    this.dataStorageService.fetchEmployees().subscribe( value => {
+    this.employeeService.fetchEmployees().subscribe( value => {
       if ( value ) {
         this.empDataSource = new MatTableDataSource<Employee>( value );
       }
     } );
 
-    this.leaveService.fetchLeaves( false ).subscribe( value => {
+    this.leaveService.fetchLeaves().subscribe( value => {
       if ( value ) {
         this.leaveDataSource = new MatTableDataSource<Leave>( value );
       }
     } );
 
-    this.timeSheetService.fetchTimeSheets( false ).subscribe( value => {
+    this.timeSheetService.fetchTimeSheets().subscribe( value => {
       if ( value ) {
-        this.timeDataSource = new MatTableDataSource<TimeSheet>( value );
+        this.timeDataSource = new MatTableDataSource<Timesheet>( value );
       }
     } );
   }

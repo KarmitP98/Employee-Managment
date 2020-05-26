@@ -35,7 +35,7 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
         this.empId = value.empId;
 
         // Fetch leaves of that employee
-        this.leaveSub = this.leaveService.fetchLeaves( true, this.empId ).subscribe( value => {
+        this.leaveSub = this.leaveService.fetchLeaves( "empId", this.empId ).subscribe( value => {
           if ( value ) {
             this.leaves = value;
             this.loadValues();

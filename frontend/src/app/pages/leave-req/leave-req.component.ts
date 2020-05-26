@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Leave } from "../../shared/model/leaves.model";
 import { Subscription } from "rxjs";
-import { ADMIN_STATUS, DataStorageService } from "../../shared/data-storage.service";
 import { MatTableDataSource } from "@angular/material";
 import { loadTrigger } from "../../shared/shared";
+import { ADMIN_STATUS, EmployeeService } from "../../shared/employee.service";
+import { LeaveService } from "../../shared/leave.service";
+import { Employee } from "../../shared/model/employee.model";
 
 @Component( {
               selector: "app-leave-req",
@@ -14,44 +16,43 @@ import { loadTrigger } from "../../shared/shared";
 export class LeaveReqComponent implements OnInit, OnDestroy {
 
   leaves: Leave[] = [];
-  storageSub: Subscription;
-  displayedColumns: string[] = [ "select", "userId", "startDate", "endDate", "reason", "status" ];
+  empSub: Subscription;
+  leaveSub: Subscription;
+  employee: Employee;
+  empId: string;
+  displayedColumns: string[] = [ "select", "empId", "startDate", "endDate", "reason", "status" ];
   selectedReq: Leave;
-  dataSource: MatTableDataSource<Leave>;
+  dataSource: MatTableDataSource<any>;
 
-  constructor( private dataStorageService: DataStorageService ) { }
+  constructor( private employeeService: EmployeeService, private leaveService: LeaveService ) { }
 
   ngOnInit() {
-    this.storageSub = this.dataStorageService.fetchEmployees().subscribe( value => {
-      if ( value ) {
-        for ( let e of value ) {
-          this.leaves.push( ...e.Leaves );
-        }
+    this.empSub = this.employeeService.employeeSubject.subscribe( emp => {
+      if ( emp ) {
+        this.employee = emp;
+        this.empId = emp.empId;
+
+        this.leaveSub = this.leaveService.fetchLeaves( "empId", emp.empId ).subscribe( value => {
+          this.dataSource = new MatTableDataSource<any>( value );
+        } );
       }
-      this.dataSource = new MatTableDataSource<Leave>( this.leaves );
     } );
   }
 
   ngOnDestroy(): void {
-    this.storageSub.unsubscribe();
+    this.empSub.unsubscribe();
+    this.leaveSub.unsubscribe();
   }
 
   changeStatus( b: boolean ): void {
     this.selectedReq.status = b ? ADMIN_STATUS.approved : ADMIN_STATUS.declined;
-    this.dataStorageService.updateLeave( this.selectedReq, this.selectedReq.leaveId );
+    this.leaveService.updateLeave( this.selectedReq, this.selectedReq.leaveId );
     this.selectedReq = null;
   }
 
   removeReq(): void {
-    this.dataStorageService.removeLeave( this.selectedReq );
-    // this.leaves = this.leaves.filter( value => {
-    //   return value.empId !== this.selectedReq.empId;
-    // } );
-    // this.loadValues();
+    this.leaveService.removeLeave( this.selectedReq );
     this.selectedReq = null;
   }
 
-  loadValues() {
-    this.dataSource = new MatTableDataSource<Leave>( this.leaves );
-  }
 }

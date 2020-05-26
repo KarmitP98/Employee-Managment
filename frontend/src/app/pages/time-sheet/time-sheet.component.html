@@ -36,12 +36,11 @@
       <mat-form-field appearance = "outline" class = "half">
         <mat-label>Hours Logged</mat-label>
         <input [(ngModel)] = "hours" matInput name = "hoursLogged"
-               placeholder = "1"
-               required step = "0.5" type = "number">
+               placeholder = "1" required step = "0.5" type = "number">
       </mat-form-field>
       <br>
       <mat-action-row>
-        <button [disabled] = "!timeForm.valid" class = "half" color = "primary"
+        <button [disabled] = "!timeForm.valid" class = "half" color = "accent"
                 mat-raised-button type = "submit">Log Work!
         </button>
       </mat-action-row>

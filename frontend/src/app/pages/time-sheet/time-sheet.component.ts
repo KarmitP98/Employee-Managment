@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Subscription } from "rxjs";
 import { TimeSheetService } from "../../shared/time-sheet.service";
-import { TimeSheet } from "../../shared/model/time-sheet";
 import { NgForm } from "@angular/forms";
 import { EmployeeService } from "../../shared/employee.service";
 import { MatTableDataSource } from "@angular/material";
 import { loadTrigger, MONTHS } from "../../shared/shared";
 import { Employee } from "../../shared/model/employee.model";
+import { Timesheet } from "../../shared/model/timesheet.model";
 
 @Component( {
               selector: "app-time-sheet",
@@ -18,12 +18,12 @@ export class TimeSheetComponent implements OnInit, OnDestroy {
 
   timeSheetSub: Subscription;
   empSub: Subscription;
-  timeSheets: TimeSheet[] = [];
+  timeSheets: Timesheet[] = [];
   @ViewChild( "timeForm", { static: false } ) timeForm: NgForm;
   empId: string;
   employee: Employee;
   displayedColumns = [ "logDate", "work", "startTime", "hours", "status", "sheetId" ];
-  dataSource: MatTableDataSource<TimeSheet>;
+  dataSource: MatTableDataSource<Timesheet>;
   options = [ "ACE 101", "CFF 102", "CFF 209", "ZAS 392", "TTP 119", "DTF 476" ];
   today = new Date();
   stTime: string = (this.today.getHours() < 10 ? "0" + this.today.getHours() : this.today.getHours()) + ":" + (this.today.getMinutes() < 10 ? "0" + this.today.getMinutes() : this.today.getMinutes());
@@ -41,7 +41,7 @@ export class TimeSheetComponent implements OnInit, OnDestroy {
         this.employee = value;
 
         // Fetch timesheets of that employee
-        this.timeSheetSub = this.timeSheetService.fetchTimeSheets( true, this.empId ).subscribe( value => {
+        this.timeSheetSub = this.timeSheetService.fetchTimeSheets( "empId", this.empId ).subscribe( value => {
           if ( value.length > 0 ) {
             this.timeSheets = value;
             this.loadValues();
@@ -59,7 +59,7 @@ export class TimeSheetComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     const date = this.timeForm.value.date;
-    const tempSheet: TimeSheet = new TimeSheet( this.empId, "placeholder",
+    const tempSheet: Timesheet = new Timesheet( this.empId, "placeholder",
                                                 MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(),
                                                 this.stTime, this.timeForm.value.work, "Pending", false, this.hours );
     this.timeSheetService.addTimeSheet( tempSheet );
