@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from "@angular/core";
 import { Employee } from "./model/employee.model";
-import { BehaviorSubject, Subject, throwError } from "rxjs";
+import { BehaviorSubject, Subscription, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { AngularFireDatabase } from "@angular/fire/database";
@@ -47,14 +47,12 @@ export class User {
              } )
 export class DataStorageService implements OnInit {
 
-  employeeChanged = new Subject<Employee[]>();
-  employeeServerUrl = "https://employee-managment-f5252.firebaseio.com/employees";
   employeeSubject = new BehaviorSubject<Employee>( null );
   loginUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
   signUpUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=";
   API_KEY = environment.APIKey;
-  currentEmployee: Employee;
   private tokenExpirationTimer: any;
+  sub: Subscription;
 
 
   constructor( private http: HttpClient, private router: Router, private firestore: AngularFireDatabase, private snackBar: MatSnackBar ) { }
@@ -125,20 +123,12 @@ export class DataStorageService implements OnInit {
 
   }
 
-  private handleAuth( email: string, token: string, expireIn: number, id: string ) {
-    const expiration = new Date( new Date().getTime() + expireIn * 1000 );
-    const user = new User( email, id,
-                           token, expiration );
-    this.autoLogout( expireIn * 1000 );
-
-    // Save the current user data to local sotrage
-    localStorage.setItem( "userData", JSON.stringify( user ) );
-
-    this.fetchEmployees( "empEmail", email ).subscribe( value => {
-      this.employeeSubject.next( value[0] );
-      this.router.navigate( [ "/home" ] );
+  addLeave( leave: Leave ) {
+    this.firestore.list<Leave>( "employees/" + leave.empId + "/Leaves" ).push( leave ).then( value => {
+      leave.leaveId = value.key;
+      this.updateLeave( leave, value.key );
     } );
-
+    this.update();
   }
 
   private handleError( errRes: HttpErrorResponse ) {
@@ -168,11 +158,25 @@ export class DataStorageService implements OnInit {
     return this.firestore.list<Leave>( "employees/" + empId + "/Leaves" ).valueChanges();
   }
 
-  addLeave( leave: Leave ) {
-    this.firestore.list<Leave>( "employees/" + leave.empId + "/Leaves" ).push( leave ).then( value => {
-      leave.leaveId = value.key;
-      this.updateLeave( leave, value.key );
+  private handleAuth( email: string, token: string, expireIn: number, id: string ) {
+    const expiration = new Date( new Date().getTime() + expireIn * 1000 );
+    const user = new User( email, id,
+                           token, expiration );
+    this.autoLogout( expireIn * 1000 );
+
+    // Save the current user data to local sotrage
+    localStorage.setItem( "userData", JSON.stringify( user ) );
+
+    this.sub = this.fetchEmployees( "empEmail", email ).subscribe( value => {
+      this.employeeSubject.next( value[0] );
+      this.router.navigate( [ "/home" ] );
+      this.sub.unsubscribe();
     } );
+
+  }
+
+  private update(): void {
+
   }
 
   updateLeave( leave: Leave, leaveId: string ) {

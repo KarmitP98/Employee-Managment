@@ -39,24 +39,22 @@ export class TimeSheetComponent implements OnInit, OnDestroy {
     this.empSubject = this.dataStorageService.employeeSubject.subscribe( value => {
       if ( value ) {
         this.empId = value.empId;
-        if ( value.TimeSheets ) {
-          this.timeSheets = Object.values( value.TimeSheets );
-        }
+        this.empSub = this.dataStorageService.fetchEmployees( "empId", this.empId ).subscribe( value => {
+          if ( value ) {
+            this.employee = value[0];
+            this.dataSource = new MatTableDataSource<TimeSheet>( this.employee.TimeSheets );
+          }
+        } );
       }
     } );
 
-    // this.empSub = this.dataStorageService.fetchEmployees( "empId", this.empId ).subscribe( value => {
-    //   if ( value ) {
-    //     this.employee = value[0];
-    //     this.dataSource = new MatTableDataSource<TimeSheet>( this.employee.TimeSheets );
-    //   }
-    // } );
+
 
   }
 
   ngOnDestroy(): void {
     this.empSubject.unsubscribe();
-    // this.empSub.unsubscribe();
+    this.empSub.unsubscribe();
   }
 
   onSubmit(): void {
@@ -65,8 +63,7 @@ export class TimeSheetComponent implements OnInit, OnDestroy {
                                                 MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(),
                                                 this.stTime, this.timeForm.value.work, "Pending", false, this.hours );
     this.dataStorageService.addTimeSheet( tempSheet );
-    this.timeSheets.push( tempSheet );
-    this.loadValues();
+    // this.timeSheets.push( tempSheet );
     this.timeForm.resetForm();
   }
 
