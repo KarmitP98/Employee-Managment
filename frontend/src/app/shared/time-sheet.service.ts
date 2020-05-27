@@ -19,7 +19,8 @@ export class TimeSheetService {
   }
 
   fetchRangeOfTimeSheets( startAt: string, limit: number ) {
-    return this.firestore.list<Timesheet>( "time-sheets", ref => ref.orderByKey().startAt( startAt ).limitToFirst( limit ) ).valueChanges();
+    return this.firestore.list<Timesheet>( "time-sheets", ref => ref.orderByChild( "sheetId" ).startAt( startAt ).limitToFirst( limit ) )
+               .valueChanges();
   }
 
   // Add new TimeSheet and add update the name to key

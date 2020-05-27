@@ -6,6 +6,7 @@ import { Leave } from "../../shared/model/leaves.model";
 import { NgForm } from "@angular/forms";
 import { MatPaginator, MatTableDataSource, PageEvent } from "@angular/material";
 import { loadTrigger, MONTHS } from "../../shared/shared";
+import { Employee } from "../../shared/model/employee.model";
 
 @Component( {
               selector: "app-annual-leave",
@@ -19,6 +20,7 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
   empSub: Subscription;
   leaves: Leave[] = [];
   empId: string;
+  employee: Employee;
   @ViewChild( "leaveForm", { static: false } ) leaveForm: NgForm;
   displayedColumns = [ "startDate", "endDate", "reason", "status", "leaveId" ];
   dataSource = new MatTableDataSource<Leave>( this.leaves );
@@ -43,6 +45,7 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
     this.empSub = this.employeeService.employeeSubject.subscribe( value => {
       if ( value ) {
         this.empId = value.empId;
+        this.employee = value;
 
         // Fetch leaves of that employee
         this.leaveSub = this.leaveService.fetchLeaves( "empId", this.empId ).subscribe( value => {
@@ -69,11 +72,8 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
       new Leave( this.empId, "placeholder",
                  MONTHS[startDate.getMonth()] + " " + startDate.getDate() + ", " + startDate.getFullYear(),
                  MONTHS[endDate.getMonth()] + " " + endDate.getDate() + ", " + endDate.getFullYear(), this.leaveForm.value.reason,
-                 "Pending", false );
+                 "Pending", false, this.employee.empName );
     this.leaveService.addLeave( tempLeave );
-    // this.leaves.push( tempLeave );
-    // this.loadValues();
-    this.leaveForm.resetForm();
   }
 
   loadValues(): void {

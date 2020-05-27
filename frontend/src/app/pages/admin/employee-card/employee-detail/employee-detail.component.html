@@ -1,9 +1,7 @@
-<mat-grid-list cols = "2" gutterSize = "5" rowHeight = "400px"
+<mat-grid-list cols = "4" gutterSize = "5" rowHeight = "400px"
                style = "width: 1400px">
-  <mat-grid-tile class = "onetile" colspan = "1" rowspan = "2">
-    <mat-card class =
-                "mat-elevation-z8" style = "width: 95%; height: 95%; background:
-    rgba(242,242,242,0.5)">
+  <mat-grid-tile class = "onetile" colspan = "2" rowspan = "2">
+    <mat-card class = "mat-elevation-z1" style = "width: 98%; height: 98%;">
       <div class = "text-center">
         <mat-card-header class = "center-block">
           <div class = "example-header-image" mat-card-avatar></div>
@@ -26,11 +24,136 @@
     </mat-card>
   </mat-grid-tile>
   <mat-grid-tile class = "onetile" colspan = "1" rowspan = "1">
-    LEAVES GO HERE
+    <mat-card class = "mat-elevation-z1" style = "width: 95%; height: 95%">
+      <mat-card-header>
+        <div class = "leave-header-image" mat-card-avatar></div>
+        <mat-card-title>Leaves</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-table [dataSource] = "leaveData" style = "width: 100%">
+
+          <!--    Select Column -->
+          <ng-container matColumnDef = "select">
+            <mat-header-cell *matHeaderCellDef>Select</mat-header-cell>
+            <mat-cell *matCellDef = "let element">
+              <mat-radio-group [(ngModel)] = "selectedLeave">
+                <mat-radio-button [value] = "element"
+                                  color = "warn"></mat-radio-button>
+              </mat-radio-group>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Log Date Column -->
+          <ng-container matColumnDef = "startDate">
+            <mat-header-cell *matHeaderCellDef>From</mat-header-cell>
+            <mat-cell
+              *matCellDef = "let element"> {{ element.startDate }} </mat-cell>
+          </ng-container>
+
+          <!-- Work Column -->
+          <ng-container matColumnDef = "endDate">
+            <mat-header-cell *matHeaderCellDef>To</mat-header-cell>
+            <mat-cell *matCellDef = "let element"> {{ element.endDate }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Start Time Column -->
+          <ng-container matColumnDef = "reason">
+            <mat-header-cell *matHeaderCellDef>Reason</mat-header-cell>
+            <mat-cell
+              *matCellDef = "let element"> {{ element.reason }} </mat-cell>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef = "status">
+            <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+            <mat-cell *matCellDef = "let element"
+                      [matBadge] = "element.status === 'Pending' ? '^':''"
+                      matBadgeColor = "warn">
+              {{ element.status }} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef = "leaveColumns"></mat-header-row>
+          <mat-row *matRowDef = "let row; columns: leaveColumns"></mat-row>
+        </mat-table>
+        <mat-paginator (page) = "updateLeaveTable($event)"
+                       [length] = "leaves.length"
+                       [pageSizeOptions] = "pageSizeOptions"
+                       [pageSize] = "leaveSize"
+                       showFirstLastButtons></mat-paginator>
+      </mat-card-content>
+    </mat-card>
   </mat-grid-tile>
   <mat-grid-tile class = "onetile" colspan = "1" rowspan = "1">
-    <mat-card class = "mat-elevation-z8" style = "width: 90%; height: 90%; background:
-    rgba(242,242,242,0.5);">
+    <mat-card class = "mat-elevation-z1" style = "width: 95%; height: 95%">
+      <mat-card-header>
+        <div class = "time-header-image" mat-card-avatar></div>
+        <mat-card-title>Time Sheets</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-table [dataSource] = "sheetData" style = "width: 100%">
+
+          <!--    Select Column -->
+          <ng-container matColumnDef = "select">
+            <mat-header-cell *matHeaderCellDef>Select</mat-header-cell>
+            <mat-cell *matCellDef = "let element">
+              <mat-radio-group [(ngModel)] = "selectedTimeSheet">
+                <mat-radio-button [value] = "element"
+                                  color = "warn"></mat-radio-button>
+              </mat-radio-group>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Log Date Column -->
+          <ng-container matColumnDef = "logDate">
+            <mat-header-cell *matHeaderCellDef>Log Date</mat-header-cell>
+            <mat-cell
+              *matCellDef = "let element"> {{ element.logDate }} </mat-cell>
+          </ng-container>
+
+          <!-- Work Column -->
+          <ng-container matColumnDef = "work">
+            <mat-header-cell *matHeaderCellDef>Work</mat-header-cell>
+            <mat-cell
+              *matCellDef = "let element"> {{ element.work }} </mat-cell>
+          </ng-container>
+
+          <!-- Start Time Column -->
+          <ng-container matColumnDef = "startTime">
+            <mat-header-cell *matHeaderCellDef>Start Time</mat-header-cell>
+            <mat-cell
+              *matCellDef = "let element"> {{ element.startTime }} </mat-cell>
+          </ng-container>
+
+          <!-- End Time Column -->
+          <ng-container matColumnDef = hours>
+            <mat-header-cell *matHeaderCellDef>Hours Logged</mat-header-cell>
+            <mat-cell
+              *matCellDef = "let element"> {{ element.hours }} </mat-cell>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef = "status">
+            <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+            <mat-cell *matCellDef = "let element"
+                      [matBadge] = "element.status === 'Pending' ? '^':''"
+                      matBadgeColor = "warn">
+              {{ element.status }} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef = "timeColumns"></mat-header-row>
+          <mat-row *matRowDef = "let row; columns: timeColumns"></mat-row>
+        </mat-table>
+        <mat-paginator (page) = "updateTimeTable($event)"
+                       [length] = "timeSheets.length"
+                       [pageSizeOptions] = "pageSizeOptions"
+                       [pageSize] = "sheetSize"
+                       showFirstLastButtons></mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile class = "onetile" colspan = "2" rowspan = "1">
+    <mat-card class = "mat-elevation-z1" style = "width: 98%; height: 95%;">
       <mat-card-content>
         <fusioncharts
           [chartConfig] = "chartConfig"
@@ -41,4 +164,6 @@
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
-<button mat-dialog-close mat-raised-button>Close</button>
+<button class = "pull-right" color = "warn" mat-dialog-close mat-raised-button
+        style = "margin-right: 8px;">X
+</button>

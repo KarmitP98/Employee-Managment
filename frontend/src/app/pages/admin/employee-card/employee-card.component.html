@@ -5,9 +5,8 @@
     <mat-card-subtitle><b>{{emp.isAdmin ? "Admin" : "Employee"}}</b>
     </mat-card-subtitle>
   </mat-card-header>
-  <img [src] = "emp.profilePicURL" alt = "Photo of a Shiba Inu"
-       class = "text-center"
-       mat-card-image style = "width: auto; height: 320px">
+  <img [src] = "emp.profilePicURL" alt = "Photo of a Shiba Inu" mat-card-image
+       style = "width: auto; height: 320px">
   <mat-card-content>
     <h5>
       <b>Name:</b> {{ emp.abv}} {{emp.empName}}<br>

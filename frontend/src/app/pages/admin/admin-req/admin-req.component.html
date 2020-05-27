@@ -79,11 +79,15 @@
     <br>
     <div class = "text-center">
       <button (click) = "changeAdmin(true)" [disabled] = "!selectedReq"
-              [textContent] = "'Approve'" color = "primary" mat-raised-button>
+              [textContent] = "'Approve'" color = "accent" mat-raised-button>
       </button>
       &nbsp; &nbsp;
       <button (click) = "changeAdmin(false)" [disabled] = "!selectedReq"
-              [textContent] = "'Decline'" color = "accent" mat-raised-button>
+              [textContent] = "'Decline'" color = "warn" mat-raised-button>
+      </button>
+      &nbsp; &nbsp;
+      <button (click) = "openDetails()" [disabled] = "!selectedReq"
+              [textContent] = "'Details'" color = "primary" mat-raised-button>
       </button>
     </div>
   </div>

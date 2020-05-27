@@ -9,7 +9,8 @@
       <mat-form-field appearance = "outline" class = "half">
         <mat-label>Log Date</mat-label>
         <input [(ngModel)] = "today" [matDatepicker] = "Date" matInput
-               [matDatepickerFilter] = "myFilter" name = "date" required>
+               [matDatepickerFilter] = "myFilter" [max] = "today" name = "date"
+               required>
         <mat-datepicker-toggle [for] = "Date" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #Date></mat-datepicker>
       </mat-form-field>

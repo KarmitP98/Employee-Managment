@@ -71,7 +71,8 @@ export class TimeSheetComponent implements OnInit, OnDestroy {
     const date = this.timeForm.value.date;
     const tempSheet: Timesheet = new Timesheet( this.empId, "placeholder",
                                                 MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(),
-                                                this.stTime, this.timeForm.value.work, "Pending", false, this.hours );
+                                                this.stTime, this.timeForm.value.work, "Pending", false, this.hours,
+                                                this.employee.empName );
     this.timeSheetService.addTimeSheet( tempSheet );
     this.employee.totalHours += this.hours;
     this.employeeService.updateEmployee( this.employee, this.empId );

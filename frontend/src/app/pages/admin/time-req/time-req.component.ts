@@ -17,14 +17,15 @@ import { Employee } from "../../../shared/model/employee.model";
 export class TimeReqComponent implements OnInit, OnDestroy {
 
   timeSheets: Timesheet[] = [];
+  data: { empName: string, logDate: string, startTime: string, hours: number, work: string, status: string }[] = [];
   empSub: Subscription;
   allEmpSub: Subscription;
   sheetSub: Subscription;
   employee: Employee;
   empId: string;
-  displayedColumns: string[] = [ "select", "userId", "logDate", "startTime", "endTime", "work", "status" ];
+  displayedColumns: string[] = [ "select", "empName", "logDate", "startTime", "hours", "work", "status" ];
   selectedReq: Timesheet;
-  dataSource = new MatTableDataSource<Timesheet>( this.timeSheets );
+  dataSource = new MatTableDataSource<any>( this.data );
   @ViewChild( MatPaginator, { static: true } ) paginator: MatPaginator;
   @ViewChild( MatSort, { static: true } ) sort: MatSort;
   pageSize = 5;
@@ -73,7 +74,6 @@ export class TimeReqComponent implements OnInit, OnDestroy {
       }
       // Dont worry about this code duplication I have some plans for this...
       this.dataSet.data = [];
-      console.log( this.hours );
       this.dataSet.data.push( ...this.hours );
     } );
 
@@ -83,6 +83,38 @@ export class TimeReqComponent implements OnInit, OnDestroy {
     this.empSub.unsubscribe();
     this.sheetSub.unsubscribe();
     this.allEmpSub.unsubscribe();
+  }
+
+  getValues() {
+    this.sheetSub = this.timeSheetService.fetchTimeSheets().subscribe(
+      value => {
+        // this.data = [];
+        // for ( const v of value ) {
+        //   this.data.push( {
+        //                     empName: v.empName,
+        //                     logDate: v.logDate,
+        //                     hours: v.hours,
+        //                     work: v.work,
+        //                     status: v.status,
+        //                     startTime: v.startTime
+        //                   } );
+        // }
+        this.timeSheets = value;
+        this.loadValues();
+      } );
+  }
+
+  loadValues() {
+    const filtered = this.timeSheets.filter( ( value, index ) => {
+      return (index >= this.pageIndex * this.pageSize && index <= (this.pageIndex * this.pageSize + this.pageSize - 1));
+    } );
+    this.dataSource = new MatTableDataSource<any>( filtered );
+  }
+
+  updateTable( $event: PageEvent ): void {
+    this.pageSize = $event.pageSize;
+    this.pageIndex = $event.pageIndex;
+    this.loadValues();
   }
 
   changeStatus( b: boolean ) {
@@ -97,26 +129,4 @@ export class TimeReqComponent implements OnInit, OnDestroy {
     this.selectedReq = null;
   }
 
-  loadValues() {
-    const filtered = this.timeSheets.filter( ( value, index ) => {
-      return (index >= this.pageIndex * this.pageSize && index <= (this.pageIndex * this.pageSize + this.pageSize - 1));
-    } );
-    this.dataSource = new MatTableDataSource<Timesheet>( filtered );
-  }
-
-  updateTable( $event: PageEvent ): void {
-    this.pageSize = $event.pageSize;
-    this.pageIndex = $event.pageIndex;
-    this.getValues();
-    // this.loadValues();
-  }
-
-  getValues() {
-    this.sheetSub = this.timeSheetService.fetchTimeSheets().subscribe(
-      value => {
-        this.timeSheets = value;
-        this.loadValues();
-      } );
-
-  }
 }

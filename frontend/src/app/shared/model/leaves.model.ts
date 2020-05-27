@@ -6,6 +6,7 @@ export class Leave {
                public endDate: string,
                public reason: string,
                public status: string,
-               public approved: boolean ) {}
+               public approved: boolean,
+               public empName: string ) {}
 
 }

@@ -18,8 +18,8 @@ export class LeaveService {
     return this.firestore.list<Leave>( "leaves" ).valueChanges();
   }
 
-  fetchRangeOfLeaves( startAt: string, limit: number ) {
-    return this.firestore.list<Leave>( "leaves", ref => ref.orderByKey().startAt( startAt ).limitToFirst( limit ) ).valueChanges();
+  fetchRangeOfLeaves( startAt: number, limit: number ) {
+    return this.firestore.list<Leave>( "leaves", ref => ref.startAt( startAt ).limitToFirst( limit ) ).valueChanges();
   }
 
   // Add new TimeSheet and add update the name to key

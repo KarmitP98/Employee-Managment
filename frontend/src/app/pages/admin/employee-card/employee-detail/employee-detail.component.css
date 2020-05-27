@@ -7,3 +7,13 @@
   background-image: url(src/assets/default-pro-pic.jpg);
   background-size: cover;
 }
+
+.time-header-image {
+  background-image: url(src/assets/time-sheet-icon.png);
+  background-size: cover;
+}
+
+.leave-header-image {
+  background-image: url(src/assets/leaves-icon.jpg);
+  background-size: cover;
+}

@@ -7,6 +7,7 @@ export class Timesheet {
                public work: string,
                public status: string,
                public approved: boolean,
-               public hours: number ) {}
+               public hours: number,
+               public empName: string ) {}
 
 }

@@ -3,3 +3,7 @@
   height: 100px;
   font-size: 24px;
 }
+
+.tile-header {
+  background: rebeccapurple;
+}

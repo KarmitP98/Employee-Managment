@@ -20,7 +20,7 @@ export class LeaveReqComponent implements OnInit, OnDestroy {
   leaveSub: Subscription;
   employee: Employee;
   empId: string;
-  displayedColumns: string[] = [ "select", "empId", "startDate", "endDate", "reason", "status" ];
+  displayedColumns: string[] = [ "select", "empName", "startDate", "endDate", "reason", "status" ];
   selectedReq: Leave;
   dataSource = new MatTableDataSource<Leave>( this.leaves );
   @ViewChild( MatPaginator, { static: true } ) paginator: MatPaginator;
@@ -44,6 +44,7 @@ export class LeaveReqComponent implements OnInit, OnDestroy {
 
     this.leaveSub = this.leaveService.fetchLeaves().subscribe( value => {
       this.leaves = value;
+      console.log();
       this.loadValues();
     } );
   }

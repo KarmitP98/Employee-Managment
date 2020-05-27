@@ -37,3 +37,8 @@ body {
   text-align: center;
   justify-content: center;
 }
+
+.tile {
+  border-radius: 10px;
+}
+
