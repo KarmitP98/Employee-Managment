@@ -35,11 +35,16 @@ export class LeaveReqComponent implements OnInit, OnDestroy {
         this.employee = emp;
         this.empId = emp.empId;
 
-        this.leaveSub = this.leaveService.fetchLeaves().subscribe( value => {
-          this.leaves = value;
-          this.loadValues();
-        } );
+        this.getValue();
       }
+    } );
+  }
+
+  private getValue(): void {
+
+    this.leaveSub = this.leaveService.fetchLeaves().subscribe( value => {
+      this.leaves = value;
+      this.loadValues();
     } );
   }
 

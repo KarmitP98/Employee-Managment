@@ -1,0 +1,44 @@
+<mat-grid-list cols = "2" gutterSize = "5" rowHeight = "400px"
+               style = "width: 1400px">
+  <mat-grid-tile class = "onetile" colspan = "1" rowspan = "2">
+    <mat-card class =
+                "mat-elevation-z8" style = "width: 95%; height: 95%; background:
+    rgba(242,242,242,0.5)">
+      <div class = "text-center">
+        <mat-card-header class = "center-block">
+          <div class = "example-header-image" mat-card-avatar></div>
+          <mat-card-title>{{ emp.abv + " " + emp.empName}}</mat-card-title>
+          <mat-card-subtitle><b>{{emp.isAdmin ? "Admin" : "Employee"}}</b>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img [src] = "emp.profilePicURL" alt = "Photo of a Shiba Inu"
+             class = "text-center"
+             mat-card-image style = "width: auto; height: 320px">
+        <mat-card-content>
+          <h2>
+            <b>Name:</b> {{ emp.abv}} {{emp.empName}}<br>
+            <b>Date of Birth:</b> {{emp.DOB}}<br>
+            <b>Email:</b> {{ emp.empEmail}}<br>
+            <b>This human works.</b>
+          </h2>
+        </mat-card-content>
+      </div>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile class = "onetile" colspan = "1" rowspan = "1">
+    LEAVES GO HERE
+  </mat-grid-tile>
+  <mat-grid-tile class = "onetile" colspan = "1" rowspan = "1">
+    <mat-card class = "mat-elevation-z8" style = "width: 90%; height: 90%; background:
+    rgba(242,242,242,0.5);">
+      <mat-card-content>
+        <fusioncharts
+          [chartConfig] = "chartConfig"
+          [dataSource] = "dataSource"
+          containerBackgroundColor = "lightgrey">
+        </fusioncharts>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<button mat-dialog-close mat-raised-button>Close</button>

@@ -1,6 +1,6 @@
 <div *ngIf = "timeSheets">
-  <div [@load]><h3 class = "text-center">Time Requests</h3>
-    <br>
+  <h1 class = "text-center">Time Sheets</h1><br>
+  <div [@load]>
     <mat-table [dataSource] = "dataSource" class = "mat-elevation-z8">
       <!--    Select Column -->
       <ng-container matColumnDef = "select">
@@ -55,9 +55,8 @@
       <mat-row *matRowDef = "let row; columns: displayedColumns"></mat-row>
     </mat-table>
     <mat-paginator (page) = "updateTable($event)" [length] = "timeSheets.length"
-                   [pageSizeOptions] = "[5, 10, 50]" [pageSize] = "5"
-                   color = "primary"
-                   showFirstLastButtons></mat-paginator>
+                   [pageSizeOptions] = "[5, 50, 250, 1000]" [pageSize] = "5"
+                   color = "primary" showFirstLastButtons></mat-paginator>
     <br>
     <br>
     <div class = "text-center">
@@ -75,16 +74,11 @@
     </div>
   </div>
   <br>
-  <hr>
-  <br>
-  <div style = "display: block">
-    <canvas [chartType] = "barChartType"
-            [colors] = "barChartColors"
-            [datasets] = "barChartData"
-            [labels] = "barChartLabels"
-            [legend] = "barChartLegend"
-            [options] = "barChartOptions"
-            [plugins] = "barChartPlugins"
-            baseChart></canvas>
+  <div [@load] class = "text-center">
+    <fusioncharts
+      [chartConfig] = "chartConfig"
+      [dataSource] = "dataSet"
+      containerBackgroundColor = "lightgrey">
+    </fusioncharts>
   </div>
 </div>

@@ -1,0 +1,37 @@
+<mat-card class = "mat-elevation-z8" style = "max-height: available">
+  <mat-card-header>
+    <div class = "example-header-image" mat-card-avatar></div>
+    <mat-card-title>{{ emp.abv + " " + emp.empName}}</mat-card-title>
+    <mat-card-subtitle><b>{{emp.isAdmin ? "Admin" : "Employee"}}</b>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img [src] = "emp.profilePicURL" alt = "Photo of a Shiba Inu"
+       class = "text-center"
+       mat-card-image style = "width: auto; height: 320px">
+  <mat-card-content>
+    <h5>
+      <b>Name:</b> {{ emp.abv}} {{emp.empName}}<br>
+      <b>Date of Birth:</b> {{emp.DOB}}<br>
+      <b>Email:</b> {{ emp.empEmail}}<br>
+      <b>This human works.</b>
+    </h5>
+  </mat-card-content>
+  <mat-card-actions align = "end">
+    <i (click) = "updateAdmin(true)" class = "material-icons md-24"
+       matTooltip = "Approve Admin" matTooltipPosition = "above"
+       style =
+         "cursor: pointer; color: green;">
+      thumb_up</i>
+    &nbsp; &nbsp; &nbsp;
+    <i (click) = "updateAdmin(false)" class = "material-icons md-24"
+       matTooltip = "Decline Admin" matTooltipPosition = "above"
+       style =
+         "cursor: pointer; color: red;">
+      thumb_down</i>
+    &nbsp; &nbsp; &nbsp;
+    <i (click) = "openDetails()" class = "material-icons md-24"
+       matTooltip = "More Details"
+       matTooltipPosition = "above"
+       style = "cursor: pointer; color: rebeccapurple;"> loupe</i>
+  </mat-card-actions>
+</mat-card>

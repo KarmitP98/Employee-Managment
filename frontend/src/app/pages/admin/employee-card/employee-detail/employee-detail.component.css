@@ -1,0 +1,9 @@
+.onetile {
+  /*background: lightblue;*/
+  border-radius: 5px;
+}
+
+.example-header-image {
+  background-image: url(src/assets/default-pro-pic.jpg);
+  background-size: cover;
+}

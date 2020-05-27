@@ -15,6 +15,11 @@ export class TimeSheetService {
       return this.firestore.list<Timesheet>( "time-sheets", ref => ref.orderByChild( child ).equalTo( value ) ).valueChanges();
     }
     return this.firestore.list<Timesheet>( "time-sheets" ).valueChanges();
+
+  }
+
+  fetchRangeOfTimeSheets( startAt: string, limit: number ) {
+    return this.firestore.list<Timesheet>( "time-sheets", ref => ref.orderByKey().startAt( startAt ).limitToFirst( limit ) ).valueChanges();
   }
 
   // Add new TimeSheet and add update the name to key

@@ -136,6 +136,8 @@ export class AdminReqComponent implements OnInit, OnDestroy {
   }
 
   // events
+  listView: boolean = false;
+
   public chartClicked( { event, active }: { event: MouseEvent, active: {}[] } ): void {
     console.log( event, active );
   }
@@ -144,4 +146,7 @@ export class AdminReqComponent implements OnInit, OnDestroy {
     console.log( event, active );
   }
 
+  switchStyle(): void {
+    this.listView = !this.listView;
+  }
 }

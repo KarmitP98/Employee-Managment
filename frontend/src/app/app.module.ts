@@ -50,6 +50,14 @@ import { SignUpComponent } from "./pages/sign-up/sign-up.component";
 import { ChartsModule } from "ng2-charts";
 import { EmployeeCardComponent } from "./pages/admin/employee-card/employee-card.component";
 import { EmployeeDetailComponent } from "./pages/admin/employee-card/employee-detail/employee-detail.component";
+import { FusionChartsModule } from "angular-fusioncharts";
+// Import FusionCharts library and chart modules
+import * as FusionCharts from "fusioncharts";
+import * as charts from "fusioncharts/fusioncharts.charts";
+import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+
+// Pass the fusioncharts library and chart modules
+FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme );
 
 @NgModule( {
              declarations: [
@@ -101,7 +109,8 @@ import { EmployeeDetailComponent } from "./pages/admin/employee-card/employee-de
                MatGridListModule,
                MatIconModule,
                MatTooltipModule,
-               MatDialogModule
+               MatDialogModule,
+               FusionChartsModule
              ],
              providers: [],
              bootstrap: [ AppComponent ],
