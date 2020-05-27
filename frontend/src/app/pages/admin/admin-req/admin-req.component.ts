@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { Employee } from "../../shared/model/employee.model";
+import { Employee } from "../../../shared/model/employee.model";
 import { Subscription } from "rxjs";
 import { MatPaginator, MatTableDataSource, PageEvent } from "@angular/material";
-import { loadTrigger } from "../../shared/shared";
-import { ADMIN_STATUS, EmployeeService } from "../../shared/employee.service";
+import { loadTrigger } from "../../../shared/shared";
+import { ADMIN_STATUS, EmployeeService } from "../../../shared/employee.service";
 import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
 import { Label } from "ng2-charts";
 

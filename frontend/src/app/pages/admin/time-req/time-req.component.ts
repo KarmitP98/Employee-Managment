@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Subscription } from "rxjs";
 import { MatPaginator, MatTableDataSource, PageEvent } from "@angular/material";
-import { loadTrigger } from "../../shared/shared";
-import { ADMIN_STATUS, EmployeeService } from "../../shared/employee.service";
-import { TimeSheetService } from "../../shared/time-sheet.service";
-import { Timesheet } from "../../shared/model/timesheet.model";
-import { Employee } from "../../shared/model/employee.model";
+import { loadTrigger } from "../../../shared/shared";
+import { ADMIN_STATUS, EmployeeService } from "../../../shared/employee.service";
+import { TimeSheetService } from "../../../shared/time-sheet.service";
+import { Timesheet } from "../../../shared/model/timesheet.model";
+import { Employee } from "../../../shared/model/employee.model";
+import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
+import { Label } from "ng2-charts";
 
 
 @Component( {
@@ -28,6 +30,42 @@ export class TimeReqComponent implements OnInit, OnDestroy {
   pageSize = 5;
   pageIndex = 0;
 
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: { xAxes: [ {} ], yAxes: [ {} ] },
+    plugins: {
+      datalabels: {
+        anchor: "end",
+        align: "end",
+        display: true
+      }
+    },
+    aspectRatio: 3,
+    hover: { axis: "xy" },
+    title: {
+      text: "Time Sheets",
+      fontSize: 24,
+      display: true
+    },
+    onClick( event?: MouseEvent, activeElements?: Array<{}> ): any {
+      console.log( activeElements[0] );
+    }
+  };
+  public barChartLabels: Label[] = [];
+  public barChartType: ChartType = "bar";
+  public barChartLegend = true;
+  public barChartPlugins = true;
+  public barChartData: ChartDataSets[] = [
+    { data: [], label: "Hours per Day" }
+  ];
+  public barChartColors = [
+    {
+      backgroundColor: [ "#ff0000", "#00ff00", "#0000ff" ]
+    }
+  ];
+
+
   constructor( private employeeService: EmployeeService, private timeSheetService: TimeSheetService ) { }
 
   ngOnInit() {
@@ -41,6 +79,10 @@ export class TimeReqComponent implements OnInit, OnDestroy {
 
         this.sheetSub = this.timeSheetService.fetchTimeSheets().subscribe( value => {
           this.timeSheets = value;
+          this.barChartLabels = [];
+          this.barChartData[0].data = [];
+          this.barChartLabels.push( ...this.timeSheets.map( value1 => value1.logDate ) );
+          this.barChartData[0].data.push( ...this.timeSheets.map( value1 => value1.hours ) );
           this.loadValues();
         } );
       }

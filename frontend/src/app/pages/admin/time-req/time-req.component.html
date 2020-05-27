@@ -74,4 +74,17 @@
               color = "warn" mat-raised-button></button>
     </div>
   </div>
+  <br>
+  <hr>
+  <br>
+  <div style = "display: block">
+    <canvas [chartType] = "barChartType"
+            [colors] = "barChartColors"
+            [datasets] = "barChartData"
+            [labels] = "barChartLabels"
+            [legend] = "barChartLegend"
+            [options] = "barChartOptions"
+            [plugins] = "barChartPlugins"
+            baseChart></canvas>
+  </div>
 </div>

@@ -10,9 +10,9 @@ import { HomeComponent } from "./pages/home/home.component";
 import { TimeSheetComponent } from "./pages/time-sheet/time-sheet.component";
 import { AnnualLeaveComponent } from "./pages/annual-leave/annual-leave.component";
 import { AdminComponent } from "./pages/admin/admin.component";
-import { TimeReqComponent } from "./pages/time-req/time-req.component";
-import { LeaveReqComponent } from "./pages/leave-req/leave-req.component";
-import { AdminReqComponent } from "./pages/admin-req/admin-req.component";
+import { TimeReqComponent } from "./pages/admin/time-req/time-req.component";
+import { LeaveReqComponent } from "./pages/admin/leave-req/leave-req.component";
+import { AdminReqComponent } from "./pages/admin/admin-req/admin-req.component";
 import { DatabaseComponent } from "./pages/database/database.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { LoadingSpinnerComponent } from "./shared/loading-spinner/loading-spinner.component";
@@ -24,7 +24,10 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatDatepickerModule,
+  MatDialogModule,
   MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
   MatInputModule,
   MatListModule,
   MatNativeDateModule,
@@ -37,13 +40,16 @@ import {
   MatSortModule,
   MatTableModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTooltipModule
 } from "@angular/material";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { environment } from "../environments/environment";
 import { SignUpComponent } from "./pages/sign-up/sign-up.component";
 import { ChartsModule } from "ng2-charts";
+import { EmployeeCardComponent } from "./pages/admin/employee-card/employee-card.component";
+import { EmployeeDetailComponent } from "./pages/admin/employee-card/employee-detail/employee-detail.component";
 
 @NgModule( {
              declarations: [
@@ -59,8 +65,9 @@ import { ChartsModule } from "ng2-charts";
                AdminReqComponent,
                LoadingSpinnerComponent,
                DatabaseComponent,
-               SignUpComponent
-
+               SignUpComponent,
+               EmployeeCardComponent,
+               EmployeeDetailComponent
              ],
              imports: [
                BrowserModule,
@@ -90,9 +97,14 @@ import { ChartsModule } from "ng2-charts";
                MatBadgeModule,
                MatPaginatorModule,
                ChartsModule,
-               MatTabsModule
+               MatTabsModule,
+               MatGridListModule,
+               MatIconModule,
+               MatTooltipModule,
+               MatDialogModule
              ],
              providers: [],
-             bootstrap: [ AppComponent ]
+             bootstrap: [ AppComponent ],
+             entryComponents: [ EmployeeDetailComponent ]
            } )
 export class AppModule {}
