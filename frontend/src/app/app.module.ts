@@ -55,9 +55,11 @@ import { FusionChartsModule } from "angular-fusioncharts";
 import * as FusionCharts from "fusioncharts";
 import * as charts from "fusioncharts/fusioncharts.charts";
 import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+// Load Widgets
+import * as Widgets from "fusioncharts/fusioncharts.widgets";
 
 // Pass the fusioncharts library and chart modules
-FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme );
+FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme, Widgets );
 
 @NgModule( {
              declarations: [

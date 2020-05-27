@@ -9,6 +9,7 @@ export class Employee {
                public isAdmin: boolean,
                public adminStatus: string,
                public password: string,
-               public totalHours?: number ) {}
+               public totalHours?: number,
+               public hoursPerWeek?: number[][] ) {}
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { COMPANY_NAME, loadTrigger, MONTHS } from "../../shared/shared";
+import { COMPANY_NAME, loadTrigger, MONTHS, STARTYEAR } from "../../shared/shared";
 import { Employee } from "../../shared/model/employee.model";
 import { NgForm } from "@angular/forms";
 import { EmployeeService } from "../../shared/employee.service";
@@ -17,8 +17,9 @@ export class SignUpComponent implements OnInit {
 
   default_male_icon_url = "assets/default-pro-pic-male.png";
   default_female_icon_url = "assets/default-pro-pic-female.jpg";
+  default_pro_pic = "assets/default-pro-pic.jpg";
   title = "Mr.";
-  proPicUrl: string = this.default_male_icon_url;
+  proPicUrl: string = this.default_pro_pic;
   firstName: string;
   lastName: string;
   email: string;
@@ -33,9 +34,15 @@ export class SignUpComponent implements OnInit {
 
   onSignUp(): void {
     const date = this.signUpForm.value.DOB;
+    let hpw: number[][] = [];
+    let weeks = Array.from( Array( 52 ).keys() );
+    hpw[new Date().getFullYear() - STARTYEAR] = [];
+    for ( let i of weeks ) {
+      hpw[new Date().getFullYear() - STARTYEAR][i] = 0;
+    }
     const newEmp = new Employee( "temp", this.title, this.firstName + " " + (this.lastName === undefined ? "" : this.lastName), this.email,
                                  MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(),
-                                 this.proPicUrl, false, "Pending", this.password, 0 );
+                                 this.proPicUrl, false, "Pending", this.password, 0, hpw );
     console.log( newEmp );
     this.employeeService.signUp( this.email, this.password, newEmp );
     this.signUpForm.resetForm();

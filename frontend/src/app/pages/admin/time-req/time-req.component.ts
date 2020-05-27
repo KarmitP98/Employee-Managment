@@ -35,12 +35,13 @@ export class TimeReqComponent implements OnInit, OnDestroy {
   dataSet = {
     chart: {
       caption: "Total Hours Logged",
-      plottooltext: "Employee <b>$label logged</b> <b>$value</b> hours!",
+      plottooltext: "Employee <b>$label logged $value</b> hours!",
       showlegend: "1",
       showpercentvalues: "1",
-      legendposition: "right",
+      legendposition: "top",
       usedataplotcolorforlabels: "1",
-      theme: "fusion"
+      theme: "fusion",
+      defaultcenterlabel: "Hour Distribution"
     },
     data: []
   };
@@ -48,7 +49,7 @@ export class TimeReqComponent implements OnInit, OnDestroy {
   chartConfig = {
     width: "1000",
     height: "600",
-    type: "pie2d",
+    type: "doughnut2d",
     dataFormat: "json"
   };
 
@@ -88,17 +89,6 @@ export class TimeReqComponent implements OnInit, OnDestroy {
   getValues() {
     this.sheetSub = this.timeSheetService.fetchTimeSheets().subscribe(
       value => {
-        // this.data = [];
-        // for ( const v of value ) {
-        //   this.data.push( {
-        //                     empName: v.empName,
-        //                     logDate: v.logDate,
-        //                     hours: v.hours,
-        //                     work: v.work,
-        //                     status: v.status,
-        //                     startTime: v.startTime
-        //                   } );
-        // }
         this.timeSheets = value;
         this.loadValues();
       } );
@@ -124,9 +114,19 @@ export class TimeReqComponent implements OnInit, OnDestroy {
     this.selectedReq = null;
   }
 
+
   removeReq(): void {
-    this.timeSheetService.removeTimeSheet( this.selectedReq );
-    this.selectedReq = null;
+    let tempSub: Subscription;
+    tempSub = this.employeeService.fetchEmployees( "empId", this.selectedReq.empId ).subscribe( value => {
+      value[0].totalHours -= this.selectedReq.hours;
+      console.log( value[0] );
+      this.employeeService.updateEmployee( value[0], value[0].empId );
+      tempSub.unsubscribe();
+      this.timeSheetService.removeTimeSheet( this.selectedReq );
+      this.selectedReq = null;
+    } );
+
+
   }
 
 }

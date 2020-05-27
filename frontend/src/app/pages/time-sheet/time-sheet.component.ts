@@ -4,7 +4,7 @@ import { TimeSheetService } from "../../shared/time-sheet.service";
 import { NgForm } from "@angular/forms";
 import { EmployeeService } from "../../shared/employee.service";
 import { MatPaginator, MatTableDataSource, PageEvent } from "@angular/material";
-import { loadTrigger, MONTHS } from "../../shared/shared";
+import { getWeekNumber, loadTrigger, MONTHS, STARTYEAR } from "../../shared/shared";
 import { Employee } from "../../shared/model/employee.model";
 import { Timesheet } from "../../shared/model/timesheet.model";
 
@@ -75,6 +75,7 @@ export class TimeSheetComponent implements OnInit, OnDestroy {
                                                 this.employee.empName );
     this.timeSheetService.addTimeSheet( tempSheet );
     this.employee.totalHours += this.hours;
+    this.employee.hoursPerWeek[this.today.getFullYear() - STARTYEAR][getWeekNumber( date )] += this.hours;
     this.employeeService.updateEmployee( this.employee, this.empId );
     // this.timeForm.resetForm();
   }
