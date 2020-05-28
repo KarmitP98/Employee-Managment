@@ -1,17 +1,17 @@
 
 .approved {
   background: rgba(204, 255, 204, 0.3);
-  border: 1px solid #006400;
+  border: 1px solid rgb(0, 100, 0);
 }
 
 .declined {
   background: rgba(255, 204, 204, 0.3);
-  border: 1px solid #8b0000;
+  border: 1px solid rgb(139, 0, 0);
 }
 
 .error {
   background: rgba(255, 204, 204, 0.3);
-  border: 5px solid #8b0000;
+  border: 5px solid rgb(139, 0, 0);
 }
 
 html, body {

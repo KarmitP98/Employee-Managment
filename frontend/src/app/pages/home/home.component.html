@@ -1,46 +1,11 @@
-<!--<br>-->
-<!--<br>-->
-<!--<div [@load] class = "container">-->
-<!--  <div class = "row">-->
-<!--    <div class = "col-xs-12 col-md-6 col-lg-offset-3 text-center">-->
-<!--      <hr>-->
-<!--      <button [routerLink] = "['/time-sheet']"-->
-<!--              class = "big-button" color = "accent" mat-raised-button>-->
-<!--        Time-Sheet-->
-<!--      </button>-->
-<!--      <hr>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <br>-->
-<!--  <div class = "row">-->
-<!--    <div class = "col-xs-12 col-md-6 col-lg-offset-3 text-center">-->
-<!--      <hr>-->
-<!--      <button [routerLink] = "['/annual-leave']"-->
-<!--              class = "big-button" color = "accent" mat-raised-button> Annual-->
-<!--                                                                       Leave-->
-<!--      </button>-->
-<!--      <hr>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <br>-->
-<!--  <div *ngIf = "isAdmin" class = "row">-->
-<!--    <div class = "col-xs-12 col-md-6 col-lg-offset-3 text-center">-->
-<!--      <hr>-->
-<!--      <button [routerLink] = "['/admin']" class = "big-button"-->
-<!--              color = "accent" mat-raised-button> Admin-->
-<!--      </button>-->
-<!--      <hr>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
 <br>
 <mat-grid-list cols = "3" gutterSize = "20" rowHeight = "1:0.75">
   <mat-grid-tile class = "tile mat-elevation-z8" colspan = "2" rowspan = "1">
     <mat-grid-tile-header
-      style = "background: #ffd740; color: black; font-weight: bold">Company's
-                                                                     Vision
+      style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight: bold; height:10%;">
+      Company's Vision
     </mat-grid-tile-header>
-    <div style = "margin: 8px">
+    <div style = "margin: 8px;">
       <p><i><h4>Nothing in this world can take the place of persistence. Talent
                 will not: nothing is more common than unsuccessful men with
                 talent. Genius
@@ -50,51 +15,15 @@
                 determination alone are
                 omnipotent.</h4></i></p>
       <br><b class = "pull-right"><i>~ Calvin Coolidge</i></b></div>
-    <mat-grid-tile-footer
-      style = "background: #ffd740; color: black; font-weight: bold"></mat-grid-tile-footer>
-  </mat-grid-tile>
-
-  <mat-grid-tile class = "tile mat-elevation-z8" colspan = "1" rowspan = "2">
-    <mat-grid-tile-header
-      style = "background: #ffd740; color: black; font-weight: bold">Updates
-    </mat-grid-tile-header>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    <mat-grid-tile-footer *ngIf = "isAdmin"
-                          style = "background: #ffd740; color: black;
-                          font-weight: bold;">
-      <button [routerLink] = "['/admin']" mat-button
-              style = "width: 100%; text-align: right; color: black; font-weight: bold">
-        See more ->
-      </button>
-    </mat-grid-tile-footer>
   </mat-grid-tile>
 
   <mat-grid-tile class = "mat-elevation-z8 tile" colspan = "1" rowspan = "2">
     <mat-grid-tile-header
-      style = "background: #ffd740; color: black; font-weight: bold">Profile
+      style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight:
+      bold; height:5%;">
+      Company News
     </mat-grid-tile-header>
-
-    <mat-grid-tile-footer
-      style = "background: #ffd740; color: black; font-weight: bold">
-      <button (click) = "openDetails()"
-              mat-button
-              style = "width: 100%; text-align: right; color: black; font-weight: bold">
-        See More ->
-      </button>
-    </mat-grid-tile-footer>
-  </mat-grid-tile>
-
-  <mat-grid-tile class = "mat-elevation-z8 tile" colspan = "1" rowspan = "1">
-    <mat-grid-tile-header
-      style = "background: #ffd740; color: black; font-weight: bold">Company
-                                                                     News
-    </mat-grid-tile-header>
-    <div style = "overflow-y: auto; height: 9vmax">
+    <div style = "overflow-y: auto; height: 80%;">
       Riot police were deployed in force as youths set cars ablaze in some
       low-income housing estates in the Paris suburbs overnight, online news
       reports and postings on Twitter showed on Wednesday, amid tensions
@@ -126,36 +55,92 @@
       Reuters
     </div>
     <mat-grid-tile-footer
-      style = "background: #ffd740; color: black; font-weight: bold"></mat-grid-tile-footer>
+      style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight: bold;"></mat-grid-tile-footer>
   </mat-grid-tile>
+
+  <mat-grid-tile class = "tile mat-elevation-z8" colspan = "1" rowspan = "1">
+    <mat-grid-tile-header
+      style = "background: rgb(255,215,64); color: rgb(0,0,0);
+      font-weight:bold; height:10%;">
+      Updates
+    </mat-grid-tile-header>
+    <div *ngIf = "(empReq + timeReq + leaveReq) > 0">
+      <div style = "width: 100%; height: 80%; overflow-y: auto;">
+        <mat-list>
+          <mat-list-item *ngFor = "let r of stringRequests"
+                         [routerLink] = "['/admin']" role = "listitem"
+                         style = "cursor:pointer;">
+            {{r}}
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+    <div *ngIf = "(empReq + timeReq + leaveReq) === 0">
+      <mat-card class = "mat-elevation-z0">You have no updates at this time!
+      </mat-card>
+    </div>
+    <mat-grid-tile-footer *ngIf = "isAdmin && (empReq + timeReq + leaveReq) > 0"
+                          style = "background: rgb(255,215,64); color: rgb(0,0,0);
+                          font-weight: bold;">
+      <button [routerLink] = "['/admin']" mat-button
+              style = "width: 100%; text-align: right; color: rgb(0,0,0); font-weight: bold;">
+        Check Updates ->
+      </button>
+    </mat-grid-tile-footer>
+  </mat-grid-tile>
+
+  <mat-grid-tile class = "mat-elevation-z8 tile" colspan = "1" rowspan = "2">
+    <mat-grid-tile-header
+      style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight:
+      bold; height:5%;">
+      Profile
+    </mat-grid-tile-header>
+    <app-employee-card *ngIf = "employee" [controls] = "false"
+                       [emp] = "employee"
+                       [shadow] = "false" style = "width: 100%;
+                         height: 95%; margin-top: 10%;">
+    </app-employee-card>
+    <mat-grid-tile-footer
+      style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight: bold;
+      height:7%;">
+      <button (click) = "openDetails()" mat-button
+              style = "width: 100%; height: 100%; text-align: right; color:
+              rgb(0,0,0);              font-weight: bold;">
+        See More ->
+      </button>
+    </mat-grid-tile-footer>
+  </mat-grid-tile>
+
 
   <mat-grid-tile class = "mat-elevation-z8 tile" colspan = "1" rowspan = "1">
     <mat-grid-tile-header
-      style = "background: #ffd740; color: black; font-weight: bold">Work This
-                                                                     Week
+      style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight: bold; height:10%;">
+      Work This Week
     </mat-grid-tile-header>
-
-    <fusioncharts
-      [dataSource] = "dataSource"
-      dataFormat = "json"
-      height = "150"
-      type = "angulargauge"
-      width = "300"
-    ></fusioncharts>
-
+    <div style = "width: 100%; height: 90%; margin-top: 20%;">
+      <fusioncharts
+        [dataSource] = "dataSource"
+        dataFormat = "json"
+        height = "70%"
+        type = "angulargauge"
+        width = "100%"
+      ></fusioncharts>
+    </div>
     <mat-grid-tile-footer
-      style = "background: #ffd740; color: black; font-weight: bold">
+      style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight: bold;">
       <button [routerLink] = "['/time-sheet']"
               mat-button
-              style = "text-align: right; width: 100%; color: black; font-weight: bold">
+              style = "text-align: right; width: 100%; color: rgb(0,0,0); font-weight: bold;">
         Log Work ->
       </button>
     </mat-grid-tile-footer>
   </mat-grid-tile>
   <mat-grid-tile class = "mat-elevation-z8 tile" colspan = "1" rowspan = "1">
     <mat-grid-tile-header
-      style = "background: #ffd740; color: black; font-weight: bold">Coming
-                                                                     Soon...
+      style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight:
+      bold; height:10%;">
+      Coming
+      Soon...
     </mat-grid-tile-header>
   </mat-grid-tile>
 </mat-grid-list>

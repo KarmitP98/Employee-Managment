@@ -1,5 +1,5 @@
 <mat-grid-list cols = "4" gutterSize = "5" rowHeight = "400px"
-               style = "width: 1400px">
+               style = "width: 1400px;">
   <mat-grid-tile class = "onetile" colspan = "2" rowspan = "2">
     <mat-card class = "mat-elevation-z1" style = "width: 98%; height: 98%;">
       <div class = "text-center">
@@ -11,7 +11,8 @@
         </mat-card-header>
         <img [src] = "emp.profilePicURL" alt = "Photo of a Shiba Inu"
              class = "text-center"
-             mat-card-image style = "width: auto; height: 320px">
+             mat-card-image style = "width: auto; height: 320px;
+             border-radius: 10px">
         <mat-card-content>
           <h2>
             <b>Name:</b> {{ emp.abv}} {{emp.empName}}<br>
@@ -24,13 +25,13 @@
     </mat-card>
   </mat-grid-tile>
   <mat-grid-tile class = "onetile" colspan = "1" rowspan = "1">
-    <mat-card class = "mat-elevation-z1" style = "width: 95%; height: 95%">
+    <mat-card class = "mat-elevation-z1" style = "width: 95%; height: 95%;">
       <mat-card-header>
         <div class = "leave-header-image" mat-card-avatar></div>
         <mat-card-title>Leaves</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <mat-table [dataSource] = "leaveData" style = "width: 100%">
+        <mat-table [dataSource] = "leaveData" style = "width: 100%;">
 
           <!--    Select Column -->
           <ng-container matColumnDef = "select">
@@ -85,13 +86,13 @@
     </mat-card>
   </mat-grid-tile>
   <mat-grid-tile class = "onetile" colspan = "1" rowspan = "1">
-    <mat-card class = "mat-elevation-z1" style = "width: 95%; height: 95%">
+    <mat-card class = "mat-elevation-z1" style = "width: 95%; height: 95%;">
       <mat-card-header>
         <div class = "time-header-image" mat-card-avatar></div>
         <mat-card-title>Time Sheets</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <mat-table [dataSource] = "sheetData" style = "width: 100%">
+        <mat-table [dataSource] = "sheetData" style = "width: 100%;">
 
           <!--    Select Column -->
           <ng-container matColumnDef = "select">
@@ -154,11 +155,13 @@
   </mat-grid-tile>
   <mat-grid-tile class = "onetile" colspan = "2" rowspan = "1">
     <mat-card class = "mat-elevation-z1" style = "width: 98%; height: 95%;">
-      <mat-card-content>
+      <mat-card-content style = "width: 100%; height: 100%;">
         <fusioncharts
-          [chartConfig] = "chartConfig"
           [dataSource] = "dataSource"
-          containerBackgroundColor = "lightgrey">
+          dataFormat = "json"
+          height = "100%"
+          type = "column2d"
+          width = "100%">
         </fusioncharts>
       </mat-card-content>
     </mat-card>

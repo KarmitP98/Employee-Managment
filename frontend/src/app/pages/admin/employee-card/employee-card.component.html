@@ -1,12 +1,13 @@
-<mat-card class = "mat-elevation-z8" style = "max-height: available">
+<mat-card [ngClass] = "[shadow ? 'mat-elevation-z8' : 'mat-elevation-z0']"
+          style = "height: auto;">
   <mat-card-header>
     <div class = "example-header-image" mat-card-avatar></div>
     <mat-card-title>{{ emp.abv + " " + emp.empName}}</mat-card-title>
     <mat-card-subtitle><b>{{emp.isAdmin ? "Admin" : "Employee"}}</b>
     </mat-card-subtitle>
   </mat-card-header>
-  <img [src] = "emp.profilePicURL" alt = "Photo of a Shiba Inu" mat-card-image
-       style = "width: auto; height: 320px">
+  <img [src] = "emp.profilePicURL" alt = "Photo of a Shiba Inu"
+       style = "width: 100%; height: 40%; border-radius: 10px;">
   <mat-card-content>
     <h5>
       <b>Name:</b> {{ emp.abv}} {{emp.empName}}<br>
@@ -15,22 +16,22 @@
       <b>This human works.</b>
     </h5>
   </mat-card-content>
-  <mat-card-actions align = "end">
+  <mat-card-actions *ngIf = "controls" align = "end">
     <i (click) = "updateAdmin(true)" class = "material-icons md-24"
        matTooltip = "Approve Admin" matTooltipPosition = "above"
        style =
-         "cursor: pointer; color: green;">
+         "cursor: pointer; color: rgb(0,128,0);">
       thumb_up</i>
     &nbsp; &nbsp; &nbsp;
     <i (click) = "updateAdmin(false)" class = "material-icons md-24"
        matTooltip = "Decline Admin" matTooltipPosition = "above"
        style =
-         "cursor: pointer; color: red;">
+         "cursor: pointer; color: rgb(255,0,0);">
       thumb_down</i>
     &nbsp; &nbsp; &nbsp;
     <i (click) = "openDetails()" class = "material-icons md-24"
        matTooltip = "More Details"
        matTooltipPosition = "above"
-       style = "cursor: pointer; color: rebeccapurple;"> loupe</i>
+       style = "cursor: pointer; color: rgb(102,51,153);"> loupe</i>
   </mat-card-actions>
 </mat-card>

@@ -12,6 +12,8 @@ import { EmployeeDetailComponent } from "./employee-detail/employee-detail.compo
             } )
 export class EmployeeCardComponent implements OnInit {
   @Input() emp: Employee;
+  @Input() shadow: boolean = true;
+  @Input() controls: boolean = true;
 
   constructor( private employeeService: EmployeeService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private dialog: MatDialog ) {
 

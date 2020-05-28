@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { getWeekNumber, loadTrigger, STARTYEAR } from "../../shared/shared";
-import { EmployeeService } from "../../shared/employee.service";
+import { ADMIN_STATUS, EmployeeService } from "../../shared/employee.service";
 import { Employee } from "../../shared/model/employee.model";
 import { MatDialog } from "@angular/material";
 import { EmployeeDetailComponent } from "../admin/employee-card/employee-detail/employee-detail.component";
+import { TimeSheetService } from "../../shared/time-sheet.service";
+import { LeaveService } from "../../shared/leave.service";
 
 @Component( {
               selector: "app-home",
@@ -18,6 +20,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   private sub: Subscription;
   today = new Date();
 
+  empReq: number = 0;
+  timeReq: number = 0;
+  leaveReq: number = 0;
   dataSource = {
     chart: {
       lowerLimit: "0",
@@ -31,15 +36,15 @@ export class HomeComponent implements OnInit, OnDestroy {
       color: [ {
         minValue: "0",
         maxValue: "20",
-        code: "#F2726F"
+        code: "#f2726f"
       }, {
         minValue: "20",
         maxValue: "30",
-        code: "#FFC533"
+        code: "#ffc533"
       }, {
         minValue: "30",
         maxValue: "40",
-        code: "#62B58F"
+        code: "#62b58f"
       } ]
     },
     dials: {
@@ -48,8 +53,18 @@ export class HomeComponent implements OnInit, OnDestroy {
       } ]
     }
   };
+  stringRequests: string[] = [];
+  empSReq: string[] = [];
+  timeSReq: string[] = [];
+  leaveSReq: string[] = [];
+  private empSub: Subscription;
+  private timeSub: Subscription;
+  private leaveSub: Subscription;
 
-  constructor( private employeeService: EmployeeService, private dialog: MatDialog ) { }
+  constructor( private employeeService: EmployeeService,
+               private timeSheetService: TimeSheetService,
+               private leaveService: LeaveService,
+               private dialog: MatDialog ) { }
 
   ngOnInit() {
     this.sub = this.employeeService.employeeSubject.subscribe( value => {
@@ -62,10 +77,51 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.isAdmin = false;
       }
     } );
+
+    this.empSub = this.employeeService.fetchEmployees( "adminStatus", ADMIN_STATUS.pending ).subscribe(
+      value => {
+        if ( value ) {
+          this.empReq = value.length;
+          for ( let v of value ) {
+            this.empSReq.push( v.abv + " " + v.empName + ": Admin Request" );
+          }
+        } else {
+          this.empReq = 0;
+          this.empSReq = [];
+        }
+        this.leaveSub = this.leaveService.fetchLeaves( "status", ADMIN_STATUS.pending ).subscribe( value => {
+          if ( value ) {
+            this.leaveReq = value.length;
+            for ( let v of value ) {
+              this.leaveSReq.push( v.empName + ": Leave Request!" );
+            }
+          } else {
+            this.leaveReq = 0;
+            this.leaveSReq = [];
+          }
+          this.timeSub = this.timeSheetService.fetchTimeSheets( "status", ADMIN_STATUS.pending ).subscribe( value => {
+            if ( value ) {
+              this.timeReq = value.length;
+              for ( let v of value ) {
+                this.timeSReq.push( v.empName + ": Time Log Update!" );
+              }
+            } else {
+              this.timeReq = 0;
+              this.timeSReq = [];
+            }
+            this.stringRequests = this.empSReq.concat( this.timeSReq.concat( this.leaveSReq ) );
+          } );
+        } );
+      }
+    );
+
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.empSub.unsubscribe();
+    this.timeSub.unsubscribe();
+    this.leaveSub.unsubscribe();
   }
 
   openDetails(): void {

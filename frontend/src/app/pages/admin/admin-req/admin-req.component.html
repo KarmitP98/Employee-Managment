@@ -6,10 +6,10 @@
     <button (click) = "switchStyle()" aria-label = "Style selector button"
             mat-raised-button>
       <i *ngIf = "listView" class = "material-icons"
-         style = "color: rebeccapurple;">view_list
+         style = "color: rgb(102,51,153);">view_list
       </i>
       <i *ngIf = "!listView" class = "material-icons"
-         style = "color: rebeccapurple;">view_module</i>
+         style = "color: rgb(102,51,153);">view_module</i>
     </button>
   </div>
 </div>
@@ -98,7 +98,8 @@
       <app-employee-card [emp] = e
                          [matBadge] = "e.adminStatus === 'Pending' ? '1': ''"
                          matBadgeColor = "warn" matBadgePosition = "above after"
-                         matBadgeSize = "large">
+                         matBadgeSize = "large"
+                         style = "width: 90%; height: 90%;">
       </app-employee-card>
     </mat-grid-tile>
   </mat-grid-list>

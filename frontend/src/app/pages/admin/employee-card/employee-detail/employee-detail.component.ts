@@ -42,12 +42,6 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     },
     data: []
   };
-  chartConfig = {
-    width: "600",
-    height: "325",
-    type: "column2d",
-    dataFormat: "json"
-  };
 
   selectedTimeSheet: Timesheet;
   selectedLeave: Leave;
