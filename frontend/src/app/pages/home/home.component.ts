@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
-import { getWeekNumber, loadTrigger, STARTYEAR } from "../../shared/shared";
+import { getWeekNumber, leftSlideTrigger, loadTrigger, STARTYEAR } from "../../shared/shared";
 import { ADMIN_STATUS, EmployeeService } from "../../shared/employee.service";
 import { Employee } from "../../shared/model/employee.model";
 import { MatDialog } from "@angular/material";
@@ -12,7 +12,7 @@ import { LeaveService } from "../../shared/leave.service";
               selector: "app-home",
               templateUrl: "./home.component.html",
               styleUrls: [ "./home.component.css" ],
-              animations: [ loadTrigger ]
+              animations: [ loadTrigger, leftSlideTrigger ]
             } )
 export class HomeComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;

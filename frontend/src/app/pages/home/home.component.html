@@ -30,9 +30,10 @@
     <div *ngIf = "(empReq + timeReq + leaveReq) > 0 && isAdmin" style = "width:
      100%; height: 75%; overflow-y: auto;">
       <p *ngFor = "let r of stringRequests" [routerLink] = "['/admin']"
-         class = "mat-raised-button"
          style = "cursor:pointer; width: 100%; text-align:
-         center; border: black 1px solid; border-radius: 5px;">
+         center; border: black 1px solid; border-radius: 5px; background:
+         rebeccapurple; color: white; font-weight: bold;"
+         [@slide]>
         {{r + "\n"}}
       </p>
     </div>

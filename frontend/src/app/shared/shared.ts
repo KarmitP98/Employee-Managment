@@ -9,6 +9,24 @@ export const loadTrigger: AnimationTriggerMetadata =
     ] )
   ] );
 
+export const leftSlideTrigger: AnimationTriggerMetadata =
+  trigger( "slide", [
+    state( "in", style( { transform: "translateX(0)" } ) ),
+    transition( "void => *", [
+      style( { transform: "translateX(-20px)" } ),
+      animate( 100 )
+    ] )
+  ] );
+
+export const scaleUpTrigger: AnimationTriggerMetadata =
+  trigger( "scale", [
+    state( "in", style( { transform: "scale(1)" } ) ),
+    transition( "void => *", [
+      style( { transform: "scale(0)" } ),
+      animate( 100 )
+    ] )
+  ] );
+
 export const COMPANY_NAME = "Regency Agency";
 
 export const MONTHS = [ "January",
