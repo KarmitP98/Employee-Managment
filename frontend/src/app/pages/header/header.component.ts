@@ -4,6 +4,7 @@ import { Employee } from "../../shared/model/employee.model";
 import { ADMIN_STATUS, EmployeeService } from "../../shared/employee.service";
 import { LeaveService } from "../../shared/leave.service";
 import { TimeSheetService } from "../../shared/time-sheet.service";
+import { COMPANY_NAME } from "../../shared/shared";
 
 @Component( {
               selector: "app-header",
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   sheetReq = 0;
   adminReq = 0;
   leaveReq = 0;
+  companyName = COMPANY_NAME;
 
   constructor( public employeeService: EmployeeService, private leaveService: LeaveService, private timeSheetService: TimeSheetService ) { }
 

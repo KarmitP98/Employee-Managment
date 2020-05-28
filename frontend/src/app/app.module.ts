@@ -57,6 +57,9 @@ import * as charts from "fusioncharts/fusioncharts.charts";
 import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 // Load Widgets
 import * as Widgets from "fusioncharts/fusioncharts.widgets";
+import { NewsComponent } from "./pages/home/news/news.component";
+import { VisionComponent } from "./pages/home/vision/vision.component";
+import { ScrollingModule } from "@angular/cdk/scrolling";
 
 // Pass the fusioncharts library and chart modules
 FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme, Widgets );
@@ -77,7 +80,9 @@ FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme, Widgets );
                DatabaseComponent,
                SignUpComponent,
                EmployeeCardComponent,
-               EmployeeDetailComponent
+               EmployeeDetailComponent,
+               NewsComponent,
+               VisionComponent
              ],
              imports: [
                BrowserModule,
@@ -112,7 +117,8 @@ FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme, Widgets );
                MatIconModule,
                MatTooltipModule,
                MatDialogModule,
-               FusionChartsModule
+               FusionChartsModule,
+               ScrollingModule
              ],
              providers: [],
              bootstrap: [ AppComponent ],

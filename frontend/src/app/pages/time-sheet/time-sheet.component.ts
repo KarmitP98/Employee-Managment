@@ -76,6 +76,10 @@ export class TimeSheetComponent implements OnInit, OnDestroy {
     this.timeSheetService.addTimeSheet( tempSheet );
     this.employee.totalHours += this.hours;
     this.employee.hoursPerWeek[this.today.getFullYear() - STARTYEAR][getWeekNumber( date )] += this.hours;
+    // let weekMap = new Map<number, number>();
+    // let cHours = this.employee.hoursPerWeek.get( this.today.getFullYear() - STARTYEAR ).weeks.get( getWeekNumber( date ) );
+    // weekMap.set( getWeekNumber( date ), cHours + this.hours );
+    // this.employee.hoursPerWeek.set( this.today.getFullYear() - STARTYEAR, { weeks: weekMap } );
     this.employeeService.updateEmployee( this.employee, this.empId );
     // this.timeForm.resetForm();
   }

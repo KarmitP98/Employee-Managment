@@ -6,8 +6,8 @@
       <h1>Welcome to {{ companyName }}</h1>
       <form #signUpForm = "ngForm" (ngSubmit) = "onSignUp()"><br>
         <h4><b>Profile Picture</b></h4>
-        <img [src] = "default_male_icon_url" alt = "Default Icon"
-             style = "width: 100px; height: 100px;">
+        <img [src] = "default_pro_pic" alt = "Default Icon"
+             style = "width: 100px; height: 100px; border-radius: 10px">
         <br>
         <br>
         <mat-form-field appearance = "outline">

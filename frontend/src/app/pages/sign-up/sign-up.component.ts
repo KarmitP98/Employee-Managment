@@ -40,6 +40,12 @@ export class SignUpComponent implements OnInit {
     for ( let i of weeks ) {
       hpw[new Date().getFullYear() - STARTYEAR][i] = 0;
     }
+
+    // let map = new Map<number, { weeks: Map<number, number> }>();
+    // let weekMap = new Map<number, number>();
+    // weekMap.set( getWeekNumber( new Date() ), 0 );
+    // map.set( new Date().getFullYear() - STARTYEAR, { weeks: weekMap } );
+    //  console.log(map);
     const newEmp = new Employee( "temp", this.title, this.firstName + " " + (this.lastName === undefined ? "" : this.lastName), this.email,
                                  MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(),
                                  this.proPicUrl, false, "Pending", this.password, 0, hpw );

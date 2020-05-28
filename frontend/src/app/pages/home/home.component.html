@@ -5,16 +5,9 @@
       style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight: bold; height:10%;">
       Company's Vision
     </mat-grid-tile-header>
-    <div style = "margin: 8px;">
-      <p><i><h4>Nothing in this world can take the place of persistence. Talent
-                will not: nothing is more common than unsuccessful men with
-                talent. Genius
-                will not; unrewarded genius is almost a proverb. Education will
-                not: the
-                world is full of educated derelicts. Persistence and
-                determination alone are
-                omnipotent.</h4></i></p>
-      <br><b class = "pull-right"><i>~ Calvin Coolidge</i></b></div>
+    <div style = "margin: 2%;">
+      <app-vision></app-vision>
+    </div>
   </mat-grid-tile>
 
   <mat-grid-tile class = "mat-elevation-z8 tile" colspan = "1" rowspan = "2">
@@ -23,39 +16,9 @@
       bold; height:5%;">
       Company News
     </mat-grid-tile-header>
-    <div style = "overflow-y: auto; height: 80%;">
-      Riot police were deployed in force as youths set cars ablaze in some
-      low-income housing estates in the Paris suburbs overnight, online news
-      reports and postings on Twitter showed on Wednesday, amid tensions
-      heightened by the coronavirus lockdown.
-
-      The latest unrest in the banlieues – high-rise, low-income neighbourhoods
-      – flared after an 18-year-old died last weekend in a motorbike accident in
-      the suburb of Argenteuil.
-
-      An investigation into the death of Sabri Choubi was ongoing, said the
-      prosecutor’s department for the district of Pontoise, which handles
-      judicial matters for Argenteuil. It added that initial findings did not
-      show Choubi’s motorcycle had been in a collision with a police car, as
-      some of the victim’s associates had alleged.
-
-
-      Officials at the Paris police department could not be immediately reached
-      for comment on the unrest overnight, but the AnonymeCitoyen twitter feed
-      and residents in the suburb of Argenteuil posted videos and photographs of
-      burnt out cars and riot police in the area.
-
-      Residents in the nearby suburb of Bezons also posted videos on Twitter of
-      a large fire, though it was unclear what was burning.
-
-
-      France’s banlieues are frequently flashpoints of anger over social and
-      economic inequality and allegations of heavy-handed policing.
-
-      Reuters
-    </div>
-    <mat-grid-tile-footer
-      style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight: bold;"></mat-grid-tile-footer>
+    <app-news
+      style = "overflow-y: auto; height: auto; margin-top: 5%; width:95%;">
+    </app-news>
   </mat-grid-tile>
 
   <mat-grid-tile class = "tile mat-elevation-z8" colspan = "1" rowspan = "1">
@@ -64,24 +27,23 @@
       font-weight:bold; height:10%;">
       Updates
     </mat-grid-tile-header>
-    <div *ngIf = "(empReq + timeReq + leaveReq) > 0">
-      <div style = "width: 100%; height: 80%; overflow-y: auto;">
-        <mat-list>
-          <mat-list-item *ngFor = "let r of stringRequests"
-                         [routerLink] = "['/admin']" role = "listitem"
-                         style = "cursor:pointer;">
-            {{r}}
-          </mat-list-item>
-        </mat-list>
-      </div>
+    <div *ngIf = "(empReq + timeReq + leaveReq) > 0 && isAdmin" style = "width:
+     100%; height: 75%; overflow-y: auto;">
+      <p *ngFor = "let r of stringRequests" [routerLink] = "['/admin']"
+         class = "mat-raised-button"
+         style = "cursor:pointer; width: 100%; text-align:
+         center; border: black 1px solid; border-radius: 5px;">
+        {{r + "\n"}}
+      </p>
     </div>
-    <div *ngIf = "(empReq + timeReq + leaveReq) === 0">
+    <div *ngIf = "(empReq + timeReq + leaveReq) === 0 || !isAdmin">
       <mat-card class = "mat-elevation-z0">You have no updates at this time!
       </mat-card>
     </div>
-    <mat-grid-tile-footer *ngIf = "isAdmin && (empReq + timeReq + leaveReq) > 0"
-                          style = "background: rgb(255,215,64); color: rgb(0,0,0);
-                          font-weight: bold;">
+    <mat-grid-tile-footer
+      *ngIf = "isAdmin && (empReq + timeReq + leaveReq) > 0"
+      style = "background: rgb(255,215,64); color: rgb(0,0,0);
+                          font-weight: bold; height: 14%;">
       <button [routerLink] = "['/admin']" mat-button
               style = "width: 100%; text-align: right; color: rgb(0,0,0); font-weight: bold;">
         Check Updates ->
@@ -127,7 +89,8 @@
       ></fusioncharts>
     </div>
     <mat-grid-tile-footer
-      style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight: bold;">
+      style = "background: rgb(255,215,64);
+       color: rgb(0,0,0); font-weight: bold; height: 14%;">
       <button [routerLink] = "['/time-sheet']"
               mat-button
               style = "text-align: right; width: 100%; color: rgb(0,0,0); font-weight: bold;">
@@ -135,6 +98,7 @@
       </button>
     </mat-grid-tile-footer>
   </mat-grid-tile>
+
   <mat-grid-tile class = "mat-elevation-z8 tile" colspan = "1" rowspan = "1">
     <mat-grid-tile-header
       style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight:
