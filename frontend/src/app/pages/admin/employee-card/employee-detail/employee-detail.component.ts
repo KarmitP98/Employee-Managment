@@ -1,11 +1,11 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MAT_DIALOG_DATA, MatPaginator, MatTableDataSource, PageEvent } from "@angular/material";
-import { Employee } from "../../../../shared/model/employee.model";
-import { TimeSheetService } from "../../../../shared/time-sheet.service";
-import { Timesheet } from "../../../../shared/model/timesheet.model";
+import { Employee } from "../../../../model/employee.model";
+import { TimeSheetService } from "../../../../services/time-sheet.service";
+import { Timesheet } from "../../../../model/timesheet.model";
 import { Subscription } from "rxjs";
-import { Leave } from "../../../../shared/model/leaves.model";
-import { LeaveService } from "../../../../shared/leave.service";
+import { Leave } from "../../../../model/leaves.model";
+import { LeaveService } from "../../../../services/leave.service";
 
 @Component( {
               selector: "app-employee-detail",

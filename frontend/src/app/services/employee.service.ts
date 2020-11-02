@@ -1,11 +1,12 @@
 import { Injectable, OnInit } from "@angular/core";
-import { Employee } from "./model/employee.model";
+import { Employee } from "../model/employee.model";
 import { BehaviorSubject, Subscription, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { AngularFireDatabase } from "@angular/fire/database";
 import { environment } from "../../environments/environment";
 import { catchError } from "rxjs/operators";
+import { StatService } from "./stat.service";
 
 export enum ADMIN_STATUS {
   pending = "Pending",
@@ -52,7 +53,7 @@ export class EmployeeService implements OnInit {
   private tokenExpirationTimer: any;
 
 
-  constructor( private http: HttpClient, private router: Router, private firestore: AngularFireDatabase ) { }
+  constructor( private http: HttpClient, private router: Router, private firestore: AngularFireDatabase, private statService: StatService ) { }
 
   ngOnInit(): void {
   }

@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { COMPANY_NAME, loadTrigger, MONTHS, STARTYEAR } from "../../shared/shared";
-import { Employee } from "../../shared/model/employee.model";
+import { Employee } from "../../model/employee.model";
 import { NgForm } from "@angular/forms";
-import { EmployeeService } from "../../shared/employee.service";
+import { EmployeeService } from "../../services/employee.service";
 
 @Component( {
               selector: "app-sign-up",

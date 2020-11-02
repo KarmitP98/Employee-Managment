@@ -45,7 +45,6 @@ import {
 } from "@angular/material";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
-import { environment } from "../environments/environment";
 import { SignUpComponent } from "./pages/sign-up/sign-up.component";
 import { ChartsModule } from "ng2-charts";
 import { EmployeeCardComponent } from "./pages/admin/employee-card/employee-card.component";
@@ -60,6 +59,7 @@ import * as Widgets from "fusioncharts/fusioncharts.widgets";
 import { NewsComponent } from "./pages/home/news/news.component";
 import { VisionComponent } from "./pages/home/vision/vision.component";
 import { ScrollingModule } from "@angular/cdk/scrolling";
+import { environment } from "../environments/environment.prod";
 
 // Pass the fusioncharts library and chart modules
 FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme, Widgets );

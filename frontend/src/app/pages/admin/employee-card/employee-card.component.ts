@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Employee } from "../../../shared/model/employee.model";
-import { ADMIN_STATUS, EmployeeService } from "../../../shared/employee.service";
+import { Employee } from "../../../model/employee.model";
+import { ADMIN_STATUS, EmployeeService } from "../../../services/employee.service";
 import { MatDialog, MatIconRegistry } from "@angular/material";
 import { DomSanitizer } from "@angular/platform-browser";
 import { EmployeeDetailComponent } from "./employee-detail/employee-detail.component";

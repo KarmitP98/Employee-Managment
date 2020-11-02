@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { AngularFireDatabase } from "@angular/fire/database";
-import { Timesheet } from "./model/timesheet.model";
+import { Timesheet } from "../model/timesheet.model";
 
 @Injectable( {
                providedIn: "root"

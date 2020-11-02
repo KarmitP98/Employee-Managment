@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
-import { Employee } from "../../shared/model/employee.model";
-import { ADMIN_STATUS, EmployeeService } from "../../shared/employee.service";
-import { LeaveService } from "../../shared/leave.service";
-import { TimeSheetService } from "../../shared/time-sheet.service";
+import { Employee } from "../../model/employee.model";
+import { ADMIN_STATUS, EmployeeService } from "../../services/employee.service";
+import { LeaveService } from "../../services/leave.service";
+import { TimeSheetService } from "../../services/time-sheet.service";
 import { COMPANY_NAME } from "../../shared/shared";
 
 @Component( {

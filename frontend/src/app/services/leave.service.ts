@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { AngularFireDatabase } from "@angular/fire/database";
-import { Leave } from "./model/leaves.model";
+import { Leave } from "../model/leaves.model";
 
 
 @Injectable( {

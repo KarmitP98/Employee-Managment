@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { Leave } from "../../../shared/model/leaves.model";
+import { Leave } from "../../../model/leaves.model";
 import { Subscription } from "rxjs";
 import { MatPaginator, MatTableDataSource, PageEvent } from "@angular/material";
 import { loadTrigger } from "../../../shared/shared";
-import { ADMIN_STATUS, EmployeeService } from "../../../shared/employee.service";
-import { LeaveService } from "../../../shared/leave.service";
-import { Employee } from "../../../shared/model/employee.model";
+import { ADMIN_STATUS, EmployeeService } from "../../../services/employee.service";
+import { LeaveService } from "../../../services/leave.service";
+import { Employee } from "../../../model/employee.model";
 
 @Component( {
               selector: "app-leave-req",

@@ -3,7 +3,7 @@ import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { COMPANY_NAME, loadTrigger } from "../../shared/shared";
-import { EmployeeService } from "../../shared/employee.service";
+import { EmployeeService } from "../../services/employee.service";
 
 @Component( {
               selector: "app-login",

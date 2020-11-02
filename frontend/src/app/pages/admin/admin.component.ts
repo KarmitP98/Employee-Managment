@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { loadTrigger } from "../../shared/shared";
-import { ADMIN_STATUS, EmployeeService } from "../../shared/employee.service";
+import { ADMIN_STATUS, EmployeeService } from "../../services/employee.service";
 import { Subscription } from "rxjs";
-import { LeaveService } from "../../shared/leave.service";
-import { TimeSheetService } from "../../shared/time-sheet.service";
+import { LeaveService } from "../../services/leave.service";
+import { TimeSheetService } from "../../services/time-sheet.service";
 
 @Component( {
               selector: "app-admin",

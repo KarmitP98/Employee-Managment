@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { Employee } from "../../../shared/model/employee.model";
+import { Employee } from "../../../model/employee.model";
 import { Subscription } from "rxjs";
 import { MatDialog, MatPaginator, MatTableDataSource, PageEvent } from "@angular/material";
 import { loadTrigger } from "../../../shared/shared";
-import { ADMIN_STATUS, EmployeeService } from "../../../shared/employee.service";
+import { ADMIN_STATUS, EmployeeService } from "../../../services/employee.service";
 import { EmployeeDetailComponent } from "../employee-card/employee-detail/employee-detail.component";
 
 @Component( {

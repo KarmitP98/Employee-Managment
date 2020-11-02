@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { animate, state, style, transition, trigger } from "@angular/animations";
-import { EmployeeService } from "./shared/employee.service";
+import { EmployeeService } from "./services/employee.service";
 
 @Component( {
               selector: "app-root",

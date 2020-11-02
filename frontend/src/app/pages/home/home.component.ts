@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { getWeekNumber, leftSlideTrigger, loadTrigger, STARTYEAR } from "../../shared/shared";
-import { ADMIN_STATUS, EmployeeService } from "../../shared/employee.service";
-import { Employee } from "../../shared/model/employee.model";
+import { ADMIN_STATUS, EmployeeService } from "../../services/employee.service";
+import { Employee } from "../../model/employee.model";
 import { MatDialog } from "@angular/material";
 import { EmployeeDetailComponent } from "../admin/employee-card/employee-detail/employee-detail.component";
-import { TimeSheetService } from "../../shared/time-sheet.service";
-import { LeaveService } from "../../shared/leave.service";
+import { TimeSheetService } from "../../services/time-sheet.service";
+import { LeaveService } from "../../services/leave.service";
 
 @Component( {
               selector: "app-home",
@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         if ( value ) {
           this.empReq = value.length;
           for ( let v of value ) {
-            this.empSReq.push( v.abv + " " + v.empName + ": Admin Request" );
+            this.empSReq.push( v.empName + ": Admin Request" );
           }
         } else {
           this.empReq = 0;
@@ -115,6 +115,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     );
 
+    console.log( new Date() );
+    console.log( getWeekNumber( new Date() ) );
   }
 
   ngOnDestroy(): void {

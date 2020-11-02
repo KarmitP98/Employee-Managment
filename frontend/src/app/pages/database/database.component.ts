@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
-import { Employee } from "../../shared/model/employee.model";
-import { Leave } from "../../shared/model/leaves.model";
-import { LeaveService } from "../../shared/leave.service";
-import { TimeSheetService } from "../../shared/time-sheet.service";
+import { Employee } from "../../model/employee.model";
+import { Leave } from "../../model/leaves.model";
+import { LeaveService } from "../../services/leave.service";
+import { TimeSheetService } from "../../services/time-sheet.service";
 import { loadTrigger } from "../../shared/shared";
-import { EmployeeService } from "../../shared/employee.service";
-import { Timesheet } from "../../shared/model/timesheet.model";
+import { EmployeeService } from "../../services/employee.service";
+import { Timesheet } from "../../model/timesheet.model";
 
 @Component( {
               selector: "app-database",

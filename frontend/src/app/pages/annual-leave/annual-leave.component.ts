@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { LeaveService } from "../../shared/leave.service";
-import { EmployeeService } from "../../shared/employee.service";
+import { LeaveService } from "../../services/leave.service";
+import { EmployeeService } from "../../services/employee.service";
 import { Subscription } from "rxjs";
-import { Leave } from "../../shared/model/leaves.model";
+import { Leave } from "../../model/leaves.model";
 import { NgForm } from "@angular/forms";
 import { MatPaginator, MatTableDataSource, PageEvent } from "@angular/material";
 import { loadTrigger, MONTHS } from "../../shared/shared";
-import { Employee } from "../../shared/model/employee.model";
+import { Employee } from "../../model/employee.model";
 
 @Component( {
               selector: "app-annual-leave",

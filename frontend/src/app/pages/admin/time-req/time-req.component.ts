@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Subscription } from "rxjs";
 import { MatPaginator, MatSort, MatTableDataSource, PageEvent } from "@angular/material";
 import { loadTrigger } from "../../../shared/shared";
-import { ADMIN_STATUS, EmployeeService } from "../../../shared/employee.service";
-import { TimeSheetService } from "../../../shared/time-sheet.service";
-import { Timesheet } from "../../../shared/model/timesheet.model";
-import { Employee } from "../../../shared/model/employee.model";
+import { ADMIN_STATUS, EmployeeService } from "../../../services/employee.service";
+import { TimeSheetService } from "../../../services/time-sheet.service";
+import { Timesheet } from "../../../model/timesheet.model";
+import { Employee } from "../../../model/employee.model";
 
 
 @Component( {

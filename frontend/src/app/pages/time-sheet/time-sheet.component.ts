@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Subscription } from "rxjs";
-import { TimeSheetService } from "../../shared/time-sheet.service";
+import { TimeSheetService } from "../../services/time-sheet.service";
 import { NgForm } from "@angular/forms";
-import { EmployeeService } from "../../shared/employee.service";
+import { EmployeeService } from "../../services/employee.service";
 import { MatPaginator, MatTableDataSource, PageEvent } from "@angular/material";
 import { getWeekNumber, loadTrigger, MONTHS, STARTYEAR } from "../../shared/shared";
-import { Employee } from "../../shared/model/employee.model";
-import { Timesheet } from "../../shared/model/timesheet.model";
+import { Employee } from "../../model/employee.model";
+import { Timesheet } from "../../model/timesheet.model";
 
 @Component( {
               selector: "app-time-sheet",
