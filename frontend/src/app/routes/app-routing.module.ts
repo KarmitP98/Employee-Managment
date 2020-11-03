@@ -19,11 +19,13 @@ const routes: Routes = [
   { path: "signUp", component: SignUpComponent, canActivate: [ LoginGuard ] },
   {
     path: ":id", component: DashboardComponent, canActivate: [ AuthGuard ], canDeactivate: [ AuthGuard ],
-    children: [ { path: "home", component: HomeComponent, canActivate: [ AuthGuard ], canDeactivate: [ AuthGuard ] },
+    children: [
+      { path: "home", component: HomeComponent, canActivate: [ AuthGuard ], canDeactivate: [ AuthGuard ] },
       { path: "time-sheet", component: TimeSheetComponent, canActivate: [ AuthGuard ], canDeactivate: [ AuthGuard ] },
       { path: "annual-leave", component: AnnualLeaveComponent, canActivate: [ AuthGuard ], canDeactivate: [ AuthGuard ] },
       {
-        path: "admin", component: AdminComponent, canActivate: [ AuthGuard ], canDeactivate: [ AuthGuard ], children: [
+        path: "admin", component: AdminComponent, canActivate: [ AuthGuard ], canDeactivate: [ AuthGuard ],
+        children: [
           { path: "", redirectTo: "time-req", pathMatch: "full" },
           { path: "time-req", component: TimeReqComponent },
           { path: "leave-req", component: LeaveReqComponent }

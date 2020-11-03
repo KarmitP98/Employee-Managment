@@ -1,53 +1,59 @@
-<div [@load] style = "margin-top: 10vh;">
-  <div class = "text-xl-center">
-    <img class = "image" mat-card-sm-image
-         src = "assets/background_square.jpg">
+<div [@load]
+     class = "text-xl-center"
+     style = "margin-top: 20vh;">
 
-    <h1>Welcome to {{ companyName }}</h1>
+  <img alt = "Company Image"
+       class = "company_logo"
+       src = "assets/background_square.jpg">
+  <br>
+
+  <h1>Welcome to {{ companyName }}</h1>
+
+  <br>
+
+  <form #f = "ngForm" (ngSubmit) = "onSubmit()">
+
+    <mat-form-field appearance = "standard">
+      <mat-label>Email</mat-label>
+      <input [(ngModel)] = "email"
+             email
+             matInput
+             name = "email"
+             placeholder = "abc@def.com"
+             required
+             type = "email">
+    </mat-form-field>
 
     <br>
 
-    <form #f = "ngForm" (ngSubmit) = "onSubmit()">
+    <mat-form-field appearance = "standard">
+      <mat-label>Password</mat-label>
+      <input [(ngModel)] = "password" matInput
+             minlength = "6"
+             name = "password"
+             password
+             placeholder = "******"
+             required
+             type = "password">
+    </mat-form-field>
 
-      <mat-form-field appearance = "standard">
-        <mat-label>Email</mat-label>
-        <input [(ngModel)] = "email"
-               email
-               matInput
-               name = "email"
-               placeholder = "abc@def.com"
-               required
-               type = "email">
-      </mat-form-field>
+    <br>
+    <br>
 
-      <br>
+    <button [disabled] = "!f.valid"
+            color = "accent"
+            mat-raised-button
+            type = "submit">
+      Login
+    </button>
+    &nbsp;
+    <button color = "warn"
+            mat-raised-button
+            routerLink = "/signUp"
+            type = "button">
+      Sign Up
+    </button>
 
-      <mat-form-field appearance = "standard">
-        <mat-label>Password</mat-label>
-        <input [(ngModel)] = "password" matInput
-               minlength = "6"
-               name = "password"
-               password
-               placeholder = "******"
-               required
-               type = "password">
-      </mat-form-field>
+  </form>
 
-      <br>
-      <br>
-      <div>
-        <button [disabled] = "!f.valid"
-                [textContent] = "'Login'"
-                color = "accent"
-                mat-raised-button
-                type = "submit"></button>
-        &nbsp;
-        <button [textContent] = "'Sign-up'"
-                color = "warn"
-                mat-raised-button
-                routerLink = "/signUp"
-                type = "button"></button>
-      </div>
-    </form>
-  </div>
 </div>

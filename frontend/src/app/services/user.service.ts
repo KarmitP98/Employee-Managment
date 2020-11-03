@@ -136,6 +136,8 @@ export class UserService {
   }
 
   public removeUser( user: UserModel ): void {
-
+    this.afs.collection( "users" )
+        .doc( user.uId )
+        .delete();
   }
 }

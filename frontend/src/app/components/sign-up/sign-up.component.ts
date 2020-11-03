@@ -3,6 +3,8 @@ import { NgForm } from "@angular/forms";
 import { UserService } from "../../services/user.service";
 import { loadTrigger } from "../../shared/animations";
 import { COMPANY_NAME } from "../../shared/constants";
+import firebase from "firebase";
+import Timestamp = firebase.firestore.Timestamp;
 
 @Component( {
               selector: "app-sign-up",
@@ -17,15 +19,16 @@ export class SignUpComponent implements OnInit {
 
   default_male_icon_url = "assets/default-pro-pic-male.png";
   default_female_icon_url = "assets/default-pro-pic-female.jpg";
+
   default_pro_pic = "assets/default-pro-pic.jpg";
-  title = "Mr.";
+  abv = "Mr.";
   proPicUrl: string = this.default_pro_pic;
-  firstName: string;
-  lastName: string;
+
   email: string;
   password: string;
-  DOB: Date;
+  DOB: Timestamp;
   adminAccount: boolean;
+  uName: string;
 
   constructor( private userService: UserService ) { }
 
@@ -33,6 +36,18 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignUp(): void {
-
+    this.userService.signUpWithEmail( {
+                                        uId: "temp",
+                                        uDOB: this.DOB,
+                                        uClass: this.adminAccount ? "Level 2" : "Level 1",
+                                        uAbv: this.abv,
+                                        uProPic: this.proPicUrl,
+                                        uName: this.uName,
+                                        uEmail: this.email,
+                                        salary: 11,
+                                        workLogIds: [],
+                                        requests: [],
+                                        leaves: []
+                                      }, this.password );
   }
 }
