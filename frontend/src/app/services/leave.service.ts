@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { AngularFireDatabase } from "@angular/fire/database";
-import { Leave } from "../model/leaves.model";
+import { AngularFirestore } from "@angular/fire/firestore";
+import { LeaveModel } from "../model/models.model";
 
 
 @Injectable( {
@@ -9,33 +8,35 @@ import { Leave } from "../model/leaves.model";
              } )
 export class LeaveService {
 
-  constructor( private http: HttpClient, private firestore: AngularFireDatabase ) { }
+  constructor( private afs: AngularFirestore ) { }
 
-  fetchLeaves( child?: string, value?: string | number | boolean ) {
+  fetchLeave( child?, condition?, value? ) {
     if ( child ) {
-      return this.firestore.list<Leave>( "leaves", ref => ref.orderByChild( child ).equalTo( value ) ).valueChanges();
+      return this.afs.collection<LeaveModel>( "Leaves", ref => ref.where( child, condition, value ) );
     }
-    return this.firestore.list<Leave>( "leaves" ).valueChanges();
+    return this.afs.collection<LeaveModel>( "Leaves" );
+
   }
 
-  fetchRangeOfLeaves( startAt: number, limit: number ) {
-    return this.firestore.list<Leave>( "leaves", ref => ref.startAt( startAt ).limitToFirst( limit ) ).valueChanges();
+  // Add new Leave and add update the name to key
+  addLeave( Leave: LeaveModel ) {
+    Leave.lId = this.afs.createId();
+    this.afs.collection<LeaveModel>( "Leaves" )
+        .doc( Leave.lId )
+        .set( Leave );
   }
 
-  // Add new TimeSheet and add update the name to key
-  addLeave( leave: Leave ) {
-    this.firestore.list<Leave>( "leaves" ).push( leave ).then( value => {
-      leave.leaveId = value.key;
-      this.updateLeave( leave, value.key );
-    } );
+  updateLeave( Leave: LeaveModel ) {
+
+    this.afs.collection<LeaveModel>( "Leaves" )
+        .doc( Leave.lId )
+        .update( Leave );
   }
 
-  updateLeave( leave: Leave, leaveId: string ) {
-    this.firestore.list<Leave>( "leaves" ).update( leaveId, leave );
-  }
-
-  removeLeave( leave: Leave ) {
-    this.firestore.list<Leave>( "leaves" ).remove( leave.leaveId );
+  removeLeave( Leave: LeaveModel ) {
+    this.afs.collection<LeaveModel>( "Leaves" )
+        .doc( Leave.lId )
+        .delete();
   }
 
 }

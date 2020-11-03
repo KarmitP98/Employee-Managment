@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { animate, state, style, transition, trigger } from "@angular/animations";
-import { EmployeeService } from "./services/employee.service";
+import { UserService } from "./services/user.service";
 
 @Component( {
               selector: "app-root",
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isAuth: boolean = false;
   private sub: Subscription;
 
-  constructor( private employeeService: EmployeeService ) {}
+  constructor( private employeeService: UserService ) {}
 
   ngOnInit(): void {
     this.sub = this.employeeService.employeeSubject.subscribe( user => {

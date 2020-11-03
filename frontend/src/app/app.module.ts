@@ -4,17 +4,17 @@ import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-import { HeaderComponent } from "./pages/header/header.component";
+import { HeaderComponent } from "./components/header/header.component";
 import { AppRoutingModule } from "./app-routing/app-routing.module";
-import { HomeComponent } from "./pages/home/home.component";
-import { TimeSheetComponent } from "./pages/time-sheet/time-sheet.component";
-import { AnnualLeaveComponent } from "./pages/annual-leave/annual-leave.component";
-import { AdminComponent } from "./pages/admin/admin.component";
-import { TimeReqComponent } from "./pages/admin/time-req/time-req.component";
-import { LeaveReqComponent } from "./pages/admin/leave-req/leave-req.component";
-import { AdminReqComponent } from "./pages/admin/admin-req/admin-req.component";
-import { DatabaseComponent } from "./pages/database/database.component";
-import { LoginComponent } from "./pages/login/login.component";
+import { HomeComponent } from "./components/home/home.component";
+import { TimeSheetComponent } from "./components/time-sheet/time-sheet.component";
+import { AnnualLeaveComponent } from "./components/annual-leave/annual-leave.component";
+import { AdminComponent } from "./components/admin/admin.component";
+import { TimeReqComponent } from "./components/admin/time-req/time-req.component";
+import { LeaveReqComponent } from "./components/admin/leave-req/leave-req.component";
+import { AdminReqComponent } from "./components/admin/admin-req/admin-req.component";
+import { DatabaseComponent } from "./components/database/database.component";
+import { LoginComponent } from "./components/login/login.component";
 import { LoadingSpinnerComponent } from "./shared/loading-spinner/loading-spinner.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
@@ -45,10 +45,10 @@ import {
 } from "@angular/material";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
-import { SignUpComponent } from "./pages/sign-up/sign-up.component";
+import { SignUpComponent } from "./components/sign-up/sign-up.component";
 import { ChartsModule } from "ng2-charts";
-import { EmployeeCardComponent } from "./pages/admin/employee-card/employee-card.component";
-import { EmployeeDetailComponent } from "./pages/admin/employee-card/employee-detail/employee-detail.component";
+import { EmployeeCardComponent } from "./components/admin/employee-card/employee-card.component";
+import { EmployeeDetailComponent } from "./components/admin/employee-card/employee-detail/employee-detail.component";
 import { FusionChartsModule } from "angular-fusioncharts";
 // Import FusionCharts library and chart modules
 import * as FusionCharts from "fusioncharts";
@@ -56,8 +56,8 @@ import * as charts from "fusioncharts/fusioncharts.charts";
 import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 // Load Widgets
 import * as Widgets from "fusioncharts/fusioncharts.widgets";
-import { NewsComponent } from "./pages/home/news/news.component";
-import { VisionComponent } from "./pages/home/vision/vision.component";
+import { NewsComponent } from "./components/home/news/news.component";
+import { VisionComponent } from "./components/home/vision/vision.component";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { environment } from "../environments/environment.prod";
 
