@@ -1,0 +1,82 @@
+<!--<div *ngIf = "leaves" [@load]>-->
+<!--  <div>-->
+<!--    <h1 class = "text-center">Leave Requests</h1>-->
+<!--    <br>-->
+<!--    <mat-table [dataSource] = "dataSource" class = "mat-elevation-z8">-->
+
+<!--      &lt;!&ndash;    Select Column &ndash;&gt;-->
+<!--      <ng-container matColumnDef = "select">-->
+<!--        <mat-header-cell *matHeaderCellDef>Select</mat-header-cell>-->
+<!--        <mat-cell *matCellDef = "let element">-->
+<!--          <mat-radio-group [(ngModel)] = "selectedReq">-->
+<!--            <mat-radio-button [value] = "element"-->
+<!--                              color = "warn"></mat-radio-button>-->
+<!--          </mat-radio-group>-->
+<!--        </mat-cell>-->
+<!--      </ng-container>-->
+
+<!--      <ng-container matColumnDef = "empName">-->
+<!--        <mat-header-cell *matHeaderCellDef mat-header-cell>Employee Name-->
+<!--        </mat-header-cell>-->
+<!--        <mat-cell *matCellDef = "let element" mat-cell>-->
+<!--          {{element.empName}}</mat-cell>-->
+<!--      </ng-container>-->
+
+<!--      <ng-container matColumnDef = "startDate">-->
+<!--        <mat-header-cell *matHeaderCellDef mat-header-cell>Start Date-->
+<!--        </mat-header-cell>-->
+<!--        <mat-cell *matCellDef = "let element" mat-cell>-->
+<!--          {{element.startDate}}</mat-cell>-->
+<!--      </ng-container>-->
+
+<!--      <ng-container matColumnDef = "endDate">-->
+<!--        <mat-header-cell *matHeaderCellDef mat-header-cell>End Date-->
+<!--        </mat-header-cell>-->
+<!--        <mat-cell *matCellDef = "let element" mat-cell>-->
+<!--          {{element.endDate}}</mat-cell>-->
+<!--      </ng-container>-->
+
+<!--      <ng-container matColumnDef = "reason">-->
+<!--        <mat-header-cell *matHeaderCellDef mat-header-cell>Reason-->
+<!--        </mat-header-cell>-->
+<!--        <mat-cell *matCellDef = "let element" mat-cell>-->
+<!--          {{element.reason}}</mat-cell>-->
+<!--      </ng-container>-->
+
+<!--      <ng-container matColumnDef = "status">-->
+<!--        <mat-header-cell *matHeaderCellDef mat-header-cell>Status-->
+<!--        </mat-header-cell>-->
+<!--        <mat-cell *matCellDef = "let element"-->
+<!--                  [matBadge] = "element.status === 'Pending' ? '^':''" mat-cell-->
+<!--                  matBadgeColor = "warn">-->
+<!--          {{element.status}}</mat-cell>-->
+<!--      </ng-container>-->
+
+<!--      <mat-header-row *matHeaderRowDef = "displayedColumns" mat-header-row>-->
+<!--      </mat-header-row>-->
+<!--      <mat-row *matRowDef = "let row; columns: displayedColumns;" mat-row>-->
+<!--      </mat-row>-->
+<!--    </mat-table>-->
+
+<!--    <mat-paginator (page) = "updateTable($event)" [length] = "leaves.length"-->
+<!--                   [pageSizeOptions] = "[5, 50, 250, 1000]" [pageSize] = "5"-->
+<!--                   color = "primary"-->
+<!--                   showFirstLastButtons></mat-paginator>-->
+
+<!--    <br>-->
+<!--    <br>-->
+<!--    <div class = "text-center">-->
+<!--      <button (click) = "changeStatus(true)" [disabled] = "!selectedReq"-->
+<!--              [textContent] = "'Approve'"-->
+<!--              color = "primary" mat-raised-button></button>-->
+<!--      &nbsp;&nbsp;-->
+<!--      <button (click) = "changeStatus(false)" [disabled] = "!selectedReq"-->
+<!--              [textContent] = "'Decline'"-->
+<!--              color = "accent" mat-raised-button></button>-->
+<!--      &lt;!&ndash;      &nbsp;&nbsp;&ndash;&gt;-->
+<!--      &lt;!&ndash;      <button (click) = "removeReq()" [disabled] = "!selectedReq"&ndash;&gt;-->
+<!--      &lt;!&ndash;              [textContent] = "'Remove'"&ndash;&gt;-->
+<!--      &lt;!&ndash;              color = "warn" mat-raised-button></button>&ndash;&gt;-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

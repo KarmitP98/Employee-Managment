@@ -24,10 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor( private employeeService: UserService ) {}
 
   ngOnInit(): void {
-    this.sub = this.employeeService.employeeSubject.subscribe( user => {
-      this.isAuth = !!user;
-    } );
-  }
+    }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();

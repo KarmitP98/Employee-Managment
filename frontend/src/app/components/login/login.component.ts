@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { COMPANY_NAME, loadTrigger } from "../../shared/animations";
+import { loadTrigger } from "../../shared/animations";
 import { UserService } from "../../services/user.service";
+import { COMPANY_NAME } from "../../shared/constants";
 
 @Component( {
               selector: "app-login",
@@ -19,17 +20,16 @@ export class LoginComponent implements OnInit, OnDestroy {
   email: string;
   password: string;
 
-  constructor( private employeeService: UserService, private router: Router, private snackBar: MatSnackBar ) { }
+  constructor( private userService: UserService, private router: Router, private snackBar: MatSnackBar ) { }
 
   ngOnInit() {
-
   }
 
   ngOnDestroy(): void {
   }
 
   onSubmit(): void {
-    this.employeeService.login( this.email, this.password );
+    this.userService.loginWithEmailandPassword( this.email, this.password );
   }
 
 

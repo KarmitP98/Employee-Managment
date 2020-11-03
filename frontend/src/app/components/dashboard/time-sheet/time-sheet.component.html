@@ -1,0 +1,118 @@
+<!--<div [@load] class = "row">-->
+<!--  <div class = "col-xs-12 col-md-6 col-lg-offset-3">-->
+<!--    <hr>-->
+<!--    <div class = "text-center">-->
+<!--      <h3>Submit a time sheet</h3>-->
+<!--      <br>-->
+<!--    </div>-->
+<!--    <form #timeForm = "ngForm" (ngSubmit) = "onSubmit()" class = "text-center">-->
+<!--      <mat-form-field appearance = "outline" class = "half">-->
+<!--        <mat-label>Log Date</mat-label>-->
+<!--        <input [(ngModel)] = "today" [matDatepicker] = "Date" matInput-->
+<!--               [matDatepickerFilter] = "myFilter" [max] = "today" name = "date"-->
+<!--               required>-->
+<!--        <mat-datepicker-toggle [for] = "Date" matSuffix></mat-datepicker-toggle>-->
+<!--        <mat-datepicker #Date></mat-datepicker>-->
+<!--      </mat-form-field>-->
+<!--      <br>-->
+<!--      <mat-form-field appearance = "outline" class = "half">-->
+<!--        <mat-label>Work</mat-label>-->
+<!--        <input [(ngModel)] = "work" [matAutocomplete] = "auto"-->
+<!--               [value] = "'Default Work'" matInput name = "work" type = "text"-->
+<!--               placeholder = "Ex. Excel Worksheet, Mailing, etc." required-->
+<!--        >-->
+<!--        <mat-autocomplete #auto = "matAutocomplete">-->
+<!--          <mat-option *ngFor = "let option of options" [value] = "option">-->
+<!--            {{ option }}-->
+<!--          </mat-option>-->
+<!--        </mat-autocomplete>-->
+<!--      </mat-form-field>-->
+<!--      <br>-->
+<!--      <mat-form-field appearance = "outline" class = "half">-->
+<!--        <mat-label>Start Time</mat-label>-->
+<!--        <input [(ngModel)] = "stTime" matInput name = "startTime"-->
+<!--               required type = "time">-->
+<!--      </mat-form-field>-->
+<!--      <br>-->
+<!--      <mat-form-field appearance = "outline" class = "half">-->
+<!--        <mat-label>Hours Logged</mat-label>-->
+<!--        <input [(ngModel)] = "hours" matInput name = "hoursLogged"-->
+<!--               placeholder = "1" required step = "0.5" type = "number">-->
+<!--      </mat-form-field>-->
+<!--      <br>-->
+<!--      <mat-action-row>-->
+<!--        <button [disabled] = "!timeForm.valid" class = "half" color = "accent"-->
+<!--                mat-raised-button type = "submit">Log Work!-->
+<!--        </button>-->
+<!--      </mat-action-row>-->
+<!--    </form>-->
+<!--    <hr>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<br>-->
+<!--<hr>-->
+<!--<div *ngIf = "timeSheets" [@load]>-->
+
+<!--  <mat-table [dataSource] = "dataSource" class = "mat-elevation-z8">-->
+<!--    &lt;!&ndash; User Id Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef = "userId">-->
+<!--      <mat-header-cell *matHeaderCellDef> Employee Id.-->
+<!--      </mat-header-cell>-->
+<!--      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.empId}} </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Date Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef = "logDate">-->
+<!--      <mat-header-cell *matHeaderCellDef> Log Date-->
+<!--      </mat-header-cell>-->
+<!--      <mat-cell-->
+<!--        *matCellDef = "let timeSheet"> {{timeSheet.logDate}} </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Work Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef = "work">-->
+<!--      <mat-header-cell *matHeaderCellDef> Work-->
+<!--      </mat-header-cell>-->
+<!--      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.work}} </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Start Time Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef = "startTime">-->
+<!--      <mat-header-cell *matHeaderCellDef> Start Time-->
+<!--      </mat-header-cell>-->
+<!--      <mat-cell-->
+<!--        *matCellDef = "let timeSheet"> {{timeSheet.startTime}}-->
+<!--      </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; End Time Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef = "hours">-->
+<!--      <mat-header-cell *matHeaderCellDef> Hours Logged-->
+<!--      </mat-header-cell>-->
+<!--      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.hours}} </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Status Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef = "status">-->
+<!--      <mat-header-cell *matHeaderCellDef> Status-->
+<!--      </mat-header-cell>-->
+<!--      <mat-cell *matCellDef = "let timeSheet"> {{timeSheet.status}} </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Time Sheet Id Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef = "sheetId">-->
+<!--      <mat-header-cell *matHeaderCellDef> Time Sheet Id.-->
+<!--      </mat-header-cell>-->
+<!--      <mat-cell-->
+<!--        *matCellDef = "let timeSheet"> {{timeSheet.sheetId}} </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    <mat-header-row *matHeaderRowDef = "displayedColumns"></mat-header-row>-->
+<!--    <mat-row *matRowDef = "let row; columns: displayedColumns;"></mat-row>-->
+<!--  </mat-table>-->
+
+<!--  <mat-paginator (page) = "updateTable($event)" [length] = "timeSheets.length"-->
+<!--                 [pageSizeOptions] = "[5, 10, 50]" [pageSize] = "5"-->
+<!--                 color = "primary"-->
+<!--                 showFirstLastButtons></mat-paginator>-->
+<!--</div>-->

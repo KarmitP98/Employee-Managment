@@ -31,7 +31,6 @@ export class UserService {
         } )
         .catch( ( err ) => {
           this.showToast( err.message, 3000 );
-          this.loadingSubject.next( false );
         } );
 
   }

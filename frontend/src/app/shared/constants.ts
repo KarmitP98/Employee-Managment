@@ -1,4 +1,4 @@
-export const COMPANY_NAME = "Regency Agency";
+export const COMPANY_NAME = "SEMS";
 
 export const MONTHS = [ "January",
                         "February",

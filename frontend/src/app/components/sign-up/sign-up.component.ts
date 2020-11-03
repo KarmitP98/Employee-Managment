@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { COMPANY_NAME, loadTrigger, MONTHS, STARTYEAR } from "../../shared/animations";
-import { Employee } from "../../model/employee.model";
 import { NgForm } from "@angular/forms";
 import { UserService } from "../../services/user.service";
+import { loadTrigger } from "../../shared/animations";
+import { COMPANY_NAME } from "../../shared/constants";
 
 @Component( {
               selector: "app-sign-up",
@@ -27,30 +27,12 @@ export class SignUpComponent implements OnInit {
   DOB: Date;
   adminAccount: boolean;
 
-  constructor( private employeeService: UserService ) { }
+  constructor( private userService: UserService ) { }
 
   ngOnInit() {
   }
 
   onSignUp(): void {
-    const date = this.signUpForm.value.DOB;
-    let hpw: number[][] = [];
-    let weeks = Array.from( Array( 52 ).keys() );
-    hpw[new Date().getFullYear() - STARTYEAR] = [];
-    for ( let i of weeks ) {
-      hpw[new Date().getFullYear() - STARTYEAR][i] = 0;
-    }
 
-    // let map = new Map<number, { weeks: Map<number, number> }>();
-    // let weekMap = new Map<number, number>();
-    // weekMap.set( getWeekNumber( new Date() ), 0 );
-    // map.set( new Date().getFullYear() - STARTYEAR, { weeks: weekMap } );
-    //  console.log(map);
-    const newEmp = new Employee( "temp", this.title, this.firstName + " " + (this.lastName === undefined ? "" : this.lastName), this.email,
-                                 MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(),
-                                 this.proPicUrl, false, "Pending", this.password, 0, hpw );
-    console.log( newEmp );
-    this.employeeService.signUp( this.email, this.password, newEmp );
-    this.signUpForm.resetForm();
   }
 }

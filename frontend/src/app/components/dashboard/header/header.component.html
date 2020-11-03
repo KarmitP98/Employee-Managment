@@ -1,0 +1,32 @@
+<mat-toolbar color = "primary">
+  <mat-card-title style = "margin-right: 25px;">
+    {{companyName}}
+  </mat-card-title>
+  <button mat-raised-button
+          routerLink = "/home"
+          routerLinkActive = "selected">
+    Home
+  </button>
+  <button mat-raised-button
+          routerLink = "/time-sheet"
+          routerLinkActive = "selected">
+    Timesheet
+  </button>
+  <button mat-raised-button
+          routerLink = "/annual-leave" routerLinkActive = "selected">
+    Annual Leave
+  </button>
+
+  <button *ngIf = "data.isAdmin"
+          mat-raised-button
+          routerLink = "/admin"
+          routerLinkActive = "selected">
+    Admin
+  </button>
+  <button (click) = "logOut()"
+          class = "text-right"
+          mat-raised-button
+          routerLinkActive = "selected">
+    Logout
+  </button>
+</mat-toolbar>

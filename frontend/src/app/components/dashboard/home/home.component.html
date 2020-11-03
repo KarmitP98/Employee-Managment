@@ -27,42 +27,42 @@
       font-weight:bold; height:10%;">
       Updates
     </mat-grid-tile-header>
-    <div *ngIf = "(empReq + timeReq + leaveReq) > 0 && isAdmin" style = "width:
-     100%; height: 75%; overflow-y: auto;">
-      <p *ngFor = "let r of stringRequests" [routerLink] = "['/admin']"
-         style = "cursor:pointer; width: 100%; text-align:
-         center; border: black 1px solid; border-radius: 5px; background:
-         rebeccapurple; color: white; font-weight: bold;"
-         [@slide]>
-        {{r + "\n"}}
-      </p>
-    </div>
-    <div *ngIf = "(empReq + timeReq + leaveReq) === 0 || !isAdmin">
-      <mat-card class = "mat-elevation-z0">You have no updates at this time!
-      </mat-card>
-    </div>
-    <mat-grid-tile-footer
-      *ngIf = "isAdmin && (empReq + timeReq + leaveReq) > 0"
-      style = "background: rgb(255,215,64); color: rgb(0,0,0);
-                          font-weight: bold; height: 14%;">
-      <button [routerLink] = "['/admin']" mat-button
-              style = "width: 100%; text-align: right; color: rgb(0,0,0); font-weight: bold;">
-        Check Updates ->
-      </button>
-    </mat-grid-tile-footer>
-  </mat-grid-tile>
+    <!--    <div *ngIf = "(empReq + timeReq + leaveReq) > 0 && isAdmin" style = "width:-->
+    <!--     100%; height: 75%; overflow-y: auto;">-->
+    <!--      <p *ngFor = "let r of stringRequests" [routerLink] = "['/admin']"-->
+    <!--         style = "cursor:pointer; width: 100%; text-align:-->
+    <!--         center; border: black 1px solid; border-radius: 5px; background:-->
+    <!--         rebeccapurple; color: white; font-weight: bold;"-->
+    <!--         [@slide]>-->
+    <!--        {{r + "\n"}}-->
+    <!--      </p>-->
+    <!--    </div>-->
+    <!--    <div *ngIf = "(empReq + timeReq + leaveReq) === 0 || !isAdmin">-->
+    <!--      <mat-card class = "mat-elevation-z0">You have no updates at this time!-->
+    <!--      </mat-card>-->
+    <!--    </div>-->
+    <!--    <mat-grid-tile-footer-->
+    <!--      *ngIf = "isAdmin && (empReq + timeReq + leaveReq) > 0"-->
+    <!--      style = "background: rgb(255,215,64); color: rgb(0,0,0);-->
+    <!--                          font-weight: bold; height: 14%;">-->
+    <!--      <button [routerLink] = "['/admin']" mat-button-->
+    <!--              style = "width: 100%; text-align: right; color: rgb(0,0,0); font-weight: bold;">-->
+    <!--        Check Updates ->-->
+    <!--      </button>-->
+    <!--    </mat-grid-tile-footer>-->
+    <!--  </mat-grid-tile>-->
 
-  <mat-grid-tile class = "mat-elevation-z8 tile" colspan = "1" rowspan = "2">
-    <mat-grid-tile-header
-      style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight:
-      bold; height:5%;">
-      Profile
-    </mat-grid-tile-header>
-    <app-employee-card *ngIf = "employee" [controls] = "false"
-                       [emp] = "employee"
-                       [shadow] = "false" style = "width: 100%;
-                         height: 95%; margin-top: 10%;">
-    </app-employee-card>
+    <!--  <mat-grid-tile class = "mat-elevation-z8 tile" colspan = "1" rowspan = "2">-->
+    <!--    <mat-grid-tile-header-->
+    <!--      style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight:-->
+    <!--      bold; height:5%;">-->
+    <!--      Profile-->
+    <!--    </mat-grid-tile-header>-->
+    <!--    <app-employee-card *ngIf = "employee" [controls] = "false"-->
+    <!--                       [emp] = "employee"-->
+    <!--                       [shadow] = "false" style = "width: 100%;-->
+    <!--                         height: 95%; margin-top: 10%;">-->
+    <!--    </app-employee-card>-->
     <mat-grid-tile-footer
       style = "background: rgb(255,215,64); color: rgb(0,0,0); font-weight: bold;
       height:7%;">
