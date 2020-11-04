@@ -5,6 +5,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { loadTrigger } from "../../shared/animations";
 import { UserService } from "../../services/user.service";
 import { COMPANY_NAME } from "../../shared/constants";
+import { LogoService } from "../../services/logo.service";
 
 @Component( {
               selector: "app-login",
@@ -20,7 +21,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   email: string;
   password: string;
 
-  constructor( private userService: UserService, private router: Router, private snackBar: MatSnackBar ) { }
+  constructor( private userService: UserService,
+               private router: Router,
+               private snackBar: MatSnackBar,
+               public logoService: LogoService ) {
+
+  }
 
   ngOnInit() {
   }
@@ -39,4 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     } );
   }
 
+  loginWith( provider: string ): void {
+    this.userService.loginWithProvider( provider );
+  }
 }

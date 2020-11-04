@@ -1,6 +1,9 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { UserService } from "../../../services/user.service";
 import { COMPANY_NAME } from "../../../shared/constants";
+import { UserModel } from "../../../model/models.model";
+import { ActivatedRoute } from "@angular/router";
+import { untilDestroyed } from "@ngneat/until-destroy";
 
 @Component( {
               selector: "app-header",
@@ -9,12 +12,24 @@ import { COMPANY_NAME } from "../../../shared/constants";
             } )
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  @Input( "data" ) data: { isAdmin: boolean };
   companyName = COMPANY_NAME;
+  user: UserModel;
 
-  constructor( private userService: UserService ) { }
+  constructor( private userService: UserService,
+               private route: ActivatedRoute ) {
+
+  }
 
   ngOnInit() {
+    const uId = this.route.snapshot.params["uId"];
+    this.userService.fetchUser( "uId", "==", uId )
+        .valueChanges( untilDestroyed( this ) )
+        .pipe()
+        .subscribe( value => {
+          if ( value?.length > 0 ) {
+            this.user = value[0];
+          }
+        } );
   }
 
   ngOnDestroy(): void {

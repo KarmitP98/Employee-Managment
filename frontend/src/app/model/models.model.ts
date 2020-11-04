@@ -8,7 +8,7 @@ export class UserModel {
   uEmail: string;
   uDOB: Timestamp;
   uProPic: string;
-  uClass: string;
+  uLevel: number;
   requests: RequestModel[];
   workLogIds: WorkLogModel[];
   leaves: LeaveModel[];

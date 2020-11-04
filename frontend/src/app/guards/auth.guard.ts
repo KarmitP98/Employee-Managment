@@ -16,9 +16,16 @@ export class AuthGuard implements CanActivate, CanDeactivate<any> {
                state: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     return new Promise( resolve => {
-      this.afa.currentUser
-          .then( () => resolve( true ) )
-          .catch( () => resolve( this.router.navigateByUrl( "/login" ) ) );
+      var sub = this.afa.authState
+                    .subscribe( ( value ) => {
+                      if ( value ) {
+                        sub.unsubscribe();
+                        resolve( true );
+                      } else {
+                        sub.unsubscribe();
+                        resolve( this.router.navigate( [ "/login" ] ) );
+                      }
+                    } );
     } );
 
   }
@@ -26,10 +33,19 @@ export class AuthGuard implements CanActivate, CanDeactivate<any> {
   canDeactivate( component: any, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     return new Promise( resolve => {
-      this.afa.currentUser
-          .then( () => resolve( false ) )
-          .catch( () => true );
+      var sub = this.afa.authState
+                    .subscribe( ( value ) => {
+                      if ( value ) {
+                        sub.unsubscribe();
+                        resolve( this.router.navigate( [ "/", value.uid ] ) );
+                      } else {
+                        sub.unsubscribe();
+                        resolve( true );
+                      }
+
+                    } );
     } );
+
   }
 
 }

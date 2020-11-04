@@ -39,7 +39,7 @@ export class SignUpComponent implements OnInit {
     this.userService.signUpWithEmail( {
                                         uId: "temp",
                                         uDOB: this.DOB,
-                                        uClass: this.adminAccount ? "Level 2" : "Level 1",
+                                        uLevel: this.adminAccount ? 2 : 1,
                                         uAbv: this.abv,
                                         uProPic: this.proPicUrl,
                                         uName: this.uName,

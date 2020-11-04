@@ -66,7 +66,7 @@ export class UserService {
                 uEmail: value.user.email,
                 uProPic: value.user.photoURL,
                 uAbv: "-",
-                uClass: "Member",
+                uLevel: 1,
                 uDOB: Timestamp.now(),
                 leaves: [],
                 requests: [],
@@ -87,12 +87,16 @@ export class UserService {
   }
 
   public signUpWithEmail( user: UserModel, password: string ) {
+
     this.loadingSubject.next( true );
 
     this.afa.createUserWithEmailAndPassword( user.uEmail, password )
         .then( ( value ) => {
           user.uId = value.user.uid;
           this.addNewUser( user );
+
+          this.router.navigate( [ "/" + value.user.uid ] );
+          this.loadingSubject.next( false );
         } )
         .catch( ( err ) => {
           this.showToast( err.message, 3000 );
@@ -127,6 +131,13 @@ export class UserService {
     this.afs.collection( "users" )
         .doc( user.uId )
         .set( user );
+  }
+
+  public fetchUser( child?, condition?, value? ) {
+    if ( child ) {
+      return this.afs.collection<UserModel>( "users", ref => ref.where( child, condition, value ) );
+    }
+    return this.afs.collection<UserModel>( "users" );
   }
 
   public updateUser( newUser: UserModel ): void {

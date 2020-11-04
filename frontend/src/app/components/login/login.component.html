@@ -1,10 +1,10 @@
 <div [@load]
-     class = "text-xl-center"
-     style = "margin-top: 20vh;">
+     class = "text-xl-center">
 
   <img alt = "Company Image"
        class = "company_logo"
-       src = "assets/background_square.jpg">
+       src = "assets/background_square.jpg"
+       style = "margin-top: 20vh;">
   <br>
 
   <h1>Welcome to {{ companyName }}</h1>
@@ -13,7 +13,8 @@
 
   <form #f = "ngForm" (ngSubmit) = "onSubmit()">
 
-    <mat-form-field appearance = "standard">
+    <mat-form-field appearance = "standard"
+                    style = "width: 20vw;">
       <mat-label>Email</mat-label>
       <input [(ngModel)] = "email"
              email
@@ -26,7 +27,8 @@
 
     <br>
 
-    <mat-form-field appearance = "standard">
+    <mat-form-field appearance = "standard"
+                    style = "width: 20vw;">
       <mat-label>Password</mat-label>
       <input [(ngModel)] = "password" matInput
              minlength = "6"
@@ -43,6 +45,7 @@
     <button [disabled] = "!f.valid"
             color = "accent"
             mat-raised-button
+            style = "width: 9vw;"
             type = "submit">
       Login
     </button>
@@ -50,10 +53,27 @@
     <button color = "warn"
             mat-raised-button
             routerLink = "/signUp"
+            style = "width: 9vw;"
             type = "button">
       Sign Up
     </button>
 
   </form>
+
+  <br>
+  <b>Or</b>
+  <br>
+  <br>
+  <button (click) = "loginWith('google')" color = "warn" mat-fab>
+    <mat-icon svgIcon = "logo-google"></mat-icon>
+  </button> &nbsp;
+  <button (click) = "loginWith('facebook')" color = "primary" disabled
+          mat-fab>
+    <mat-icon svgIcon = "logo-facebook"></mat-icon>
+  </button> &nbsp;
+  <button (click) = "loginWith('github')" color = "light" disabled
+          mat-fab>
+    <mat-icon svgIcon = "logo-github"></mat-icon>
+  </button>
 
 </div>

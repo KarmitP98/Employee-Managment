@@ -15,10 +15,19 @@ export class LoginGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return new Promise( resolve => {
-      this.afa.currentUser
-          .then( ( user ) => resolve( this.router.navigateByUrl( "/" + user.uid ) ) )
-          .catch( () => resolve( true ) );
+      var sub = this.afa.authState
+                    .subscribe( ( value ) => {
+                      if ( value ) {
+                        sub.unsubscribe();
+                        resolve( this.router.navigate( [ "/", value.uid ] ) );
+                      } else {
+                        sub.unsubscribe();
+                        resolve( true );
+                      }
+
+                    } );
     } );
+
 
   }
 }

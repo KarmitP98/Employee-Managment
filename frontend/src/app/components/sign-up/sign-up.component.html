@@ -1,9 +1,10 @@
 <div [@load]
-     class = "text-center" style = "margin-top: 10vh;">
+     class = "text-center">
 
   <img alt = "Company Name"
        class = "company_logo"
-       src = "assets/background_square.jpg">
+       src = "assets/background_square.jpg"
+       style = "margin-top: 10vh;">
 
   <h1>Welcome to {{ companyName }}</h1>
 
@@ -18,7 +19,8 @@
     <br>
     <br>
 
-    <mat-form-field appearance = "standard">
+    <mat-form-field appearance = "standard"
+                    style = "width: 4vw;">
       <mat-label>Title</mat-label>
       <mat-select [(ngModel)] = "abv" name = "abv" required>
         <mat-option value = "Mr.">Mr.</mat-option>
@@ -26,13 +28,12 @@
         <mat-option value = "Miss">Miss</mat-option>
       </mat-select>
     </mat-form-field>
-
-    <br>
-
-    <mat-form-field appearance = "standard">
+    &nbsp;
+    <mat-form-field appearance = "standard"
+                    style = "width: 15vw;">
       <mat-label>First Name</mat-label>
       <input [(ngModel)] = "uName"
-             [placeholder] = "'User Name'"
+             placeholder = "User Name"
              matInput
              name = "uName"
              required
@@ -41,7 +42,8 @@
 
     <br>
 
-    <mat-form-field appearance = "standard">
+    <mat-form-field appearance = "standard"
+                    style = "width: 20vw;">
       <mat-label>Date of Birth</mat-label>
       <input [(ngModel)] = "DOB" [matDatepicker] = "picker" matInput
              name = "DOB" required>
@@ -52,19 +54,21 @@
 
     <br>
 
-    <mat-form-field appearance = "standard" class = "mat-form-field">
+    <mat-form-field appearance = "standard"
+                    style = "width: 20vw;">
       <mat-label>Email</mat-label>
       <input [(ngModel)] = "email" email matInput name = "email"
-             placeholder = "Email" required type = "email">
+             placeholder = "abc@def.com" required type = "email">
     </mat-form-field>
 
-    &nbsp;
+    <br>
 
-    <mat-form-field appearance = "standard" class = "mat-form-field">
+    <mat-form-field appearance = "standard"
+                    style = "width: 20vw;">
       <mat-label>Password</mat-label>
       <input [(ngModel)] = "password" autocomplete matInput
              minlength = "6" name = "password"
-             password placeholder = "Password" required type = "password">
+             password placeholder = "******" required type = "password">
     </mat-form-field>
 
     <br>
@@ -79,11 +83,16 @@
       <button [disabled] = "!signUpForm.valid"
               color = "accent"
               mat-raised-button
+              style = "width: 9vw;"
               type = "submit">
         Sign Up
-      </button> &nbsp;
-      <button color = "warn" mat-raised-button
-              routerLink = "/login" type = "button">
+      </button>
+      &nbsp;
+      <button color = "warn"
+              mat-raised-button
+              routerLink = "/login"
+              style = "width: 9vw;"
+              type = "button">
         Back
       </button>
     </div>

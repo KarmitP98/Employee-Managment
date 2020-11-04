@@ -54,6 +54,8 @@ import { LeaveReqComponent } from "./components/dashboard/admin/leave-req/leave-
 import { TimeReqComponent } from "./components/dashboard/admin/time-req/time-req.component";
 import { AnnualLeaveComponent } from "./components/dashboard/annual-leave/annual-leave.component";
 import { TimeSheetComponent } from "./components/dashboard/time-sheet/time-sheet.component";
+import { MatMenuModule } from "@angular/material/menu";
+import { IonicModule } from "@ionic/angular";
 
 // Pass the fusioncharts library and chart modules
 FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme, Widgets );
@@ -116,7 +118,9 @@ FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme, Widgets );
                MatGridListModule,
                MatBadgeModule,
                MatToolbarModule,
-               MatCardModule
+               MatCardModule,
+               MatMenuModule,
+               IonicModule.forRoot()
              ],
              providers: [],
              bootstrap: [ AppComponent ],
