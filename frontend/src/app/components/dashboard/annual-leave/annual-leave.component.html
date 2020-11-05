@@ -1,9 +1,11 @@
 <div class = "text-center wrapper">
   <h3>Leave Application</h3><br>
 
-  <form #leaveForm = "ngForm" (ngSubmit) = "onSubmit()" class = "text-center">
+  <form #leaveForm = "ngForm"
+        (ngSubmit) = "onSubmit()"
+        class = "text-center">
 
-    <mat-form-field appearance = "outline" class = "half">
+    <mat-form-field appearance = "outline" class = "w-25">
       <mat-label>Start Date</mat-label>
       <input [(ngModel)] = "minDate" [matDatepickerFilter] = "myFilter"
              [matDatepicker] = "startDate" [min] = "minDate" matInput
@@ -15,7 +17,7 @@
 
     <br>
 
-    <mat-form-field appearance = "outline" class = "half">
+    <mat-form-field appearance = "outline" class = "w-25">
       <mat-label>End Date</mat-label>
       <input [(ngModel)] = "minDate" [matDatepickerFilter] = "myFilter"
              [matDatepicker] = "endDate" [min] = "minDate" matInput
@@ -27,7 +29,7 @@
 
     <br>
 
-    <mat-form-field appearance = "outline" class = "half">
+    <mat-form-field appearance = "outline" class = "w-25">
       <mat-label>Reason</mat-label>
       <mat-select name = "reason" ngModel = "Sick Leave" required>
         <mat-option value = "Sick Leave">Sick Leave</mat-option>
@@ -39,8 +41,18 @@
     <br>
 
     <mat-action-row>
-      <button [disabled] = "!leaveForm.valid" class = "half" color = "accent"
-              mat-raised-button type = "submit">Apply for Leave!
+      <button [disabled] = "!leaveForm.valid"
+              class = "w-25"
+              color = "accent"
+              mat-raised-button
+              type = "submit">Apply for Leave!
+      </button>
+      <button (click) = "resetForm()"
+              class = "w-25"
+              color = "warn"
+              mat-raised-button
+              type = "reset">
+        Reset
       </button>
     </mat-action-row>
 

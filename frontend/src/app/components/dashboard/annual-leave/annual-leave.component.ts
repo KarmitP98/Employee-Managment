@@ -2,8 +2,6 @@ import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Subscription } from "rxjs";
 import { NgForm } from "@angular/forms";
 import { loadTrigger } from "../../../shared/animations";
-import { UserService } from "../../../services/user.service";
-import { LeaveService } from "../../../services/leave.service";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { LeaveModel, UserModel } from "../../../model/models.model";
@@ -16,7 +14,6 @@ import { LeaveModel, UserModel } from "../../../model/models.model";
             } )
 export class AnnualLeaveComponent implements OnInit, OnDestroy {
 
-  leaveSub: Subscription;
   empSub: Subscription;
   leaves: LeaveModel[] = [];
   empId: string;
@@ -36,7 +33,7 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
     return day !== 0 && day !== 6;
   };
 
-  constructor( private leaveService: LeaveService, private employeeService: UserService ) { }
+  constructor() { }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -56,5 +53,9 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
     this.pageSize = $event.pageSize;
     this.pageIndex = $event.pageIndex;
     this.loadValues();
+  }
+
+  resetForm(): void {
+    this.leaveForm.resetForm();
   }
 }

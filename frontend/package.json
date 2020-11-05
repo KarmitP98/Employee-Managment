@@ -1,9 +1,9 @@
 {
-  "name": "frontend",
-  "version": "4.0.0",
+  "name": "project_management",
+  "version": "4.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -o",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
