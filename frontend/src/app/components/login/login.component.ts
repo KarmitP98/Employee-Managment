@@ -48,4 +48,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginWith( provider: string ): void {
     this.userService.loginWithProvider( provider );
   }
+
+  resolved( $event: string ): void {
+    console.log( $event );
+  }
 }

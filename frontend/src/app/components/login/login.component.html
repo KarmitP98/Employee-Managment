@@ -39,18 +39,19 @@
              type = "password">
     </mat-form-field>
 
+
     <br>
     <br>
 
     <button [disabled] = "!f.valid"
-            color = "accent"
+            color = "primary"
             mat-raised-button
             style = "width: 9vw;"
             type = "submit">
       Login
     </button>
     &nbsp;
-    <button color = "warn"
+    <button color = "accent"
             mat-raised-button
             routerLink = "/signUp"
             style = "width: 9vw;"
@@ -75,5 +76,4 @@
           mat-fab>
     <mat-icon svgIcon = "logo-github"></mat-icon>
   </button>
-
 </div>
