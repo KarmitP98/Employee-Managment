@@ -5,54 +5,66 @@
         (ngSubmit) = "onSubmit()"
         class = "text-center">
 
-    <mat-form-field appearance = "outline" class = "w-25">
-      <mat-label>Start Date</mat-label>
-      <input [(ngModel)] = "minDate" [matDatepickerFilter] = "myFilter"
-             [matDatepicker] = "startDate" [min] = "minDate" matInput
-             name = "startDate" required>
-      <mat-datepicker-toggle [for] = "startDate" matSuffix>
-      </mat-datepicker-toggle>
-      <mat-datepicker #startDate></mat-datepicker>
+    <mat-form-field appearance = "standard" class = "w-25">
+      <mat-label>Select the Date Range</mat-label>
+      <mat-date-range-input [rangePicker] = "picker">
+        <input [(ngModel)] = "stDate" matStartDate
+               name = "startDate"
+               placeholder = "Start date">
+        <input [(ngModel)] = "edDate" matEndDate
+               name = "endDate"
+               placeholder = "End date"
+               required>
+      </mat-date-range-input>
+      <mat-datepicker-toggle [for] = "picker" matSuffix></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+
     </mat-form-field>
 
     <br>
 
-    <mat-form-field appearance = "outline" class = "w-25">
-      <mat-label>End Date</mat-label>
-      <input [(ngModel)] = "minDate" [matDatepickerFilter] = "myFilter"
-             [matDatepicker] = "endDate" [min] = "minDate" matInput
-             name = "endDate" required>
-      <mat-datepicker-toggle [for] = "endDate"
-                             matSuffix></mat-datepicker-toggle>
-      <mat-datepicker #endDate></mat-datepicker>
-    </mat-form-field>
-
-    <br>
-
-    <mat-form-field appearance = "outline" class = "w-25">
+    <mat-form-field appearance = "standard" class = "w-25">
       <mat-label>Reason</mat-label>
-      <mat-select name = "reason" ngModel = "Sick Leave" required>
-        <mat-option value = "Sick Leave">Sick Leave</mat-option>
-        <mat-option value = "Religious Leave">Religious Leave</mat-option>
-        <mat-option value = "Vacation Leave">Vacation Leave</mat-option>
+      <mat-select [(ngModel)] = "leaveType" name = "reason" required>
+        <mat-option value = "Sick">Sick Leave</mat-option>
+        <mat-option value = "Religious">Religious Leave</mat-option>
+        <mat-option value = "Vacation">Vacation Leave</mat-option>
+        <mat-option value = "Other">Other Reason</mat-option>
       </mat-select>
     </mat-form-field>
 
     <br>
 
+    <mat-form-field class = "w-25">
+      <mat-label>Explanation</mat-label>
+      <textarea #message [(ngModel)] = "reason" matInput
+                maxlength = "500"
+                name = "reason"
+                placeholder =
+                  "Please provide a brief explanation for your leave explanation..."
+                required
+                rows = "4"></textarea>
+      <mat-hint align = "start"><strong>Don't disclose personal info</strong>
+      </mat-hint>
+      <mat-hint align = "end">{{message.value.length}} / 500</mat-hint>
+    </mat-form-field>
+    <br>
+    <br>
+
     <mat-action-row>
-      <button [disabled] = "!leaveForm.valid"
-              class = "w-25"
-              color = "accent"
-              mat-raised-button
-              type = "submit">Apply for Leave!
-      </button>
       <button (click) = "resetForm()"
-              class = "w-25"
+              style = "width: 10vw;"
               color = "warn"
               mat-raised-button
               type = "reset">
         Reset
+      </button>
+      &nbsp;
+      <button [disabled] = "!leaveForm.valid"
+              color = "accent"
+              mat-raised-button
+              style = "width: 10vw;"
+              type = "submit">Apply for Leave!
       </button>
     </mat-action-row>
 
@@ -64,41 +76,31 @@
   <div *ngIf = "leaves" [@load]>
 
     <mat-table [dataSource] = "dataSource" class = "mat-elevation-z8">
-      <!-- User Id Column -->
-      <ng-container matColumnDef = "empId">
-        <mat-header-cell *matHeaderCellDef> Employee Id.</mat-header-cell>
-        <mat-cell *matCellDef = "let leave"> {{leave.empId}} </mat-cell>
-      </ng-container>
-
       <!-- Start Date Column -->
       <ng-container matColumnDef = "startDate">
-        <mat-header-cell *matHeaderCellDef> Start Date</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Start Date</mat-header-cell>
         <mat-cell
-          *matCellDef = "let leave"> {{leave.startDate}} </mat-cell>
+          *matCellDef = "let leave"> {{leave.startDate.toDate() | date}}
+        </mat-cell>
       </ng-container>
 
       <!-- End Date Column -->
       <ng-container matColumnDef = "endDate">
         <mat-header-cell *matHeaderCellDef> End Date</mat-header-cell>
-        <mat-cell *matCellDef = "let leave"> {{leave.endDate}} </mat-cell>
+        <mat-cell *matCellDef = "let leave"> {{leave.endDate.toDate() | date}}
+        </mat-cell>
       </ng-container>
 
       <!-- Reason Column -->
       <ng-container matColumnDef = "reason">
-        <mat-header-cell *matHeaderCellDef> Reason</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Reason</mat-header-cell>
         <mat-cell *matCellDef = "let leave"> {{leave.reason}} </mat-cell>
       </ng-container>
 
       <!-- Status Column -->
-      <ng-container matColumnDef = "status">
-        <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
-        <mat-cell *matCellDef = "let leave"> {{leave.status}} </mat-cell>
-      </ng-container>
-
-      <!-- Leave Id Column -->
-      <ng-container matColumnDef = "leaveId">
-        <mat-header-cell *matHeaderCellDef> Leave Id.</mat-header-cell>
-        <mat-cell *matCellDef = "let leave"> {{leave.leaveId}} </mat-cell>
+      <ng-container matColumnDef = "type">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef = "let leave"> {{leave.type}} </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef = "displayedColumns"></mat-header-row>

@@ -27,7 +27,7 @@ const routes: Routes = [
       {
         path: "admin", component: AdminComponent, canActivate: [ AuthGuard ],
         children: [
-          { path: "", redirectTo: "time-req", pathMatch: "full" },
+          { path: "", redirectTo: "leave-req", pathMatch: "full" },
           { path: "time-req", component: TimeReqComponent },
           { path: "leave-req", component: LeaveReqComponent }
         ]

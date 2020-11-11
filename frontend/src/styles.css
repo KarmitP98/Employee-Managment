@@ -9,6 +9,16 @@
   border: 1px solid rgb(139, 0, 0);
 }
 
+.approved-acc {
+  color: black;
+  background: limegreen;
+}
+
+.declined-acc {
+  color: white;
+  background: orangered;
+}
+
 .error {
   background: rgba(255, 204, 204, 0.3);
   border: 5px solid rgb(139, 0, 0);
@@ -42,4 +52,14 @@ body {
   border-radius: 10px;
 }
 
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
 

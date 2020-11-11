@@ -37,8 +37,9 @@ export class TimesheetModel {
 export class LeaveModel {
   uId: string;
   lId: string;
-  startDate: string;
-  endDate: string;
+  startDate: Timestamp;
+  endDate: Timestamp;
+  type: string;
   reason: string;
   status: string;
   approved: boolean;
