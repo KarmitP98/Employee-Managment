@@ -24,9 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor( private userService: UserService,
                private router: Router,
                private snackBar: MatSnackBar,
-               public logoService: LogoService ) {
-
-  }
+               public logoService: LogoService) {}
 
   ngOnInit() {
   }

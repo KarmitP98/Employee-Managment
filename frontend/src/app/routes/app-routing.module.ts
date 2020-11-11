@@ -12,6 +12,7 @@ import { TimeReqComponent } from "../components/dashboard/admin/time-req/time-re
 import { AnnualLeaveComponent } from "../components/dashboard/annual-leave/annual-leave.component";
 import { TimeSheetComponent } from "../components/dashboard/time-sheet/time-sheet.component";
 import { DashboardComponent } from "../components/dashboard/dashboard.component";
+import { UsersComponent } from "../components/dashboard/admin/users/users.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -29,7 +30,8 @@ const routes: Routes = [
         children: [
           { path: "", redirectTo: "leave-req", pathMatch: "full" },
           { path: "time-req", component: TimeReqComponent },
-          { path: "leave-req", component: LeaveReqComponent }
+          { path: "leave-req", component: LeaveReqComponent },
+          { path: "users", component: UsersComponent }
         ]
       } ]
   }

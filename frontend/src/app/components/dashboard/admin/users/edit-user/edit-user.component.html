@@ -1,0 +1,45 @@
+<h1 mat-dialog-title>Hi {{data.uName}}</h1>
+<div mat-dialog-content>
+
+  <mat-form-field class = "w-100" appearance = "standard">
+    <mat-label>User Name</mat-label>
+    <input matInput
+           type = "text"
+           [(ngModel)] = "data.uName"
+           placeholder = "User Name">
+  </mat-form-field>
+
+  <br>
+
+
+  <mat-form-field class = "w-100" appearance = "standard">
+    <mat-label>User Level</mat-label>
+    <mat-select [(ngModel)]="data.uLevel" placeholder="Clearance Level">
+      <mat-option [value]="1">Level 1</mat-option>
+      <mat-option [value]="2">Level 2</mat-option>
+      <mat-option [value]="3">Level 3</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field class = "w-100" appearance = "standard">
+    <mat-label>User Salary [$]</mat-label>
+    <input matInput
+           type = "number"
+           [(ngModel)] = "data.salary"
+           placeholder = "User Salary">
+  </mat-form-field>
+
+</div>
+<hr>
+<mat-dialog-actions>
+  <button mat-raised-button (click) = "onNoClick()"
+          color = "warn">
+    Exit
+  </button>
+  <button mat-raised-button [mat-dialog-close] = "data" cdkFocusInitial
+          color = "accent">
+    Save
+  </button>
+</mat-dialog-actions>
