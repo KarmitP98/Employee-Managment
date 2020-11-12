@@ -51,7 +51,7 @@
     <br>
     <br>
 
-    <mat-action-row class="text-center">
+    <div class = "text-center">
       <button (click) = "resetForm()"
               style = "width: 10vw;"
               color = "warn"
@@ -61,12 +61,11 @@
       </button>
       &nbsp;
       <button [disabled] = "!leaveForm.valid"
-              color = "accent"
               mat-raised-button
               style = "width: 10vw;"
               type = "submit">Apply for Leave!
       </button>
-    </mat-action-row>
+    </div>
 
   </form>
   <hr>
@@ -100,7 +99,8 @@
       <!-- Status Column -->
       <ng-container matColumnDef = "type">
         <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-        <mat-cell *matCellDef = "let leave"> {{leave.type}} </mat-cell>
+        <mat-cell
+          *matCellDef = "let leave"> {{leave.status | uppercase}} </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef = "displayedColumns"></mat-header-row>

@@ -15,6 +15,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   userSub: Subscription;
   users: UserModel[] = [];
+  uId: string;
 
   constructor( private userService: UserService,
                private route: ActivatedRoute,
@@ -22,6 +23,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const uId = this.route.snapshot.parent.parent.params["uId"];
+    this.uId = uId;
 
     this.userSub = this.userService.fetchUser( "uId", "!=", uId )
                        .valueChanges()
@@ -39,12 +41,11 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   openDialog( user: UserModel ): void {
     const dialogRef = this.dialog.open( EditUserComponent, {
-      closeOnNavigation: true,
       position: null,
-      hasBackdrop: false,
-      role:  "dialog",
+      hasBackdrop: true,
+      role: "dialog",
       width: "20%",
-      data: user
+      data: user.uId
     } );
 
     dialogRef.afterClosed().subscribe( result => {

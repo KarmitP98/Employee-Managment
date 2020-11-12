@@ -1,43 +1,11 @@
 <div *ngIf = "leaves" [@load]>
-  <mat-accordion multi>
-    <mat-expansion-panel *ngFor = "let req of this.leaves"
-                         [matBadge] = "req.approved? '':'1'"
-                         matBadgeColor = "warn"
-                         style = "margin-top: 4px;"
-                         [expanded] = "!req.approved">
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{req.uName}}'s Leave Request</mat-panel-title>
-        <mat-panel-description class="text-left">From:
-          {{req.startDate.toDate() | date}} to
-          {{req.endDate.toDate() | date}}
-          <br>
-          Days: {{DaysBetween(req.startDate.toDate(), req.endDate.toDate())}}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div class = "text-left">
-        Type: {{req.type}}
-        <br>
-        Reason: {{req.reason}}
-        <br>
-        Status:
-        <a
-          [style] = "req.approved ? 'color: green':'color: red'">{{req.approved ?
-          "Approved" : "Pending"}}</a>
 
-        <div class = "float-right">
-          <button (click) = "changeStatus(req, true)"
-                  color = "accent"
-                  mat-raised-button>
-            Approve
-          </button>
-          &nbsp;
-          <button (click) = "changeStatus(req, false)"
-                  color = "warn"
-                  mat-raised-button>
-            Decline
-          </button>
-        </div>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
+  <h1>Pending Leaves</h1>
+  <hr>
+  <app-leave-table [leaves] = "getPendingReq()"></app-leave-table>
+  <br>
+  <hr>
+  <h1>Approved Requests</h1>
+  <hr>
+  <app-leave-table [leaves] = "getApprovedReq()"></app-leave-table>
 </div>

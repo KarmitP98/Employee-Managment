@@ -66,7 +66,6 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
                     .subscribe( ( value ) => {
                       if ( value?.length > 0 ) {
                         this.leaves = value;
-                        console.log( value );
                         this.dataSource = new MatTableDataSource<LeaveModel>( this.leaves );
                       }
                     } );

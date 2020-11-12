@@ -56,8 +56,9 @@ import { AnnualLeaveComponent } from "./components/dashboard/annual-leave/annual
 import { TimeSheetComponent } from "./components/dashboard/time-sheet/time-sheet.component";
 import { MatMenuModule } from "@angular/material/menu";
 import { IonicModule } from "@ionic/angular";
-import { UsersComponent } from './components/dashboard/admin/users/users.component';
-import { EditUserComponent } from './components/dashboard/admin/users/edit-user/edit-user.component';
+import { UsersComponent } from "./components/dashboard/admin/users/users.component";
+import { EditUserComponent } from "./components/dashboard/admin/users/edit-user/edit-user.component";
+import { LeaveTableComponent } from "./components/dashboard/admin/leave-req/leave-table/leave-table.component";
 
 // Pass the fusioncharts library and chart modules
 FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme, Widgets );
@@ -80,7 +81,8 @@ FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme, Widgets );
                DashboardComponent,
                TimeSheetComponent,
                UsersComponent,
-               EditUserComponent
+               EditUserComponent,
+               LeaveTableComponent
              ],
              imports: [
                BrowserModule,

@@ -2,6 +2,22 @@ import firebase from "firebase";
 import Timestamp = firebase.firestore.Timestamp;
 
 export class UserModel {
+
+
+  constructor( other: UserModel ) {
+    this.uId = other.uId;
+    this.uAbv = other.uAbv;
+    this.uName = other.uName;
+    this.uEmail = other.uEmail;
+    this.uDOB = other.uDOB;
+    this.uProPic = other.uProPic;
+    this.uLevel = other.uLevel;
+    this.requests = other.requests;
+    this.workLogIds = other.workLogIds;
+    this.leaves = other.leaves;
+    this.salary = other.salary;
+  }
+
   uId: string;
   uAbv: string;
   uName: string;

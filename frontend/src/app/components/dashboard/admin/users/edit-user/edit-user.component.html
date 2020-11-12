@@ -1,45 +1,67 @@
-<h1 mat-dialog-title>Hi {{data.uName}}</h1>
-<div mat-dialog-content>
+<div *ngIf = "user">
+  <h1 mat-dialog-title>Hi {{user.uName}}</h1>
+  <div mat-dialog-content>
 
-  <mat-form-field class = "w-100" appearance = "standard">
-    <mat-label>User Name</mat-label>
-    <input matInput
-           type = "text"
-           [(ngModel)] = "data.uName"
-           placeholder = "User Name">
-  </mat-form-field>
+    <mat-form-field appearance = "standard" class = "w-25">
+      <mat-label>Abv.</mat-label>
+      <mat-select [(ngModel)] = "user.uAbv" placeholder = "Mr.">
+        <mat-option value = "Mr.">Mr.</mat-option>
+        <mat-option value = "Mrs.">Mrs.</mat-option>
+        <mat-option value = "Miss">Miss</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <br>
+    <mat-form-field appearance = "standard" class = "w-75">
+      <mat-label>User Name</mat-label>
+      <input [(ngModel)] = "user.uName"
+             matInput
+             placeholder = "User Name"
+             type = "text">
+    </mat-form-field>
 
+    <br>
 
-  <mat-form-field class = "w-100" appearance = "standard">
-    <mat-label>User Level</mat-label>
-    <mat-select [(ngModel)]="data.uLevel" placeholder="Clearance Level">
-      <mat-option [value]="1">Level 1</mat-option>
-      <mat-option [value]="2">Level 2</mat-option>
-      <mat-option [value]="3">Level 3</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field appearance = "standard"
+                    class = "w-100">
+      <mat-label>Date of Birth</mat-label>
+      <input [(ngModel)] = "user.uDOB" [matDatepicker] = "picker" matInput
+             required>
+      <mat-datepicker-toggle [for] = "picker"
+                             matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker startView = "multi-year"></mat-datepicker>
+    </mat-form-field>
 
-  <br>
+    <br>
 
-  <mat-form-field class = "w-100" appearance = "standard">
-    <mat-label>User Salary [$]</mat-label>
-    <input matInput
-           type = "number"
-           [(ngModel)] = "data.salary"
-           placeholder = "User Salary">
-  </mat-form-field>
+    <mat-form-field appearance = "standard" class = "w-100">
+      <mat-label>User Level</mat-label>
+      <mat-select [(ngModel)] = "user.uLevel" placeholder = "Clearance Level">
+        <mat-option [value] = "1">Level 1</mat-option>
+        <mat-option [value] = "2">Level 2</mat-option>
+        <mat-option [value] = "3">Level 3</mat-option>
+      </mat-select>
+    </mat-form-field>
 
+    <br>
+
+    <mat-form-field appearance = "standard" class = "w-100">
+      <mat-label>User Salary [$]</mat-label>
+      <input [(ngModel)] = "user.salary"
+             matInput
+             placeholder = "User Salary"
+             type = "number">
+    </mat-form-field>
+
+  </div>
+  <hr>
+  <mat-dialog-actions>
+    <button (click) = "onNoClick()" color = "warn"
+            mat-raised-button>
+      Exit
+    </button>
+    <button [mat-dialog-close] = "user" cdkFocusInitial color = "accent"
+            mat-raised-button>
+      Save
+    </button>
+  </mat-dialog-actions>
 </div>
-<hr>
-<mat-dialog-actions>
-  <button mat-raised-button (click) = "onNoClick()"
-          color = "warn">
-    Exit
-  </button>
-  <button mat-raised-button [mat-dialog-close] = "data" cdkFocusInitial
-          color = "accent">
-    Save
-  </button>
-</mat-dialog-actions>
