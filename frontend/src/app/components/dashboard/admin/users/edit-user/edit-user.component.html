@@ -25,22 +25,29 @@
                     class = "w-100">
       <mat-label>Date of Birth</mat-label>
       <input [(ngModel)] = "user.uDOB" [matDatepicker] = "picker" matInput
-             required>
-      <mat-datepicker-toggle [for] = "picker"
-                             matSuffix></mat-datepicker-toggle>
-      <mat-datepicker #picker startView = "multi-year"></mat-datepicker>
+             [placeholder] = "user.uDOB.toDate() | date">
+      <mat-datepicker-toggle [for] = "picker" matSuffix>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <br>
-
-    <mat-form-field appearance = "standard" class = "w-100">
-      <mat-label>User Level</mat-label>
-      <mat-select [(ngModel)] = "user.uLevel" placeholder = "Clearance Level">
-        <mat-option [value] = "1">Level 1</mat-option>
-        <mat-option [value] = "2">Level 2</mat-option>
-        <mat-option [value] = "3">Level 3</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <mat-label>User Level</mat-label>
+    <div>
+      <mat-button-toggle-group #group = "matButtonToggleGroup"
+                               [(ngModel)] = "user.uLevel"
+                               appearance = "legacy">
+        <mat-button-toggle [value] = "1" aria-label = "Text align left">
+          <mat-icon color = "warn">looks_one</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle [value] = "2" aria-label = "Text align center">
+          <mat-icon color = "accent">looks_two</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle [value] = "3" aria-label = "Text align right">
+          <mat-icon color = "primary">looks_3</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
 
     <br>
 

@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   admin: boolean = false;
   email: string;
   password: string;
+  recaptcha: boolean;
 
   constructor( private userService: UserService,
                private router: Router,
