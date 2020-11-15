@@ -37,18 +37,18 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
   @ViewChild( MatPaginator, { static: true } ) paginator: MatPaginator;
   pageSize = 5;
   pageIndex = 0;
-
-  myFilter = ( d: Date | null ): boolean => {
-    const day = (d || new Date()).getDay();
-    // Prevent Saturday and Sunday from being selected.
-    return day !== 0 && day !== 6;
-  };
   leaveType: string;
   reason: string;
 
   constructor( public userService: UserService,
                private route: ActivatedRoute,
                private leaveService: LeaveService ) { }
+
+  myFilter = ( d: Date | null ): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
 
   ngOnInit() {
     const uId = this.route.snapshot.parent.params["uId"];

@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor( private userService: UserService,
                private router: Router,
                private snackBar: MatSnackBar,
-               public logoService: LogoService) {}
+               public logoService: LogoService ) {}
 
   ngOnInit() {
   }
@@ -37,18 +37,17 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.userService.loginWithEmailandPassword( this.email, this.password );
   }
 
-
-  private showError( error: string ): void {
-    this.snackBar.open( error, "Close", {
-      duration: 2000
-    } );
-  }
-
   loginWith( provider: string ): void {
     this.userService.loginWithProvider( provider );
   }
 
   resolved( $event: string ): void {
     console.log( $event );
+  }
+
+  private showError( error: string ): void {
+    this.snackBar.open( error, "Close", {
+      duration: 2000
+    } );
   }
 }

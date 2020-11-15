@@ -4,6 +4,18 @@ import Timestamp = firebase.firestore.Timestamp;
 export class UserModel {
 
 
+  uId: string;
+  uAbv: string;
+  uName: string;
+  uEmail: string;
+  uDOB: Timestamp;
+  uProPic: string;
+  uLevel: number;
+  requests: RequestModel[];
+  workLogIds: WorkLogModel[];
+  leaves: LeaveModel[];
+  salary?: number;
+
   constructor( other: UserModel ) {
     this.uId = other.uId;
     this.uAbv = other.uAbv;
@@ -17,18 +29,6 @@ export class UserModel {
     this.leaves = other.leaves;
     this.salary = other.salary;
   }
-
-  uId: string;
-  uAbv: string;
-  uName: string;
-  uEmail: string;
-  uDOB: Timestamp;
-  uProPic: string;
-  uLevel: number;
-  requests: RequestModel[];
-  workLogIds: WorkLogModel[];
-  leaves: LeaveModel[];
-  salary?: number;
 }
 
 export class WorkLogModel {
@@ -37,6 +37,7 @@ export class WorkLogModel {
   weekNum: number;
   weeklyBilledHours: number;
   weeklyUnBilledHours: number;
+  sheets: TimesheetModel[];
 }
 
 export class TimesheetModel {

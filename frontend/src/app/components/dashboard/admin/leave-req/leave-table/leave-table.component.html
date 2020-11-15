@@ -25,12 +25,14 @@
       <div class = "text-right">
         <button (click) = "changeStatus(req, true)"
                 color = "accent"
+                *ngIf = "!req.approved"
                 mat-raised-button>
           Approve
         </button>
         &nbsp;
         <button (click) = "changeStatus(req, false)"
                 color = "warn"
+                *ngIf = "req.approved"
                 mat-raised-button>
           Decline
         </button>

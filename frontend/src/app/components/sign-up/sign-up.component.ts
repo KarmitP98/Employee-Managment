@@ -4,6 +4,7 @@ import { UserService } from "../../services/user.service";
 import { loadTrigger } from "../../shared/animations";
 import { COMPANY_NAME } from "../../shared/constants";
 import firebase from "firebase";
+import { AngularFireStorage } from "@angular/fire/storage";
 import Timestamp = firebase.firestore.Timestamp;
 
 @Component( {
@@ -29,8 +30,10 @@ export class SignUpComponent implements OnInit {
   DOB: Timestamp;
   adminAccount: boolean;
   uName: string;
+  public selectedFile: File;
 
-  constructor( private userService: UserService ) { }
+  constructor( private userService: UserService,
+               private afst: AngularFireStorage ) { }
 
   ngOnInit() {
   }
@@ -50,4 +53,12 @@ export class SignUpComponent implements OnInit {
                                         leaves: []
                                       }, this.password );
   }
+
+  selectProfilePic( $event: Event ) {
+    console.log( $event );
+    var file: File = this.selectedFile;
+    console.log( file );
+
+  }
+
 }

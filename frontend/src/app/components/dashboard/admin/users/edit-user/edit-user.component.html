@@ -24,8 +24,9 @@
     <mat-form-field appearance = "standard"
                     class = "w-100">
       <mat-label>Date of Birth</mat-label>
-      <input [(ngModel)] = "user.uDOB" [matDatepicker] = "picker" matInput
-             [placeholder] = "user.uDOB.toDate() | date">
+      <input [(ngModel)] = "user.uDOB" [matDatepicker] = "picker"
+             [placeholder] = "user.uDOB.toDate() | date"
+             matInput>
       <mat-datepicker-toggle [for] = "picker" matSuffix>
       </mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>

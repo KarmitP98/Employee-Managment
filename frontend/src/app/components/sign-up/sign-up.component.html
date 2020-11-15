@@ -17,6 +17,10 @@
          alt = "Default Icon"
          class = "company_logo">
     <br>
+
+    <input (change) = "selectProfilePic($event)"
+           type = "file">
+
     <br>
 
     <mat-form-field appearance = "standard"
@@ -33,9 +37,9 @@
                     style = "width: 15vw;">
       <mat-label>First Name</mat-label>
       <input [(ngModel)] = "uName"
-             placeholder = "User Name"
              matInput
              name = "uName"
+             placeholder = "User Name"
              required
              type = "text">
     </mat-form-field>

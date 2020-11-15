@@ -26,6 +26,8 @@ export class UserService {
 
     this.afa.signInWithEmailAndPassword( email, password )
         .then( ( value ) => {
+          var d = Timestamp.now();
+          sessionStorage.setItem( "Login", JSON.stringify( d ) );
           this.router.navigate( [ "/" + value.user.uid ] );
           this.loadingSubject.next( false );
         } )
@@ -74,7 +76,8 @@ export class UserService {
                 salary: 0
               } );
           }
-
+          var string = "Login: " + JSON.stringify( Timestamp.now().toDate() );
+          this.afs.collection( "log" ).add( { string } );
           this.router.navigate( [ "/" + value.user.uid ] );
           this.loadingSubject.next( false );
 

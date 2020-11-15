@@ -61,6 +61,7 @@ import { EditUserComponent } from "./components/dashboard/admin/users/edit-user/
 import { LeaveTableComponent } from "./components/dashboard/admin/leave-req/leave-table/leave-table.component";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { RecaptchaModule } from "angular-google-recaptcha";
+import { ProfileComponent } from "./components/dashboard/profile/profile.component";
 
 // Pass the fusioncharts library and chart modules
 FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme, Widgets );
@@ -84,7 +85,8 @@ FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme, Widgets );
                TimeSheetComponent,
                UsersComponent,
                EditUserComponent,
-               LeaveTableComponent
+               LeaveTableComponent,
+               ProfileComponent
              ],
              imports: [
                BrowserModule,

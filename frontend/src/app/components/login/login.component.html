@@ -39,11 +39,15 @@
     </mat-form-field>
 
     <br>
-    <recaptcha
-      [(ngModel)] = "recaptcha"
-      name = "recaptcha"
-      required>
-    </recaptcha>
+    <div class = "text-center">
+      <recaptcha
+        [(ngModel)] = "recaptcha"
+        name = "recaptcha"
+        required
+        style = "display: inline-block;">
+      </recaptcha>
+    </div>
+
 
     <br>
     <br>

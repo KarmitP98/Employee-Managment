@@ -18,8 +18,7 @@ export class RequestService {
     return this.afs.collection( "requests" );
   }
 
-  public removeRequest(request)
-  {
+  public removeRequest( request ) {
 
   }
 
