@@ -94,3 +94,18 @@ export enum ADMIN_STATUS {
   approved = 'Approved',
   declined = 'Declined'
 }
+
+export var themes: theme[] = [
+  { name: 'Default', class: '' },
+  { name: 'Classic', class: 'classic-theme' },
+  { name: 'Dark', class: 'dark-theme' },
+  { name: 'RGB', class: 'rgb-theme' },
+  { name: 'BYG', class: 'byg-theme' },
+  { name: 'Charleston', class: 'charleston-theme' }
+];
+
+export var spinners = [
+  { color: 'primary' },
+  { color: 'accent' },
+  { color: 'warn' }
+];

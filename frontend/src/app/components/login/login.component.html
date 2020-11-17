@@ -1,6 +1,10 @@
-<div [@load] class = "text-xl-center">
+<mat-toolbar>
+  <span class = 'example-spacer'></span>
+  <app-theme-changer class = 'text-right' xPos = 'before'></app-theme-changer>
+</mat-toolbar>
+<div [@load] class = 'text-xl-center'>
 
-  <img alt = "Company Image"
+  <img alt = 'Company Image'
        class = 'company_logo'
        src = 'assets/logos/SEMS_Logo.png'
        style = 'margin-top: 10vh;'>
@@ -10,41 +14,41 @@
 
   <br>
 
-  <form #f = "ngForm" (ngSubmit) = "onSubmit()">
+  <form #f = 'ngForm' (ngSubmit) = 'onSubmit()'>
 
-    <mat-form-field appearance = "standard"
-                    style = "width: 20vw;">
+    <mat-form-field appearance = 'standard'
+                    style = 'width: 20vw;'>
       <mat-label>Email</mat-label>
-      <input [(ngModel)] = "email"
+      <input [(ngModel)] = 'email'
              email
              matInput
-             name = "email"
-             placeholder = "abc@def.com"
+             name = 'email'
+             placeholder = 'abc@def.com'
              required
-             type = "email">
+             type = 'email'>
     </mat-form-field>
 
     <br>
 
-    <mat-form-field appearance = "standard"
-                    style = "width: 20vw;">
+    <mat-form-field appearance = 'standard'
+                    style = 'width: 20vw;'>
       <mat-label>Password</mat-label>
-      <input [(ngModel)] = "password" matInput
-             minlength = "6"
-             name = "password"
+      <input [(ngModel)] = 'password' matInput
+             minlength = '6'
+             name = 'password'
              password
-             placeholder = "******"
+             placeholder = '******'
              required
-             type = "password">
+             type = 'password'>
     </mat-form-field>
 
     <br>
-    <div class = "text-center">
+    <div class = 'text-center'>
       <recaptcha
-        [(ngModel)] = "recaptcha"
-        name = "recaptcha"
+        [(ngModel)] = 'recaptcha'
+        name = 'recaptcha'
         required
-        style = "display: inline-block;">
+        style = 'display: inline-block;'>
       </recaptcha>
     </div>
 
@@ -52,19 +56,19 @@
     <br>
     <br>
 
-    <button [disabled] = "!f.valid"
-            color = "primary"
+    <button [disabled] = '!f.valid'
+            color = 'primary'
             mat-raised-button
-            style = "width: 9vw;"
-            type = "submit">
+            style = 'width: 9vw;'
+            type = 'submit'>
       Login
     </button>
     &nbsp;
-    <button color = "accent"
+    <button color = 'accent'
             mat-raised-button
-            routerLink = "/signUp"
-            style = "width: 9vw;"
-            type = "button">
+            routerLink = '/signUp'
+            style = 'width: 9vw;'
+            type = 'button'>
       Sign Up
     </button>
 
@@ -74,15 +78,16 @@
   <b>Or</b>
   <br>
   <br>
-  <button (click) = "loginWith('google')" color = "warn" mat-fab>
-    <mat-icon svgIcon = "logo-google"></mat-icon>
+  <button (click) = "loginWith('google')" color = 'warn' mat-fab>
+    <mat-icon svgIcon = 'logo-google'></mat-icon>
   </button> &nbsp;
-  <button (click) = "loginWith('facebook')" color = "primary" disabled
+  <button (click) = "loginWith('facebook')" color = 'primary' disabled
           mat-fab>
-    <mat-icon svgIcon = "logo-facebook"></mat-icon>
+    <mat-icon svgIcon = 'logo-facebook'></mat-icon>
   </button> &nbsp;
-  <button (click) = "loginWith('github')" color = "light" disabled
+  <button (click) = "loginWith('github')" color = 'light' disabled
           mat-fab>
-    <mat-icon svgIcon = "logo-github"></mat-icon>
+    <mat-icon svgIcon = 'logo-github'></mat-icon>
   </button>
+
 </div>

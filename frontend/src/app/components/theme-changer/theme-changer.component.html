@@ -1,0 +1,25 @@
+<button [matMenuTriggerFor] = 'themeMenu' mat-icon-button>
+  <mat-icon>palette</mat-icon>
+</button>
+<mat-menu #themeMenu = 'matMenu' [xPosition] = 'xPos'
+          [yPosition] = 'yPos'>
+  <div *ngFor = 'let theme of themes'
+       [ngClass] = 'theme.class'>
+    <button (click) = 'themeService.changeTheme(theme.class)'
+            color = 'primary'
+            mat-button
+            style = 'width: 100%; text-align: left;'>
+              <span>
+                {{theme.name}}
+              </span>
+      <span style = 'display: flex;'>
+              <mat-progress-spinner *ngFor = 'let spinner of spinners'
+                                    [color] = 'spinner.color'
+                                    [diameter] = 'diameter'
+                                    [mode] = 'mode'
+                                    [value] = 'value'>
+              </mat-progress-spinner>
+            </span>
+    </button>
+  </div>
+</mat-menu>

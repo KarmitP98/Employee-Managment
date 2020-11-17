@@ -33,7 +33,6 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "src/theme/themes.scss",
-              "src/theme/colors.scss",
               {
                 "input": "node_modules/@ionic/angular/css/normalize.css"
               },

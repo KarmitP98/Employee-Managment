@@ -1,4 +1,4 @@
-<div [ngClass] = 'themeService.theme | async'>
+
   <mat-toolbar *ngIf = 'user' color = 'primary'>
 
     <mat-card-title style = 'margin-right: 25px;'>
@@ -31,31 +31,7 @@
       <ion-spinner duration = '5000' name = 'dots'></ion-spinner>
     </button>
 
-
-    <button [matMenuTriggerFor] = 'themeMenu' mat-icon-button>
-      <mat-icon>palette</mat-icon>
-    </button>
-    <mat-menu #themeMenu = 'matMenu' xPosition = 'before'>
-      <div *ngFor = 'let theme of themes'
-           [ngClass] = 'theme.class'>
-        <button (click) = 'changeTheme(theme.class)'
-                color = 'primary'
-                mat-button
-                style = 'width: 100%; text-align: left;'>
-              <span>
-                {{theme.name}}
-              </span>
-          <span style = 'display: flex;'>
-              <mat-progress-spinner *ngFor = 'let spinner of spinners'
-                                    [color] = 'spinner.color'
-                                    [diameter] = 'diameter'
-                                    [mode] = 'mode'
-                                    [value] = 'value'>
-              </mat-progress-spinner>
-            </span>
-        </button>
-      </div>
-    </mat-menu>
+    <app-theme-changer [xPos] = '"before"'></app-theme-changer>
 
     <button [matMenuTriggerFor] = 'menu'
             aria-label = 'Example icon-button with a menu'
@@ -86,4 +62,3 @@
     </mat-menu>
 
   </mat-toolbar>
-</div>
