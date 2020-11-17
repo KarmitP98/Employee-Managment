@@ -62,6 +62,7 @@ import { LeaveTableComponent } from "./components/dashboard/admin/leave-req/leav
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { RecaptchaModule } from "angular-google-recaptcha";
 import { ProfileComponent } from "./components/dashboard/profile/profile.component";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // Pass the fusioncharts library and chart modules
 FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme, Widgets );
@@ -130,6 +131,7 @@ FusionChartsModule.fcRoot( FusionCharts, charts, FusionTheme, Widgets );
                MatToolbarModule,
                MatCardModule,
                MatMenuModule,
+               MatProgressSpinnerModule,
                IonicModule.forRoot(),
                MatButtonToggleModule,
                RecaptchaModule.forRoot( {

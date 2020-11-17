@@ -3,11 +3,24 @@
 
 @include mat-core();
 
-//$my-app-primary: mat-palette($mat-blue-grey);
-//$my-app-accent:  mat-palette($mat-pink, 500, 900, A100);
-//$my-app-warn:    mat-palette($mat-deep-orange);
-//$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
-//@include angular-material-theme($my-app-theme);
+
+.classic-theme {
+  $primary: mat-palette($mat-blue-grey, 500, 100, 700);
+  $accent: mat-palette($mat-pink, 500, 100, 700);
+  $warn: mat-palette($mat-deep-orange, 500, 100, 700);
+
+  $theme: mat-light-theme($primary, $accent, $warn);
+  @include angular-material-theme($theme);
+}
+
+.dark-theme {
+  $primary: mat-palette($mat-rich-black, 500, 100, 700);
+  $accent: mat-palette($mat-platinum, 500, 100, 700);
+  $warn: mat-palette($mat-par-pink, 500, 100, 700);
+
+  $theme: mat-light-theme($primary, $accent, $warn);
+  @include angular-material-theme($theme);
+}
 
 .byg-theme {
   $byg-primary: mat-palette($mat-blue, 500, 100, 700);
@@ -18,8 +31,8 @@
 }
 
 .rgb-theme {
-  $rgb-primary: mat-palette($mat-crayola-blue, 500, 100, 700);
-  $rgb-accent: mat-palette($mat-caribbean-green, 500, 100, 700);
+  $rgb-primary: mat-palette($mat-caribbean-green, 500, 100, 700);
+  $rgb-accent: mat-palette($mat-crayola-blue, 500, 100, 700);
   $rgb-warn: mat-palette($mat-par-pink, 500, 100, 700);
   $rgb-theme: mat-light-theme($rgb-primary, $rgb-accent, $rgb-warn);
   @include angular-material-theme($rgb-theme);
@@ -32,5 +45,3 @@
   $theme: mat-light-theme($a-primary, $a-accent, $a-warn);
   @include angular-material-theme($theme);
 }
-
-
