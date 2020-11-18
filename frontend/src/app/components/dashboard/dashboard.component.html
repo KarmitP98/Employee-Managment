@@ -1,2 +1,16 @@
 <app-header></app-header>
-<router-outlet class = "wrapper"></router-outlet>
+<div class = 'text-center'>
+  <router-outlet></router-outlet>
+  <mat-grid-list [cols] = '1'>
+    <mat-grid-tile>
+      <mat-grid-tile-header>
+        Header
+      </mat-grid-tile-header>
+      Content
+      <mat-grid-tile-footer>
+        Footer
+      </mat-grid-tile-footer>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</div>

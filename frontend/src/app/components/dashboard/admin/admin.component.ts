@@ -19,10 +19,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   public leaves: LeaveModel[] = [];
   public logs: WorkLogModel[] = [];
   public dataSource: any;
-  private selected: string = "Leave";
+  selected: string = "leave";
   private userSub: Subscription;
-  private logSub: Subscription;
-  private leaveSub: Subscription;
 
   constructor( private userService: UserService,
                private leaveService: LeaveService,

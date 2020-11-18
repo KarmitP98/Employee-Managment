@@ -15,7 +15,7 @@ import { DashboardComponent } from "../components/dashboard/dashboard.component"
 import { UsersComponent } from "../components/dashboard/admin/users/users.component";
 
 const routes: Routes = [
-  { path: "", redirectTo: "/login", pathMatch: "full" },
+  { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "login", component: LoginComponent, canActivate: [ LoginGuard ] },
   { path: "signUp", component: SignUpComponent, canActivate: [ LoginGuard ] },
   {

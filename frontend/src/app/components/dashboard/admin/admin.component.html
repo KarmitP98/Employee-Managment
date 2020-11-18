@@ -4,24 +4,27 @@
   <button class = 'w-25'
           disabled
           mat-raised-button
-          color = 'accent'
+          (click) = 'selected = "time"'
           routerLink = 'time-req'
+          [color] = 'selected === "time" ? "primary" : "accent"'
           routerLinkActive = 'selected'>
     Work Logs
   </button>
   &nbsp;&nbsp;
   <button class = 'w-25'
           mat-raised-button
-          color = 'accent'
+          (click) = 'selected = "leave"'
           routerLink = 'leave-req'
+          [color] = 'selected === "leave" ? "primary" : "accent"'
           routerLinkActive = 'selected'>
     Leave Requests
   </button>
   &nbsp;&nbsp;
   <button class = 'w-25'
           mat-raised-button
-          color = 'accent'
+          (click) = 'selected = "users"'
           routerLink = 'users'
+          [color] = 'selected === "users" ? "primary" : "accent"'
           routerLinkActive = 'selected'>
     Users
   </button>
