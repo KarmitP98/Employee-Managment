@@ -5,13 +5,11 @@ import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { LogoService } from "../../services/logo.service";
-import { loadTrigger } from "../../shared/animations";
 
 @Component( {
               selector: "app-login",
               templateUrl: "./login.component.html",
-              styleUrls: [ "./login.component.scss" ],
-              animations: [ loadTrigger ]
+              styleUrls: [ "./login.component.scss" ]
             } )
 export class LoginComponent implements OnInit {
 

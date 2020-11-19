@@ -36,7 +36,6 @@ import { RecaptchaModule } from "angular-google-recaptcha";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { HttpClientModule } from "@angular/common/http";
 import { MatCardModule } from "@angular/material/card";
-import { IonicModule } from "@ionic/angular";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
@@ -83,7 +82,6 @@ import { MatBadgeModule } from "@angular/material/badge";
                MatSlideToggleModule,
                MatInputModule,
                MatSnackBarModule,
-               IonicModule.forRoot(),
                RecaptchaModule
                  .forRoot( {
                              siteKey: "6LezHN8ZAAAAAJAlbO7gddSj9oFg7Mi_wqYZocQS"
