@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Serve 8100" type="js.build_tools.npm">
+    <package-json value="$PROJECT_DIR$/EM/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="serve 8100" />
+    </scripts>
+    <node-interpreter value="project" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>

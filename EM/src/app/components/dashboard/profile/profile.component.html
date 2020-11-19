@@ -1,0 +1,37 @@
+<mat-card *ngIf = 'this.user' class = 'mat-elevation-z0'>
+
+  <mat-card-header>
+    <img [src] = 'this.user.uProPic' alt = 'UPP'
+         matCardAvatar>
+    <mat-card-title>
+      {{this.user.uAbv}} {{this.user.uName}}
+    </mat-card-title>
+    <mat-card-subtitle>
+      User Type: {{getUserType()}}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    Email: {{this.user.uEmail}}
+    <br>
+    Date: {{this.user.uDOB | date}}
+    <br>
+    Salary: {{this.user.salary}}
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button (click) = 'editDialogue()'
+            class = 'w-25'
+            color = 'accent'
+            mat-raised-button>
+      Edit
+    </button>
+    <button (click) = 'closeDialogue()'
+            class = 'w-25'
+            color = 'warn'
+            mat-raised-button>
+      Close
+    </button>
+  </mat-card-actions>
+
+</mat-card>

@@ -1,0 +1,95 @@
+<mat-toolbar>
+  <span class = 'example-spacer'></span>
+  <app-theme-changer class = 'text-right' xPos = 'before'></app-theme-changer>
+</mat-toolbar>
+<div [@load] class = 'text-center'>
+
+  <img alt = 'Company Image'
+       class = 'company_logo'
+       src = 'assets/logos/SEMS_Logo.png'
+       style = 'margin-top: 10vh;'>
+  <br>
+
+  <h1>Welcome to {{ companyName }}</h1>
+
+  <br>
+
+  <form #f = 'ngForm' (ngSubmit) = 'onSubmit()'>
+
+    <mat-form-field appearance = 'standard'
+                    style = 'width: 20vw;'>
+      <mat-label>Email</mat-label>
+      <!--suppress HtmlFormInputWithoutLabel -->
+      <input [(ngModel)] = 'email'
+             email
+             matInput
+             name = 'email'
+             placeholder = 'abc@def.com'
+             required
+             type = 'email'>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field appearance = 'standard'
+                    style = 'width: 20vw;'>
+      <mat-label>Password</mat-label>
+      <!--suppress HtmlFormInputWithoutLabel -->
+      <input [(ngModel)] = 'password' matInput
+             minlength = '6'
+             name = 'password'
+             password
+             placeholder = '******'
+             required
+             type = 'password'>
+    </mat-form-field>
+
+    <br>
+    <div class = 'text-center'>
+      <recaptcha
+        [(ngModel)] = 'recaptcha'
+        name = 'recaptcha'
+        required
+        style = 'display: inline-block;'>
+      </recaptcha>
+    </div>
+
+
+    <br>
+    <br>
+
+    <button [disabled] = '!f.valid'
+            color = 'primary'
+            mat-raised-button
+            style = 'width: 9vw;'
+            type = 'submit'>
+      Login
+    </button>
+    &nbsp;
+    <button color = 'accent'
+            mat-raised-button
+            routerLink = '/signUp'
+            style = 'width: 9vw;'
+            type = 'button'>
+      Sign Up
+    </button>
+
+  </form>
+
+  <br>
+  <b>Or</b>
+  <br>
+  <br>
+  <button (click) = "loginWith('google')" color = 'warn' mat-fab>
+    <mat-icon svgIcon = 'logo-google'></mat-icon>
+  </button> &nbsp;
+  <button (click) = "loginWith('facebook')" color = 'primary' disabled
+          mat-fab>
+    <mat-icon svgIcon = 'logo-facebook'></mat-icon>
+  </button> &nbsp;
+  <button (click) = "loginWith('github')" color = 'light' disabled
+          mat-fab>
+    <mat-icon svgIcon = 'logo-github'></mat-icon>
+  </button>
+
+</div>

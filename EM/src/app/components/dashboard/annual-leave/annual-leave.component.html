@@ -1,0 +1,118 @@
+<div class = 'text-center wrapper'>
+  <h3>Leave Application</h3><br>
+
+  <form #leaveForm = 'ngForm'
+        (ngSubmit) = 'onSubmit()'
+        class = 'text-center'>
+
+    <mat-form-field appearance = 'standard' class = 'w-25'>
+      <mat-label>Select the Date Range</mat-label>
+      <mat-date-range-input [rangePicker] = 'picker'>
+        <!--suppress HtmlFormInputWithoutLabel -->
+        <input [(ngModel)] = 'stDate' matStartDate
+               name = 'startDate'
+               placeholder = 'Start date'>
+        <!--suppress HtmlFormInputWithoutLabel -->
+        <input [(ngModel)] = 'edDate' matEndDate
+               name = 'endDate'
+               placeholder = 'End date'
+               required>
+      </mat-date-range-input>
+      <mat-datepicker-toggle [for] = 'picker' matSuffix></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field appearance = 'standard' class = 'w-25'>
+      <mat-label>Reason</mat-label>
+      <mat-select [(ngModel)] = 'leaveType' name = 'reason' required>
+        <mat-option value = 'Sick'>Sick Leave</mat-option>
+        <mat-option value = 'Religious'>Religious Leave</mat-option>
+        <mat-option value = 'Vacation'>Vacation Leave</mat-option>
+        <mat-option value = 'Other'>Other Reason</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field class = 'w-25'>
+      <mat-label>Explanation</mat-label>
+      <!--suppress HtmlFormInputWithoutLabel -->
+      <textarea #message [(ngModel)] = 'reason' matInput
+                maxlength = '500'
+                name = 'reason'
+                placeholder =
+                  'Please provide a brief explanation for your leave explanation...'
+                required
+                rows = '4'></textarea>
+      <mat-hint align = 'start'><strong>Don't disclose personal info</strong>
+      </mat-hint>
+      <mat-hint align = 'end'>{{message.value.length}} / 500</mat-hint>
+    </mat-form-field>
+    <br>
+    <br>
+
+    <div class = 'text-center'>
+      <button (click) = 'resetForm()'
+              color = 'warn'
+              mat-raised-button
+              style = 'width: 10vw;'
+              type = 'reset'>
+        Reset
+      </button>
+      &nbsp;
+      <button [disabled] = '!leaveForm.valid'
+              mat-raised-button
+              style = 'width: 10vw;'
+              type = 'submit'>Apply for Leave!
+      </button>
+    </div>
+
+  </form>
+  <hr>
+
+  <br>
+  <hr>
+  <div *ngIf = 'leaves' [@load]>
+
+    <mat-table [dataSource] = 'dataSource' class = 'mat-elevation-z8'>
+      <!-- Start Date Column -->
+      <ng-container matColumnDef = 'startDate'>
+        <mat-header-cell *matHeaderCellDef>Start Date</mat-header-cell>
+        <mat-cell
+          *matCellDef = 'let leave'> {{leave.startDate.toDate() | date}}
+        </mat-cell>
+      </ng-container>
+
+      <!-- End Date Column -->
+      <ng-container matColumnDef = 'endDate'>
+        <mat-header-cell *matHeaderCellDef> End Date</mat-header-cell>
+        <mat-cell *matCellDef = 'let leave'> {{leave.endDate.toDate() | date}}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Reason Column -->
+      <ng-container matColumnDef = 'reason'>
+        <mat-header-cell *matHeaderCellDef>Reason</mat-header-cell>
+        <mat-cell *matCellDef = 'let leave'> {{leave.reason}} </mat-cell>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef = 'type'>
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell
+          *matCellDef = 'let leave'> {{leave.status | uppercase}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef = 'displayedColumns'></mat-header-row>
+      <mat-row *matRowDef = 'let row; columns: displayedColumns;'></mat-row>
+
+    </mat-table>
+    <mat-paginator (page) = 'updateTable($event)' [length] = 'leaves.length'
+                   [pageSizeOptions] = '[5, 10, 50]' [pageSize] = '5'
+                   color = 'primary'
+                   showFirstLastButtons></mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div *ngIf = 'leaves' [@load]>
+
+  <h1>Declined Leaves</h1>
+  <hr>
+  <app-leave-table [leaves] = 'getPendingReq()'></app-leave-table>
+  <br>
+  <hr>
+  <h1>Approved Leaves</h1>
+  <hr>
+  <app-leave-table [leaves] = 'getApprovedReq()'></app-leave-table>
+</div>

@@ -1,0 +1,113 @@
+<mat-toolbar>
+  <span class = 'example-spacer'></span>
+  <app-theme-changer class = 'text-right' xPos = 'before'></app-theme-changer>
+</mat-toolbar>
+<div [@load]
+     class = 'text-center'>
+
+  <img alt = 'Company Name'
+       class = 'company_logo'
+       src = 'assets/background_square.jpg'
+       style = 'margin-top: 10vh;'>
+
+  <h1>Welcome to {{ companyName }}</h1>
+
+  <br>
+
+  <form #signUpForm = 'ngForm' (ngSubmit) = 'onSignUp()'><br>
+
+    <h4>Profile Picture</h4>
+    <img [src] = 'default_pro_pic'
+         alt = 'Default Icon'
+         class = 'company_logo'>
+    <br>
+
+    <input (change) = 'selectProfilePic($event)'
+           type = 'file'>
+
+    <br>
+
+    <mat-form-field appearance = 'standard'
+                    style = 'width: 4vw;'>
+      <mat-label>Title</mat-label>
+      <mat-select [(ngModel)] = 'abv' name = 'abv' required>
+        <mat-option value = 'Mr.'>Mr.</mat-option>
+        <mat-option value = 'Mrs.'>Mrs.</mat-option>
+        <mat-option value = 'Miss'>Miss</mat-option>
+      </mat-select>
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field appearance = 'standard'
+                    style = 'width: 15vw;'>
+      <mat-label>First Name</mat-label>
+      <!--suppress HtmlFormInputWithoutLabel -->
+      <input [(ngModel)] = 'uName'
+             matInput
+             name = 'uName'
+             placeholder = 'User Name'
+             required
+             type = 'text'>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field appearance = 'standard'
+                    style = 'width: 20vw;'>
+      <mat-label>Date of Birth</mat-label>
+      <!--suppress HtmlFormInputWithoutLabel -->
+      <input [(ngModel)] = 'DOB' [matDatepicker] = 'picker' matInput
+             name = 'DOB' required>
+      <mat-datepicker-toggle [for] = 'picker'
+                             matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker startView = 'multi-year'></mat-datepicker>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field appearance = 'standard'
+                    style = 'width: 20vw;'>
+      <mat-label>Email</mat-label>
+      <!--suppress HtmlFormInputWithoutLabel -->
+      <input [(ngModel)] = 'email' email matInput name = 'email'
+             placeholder = 'abc@def.com' required type = 'email'>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field appearance = 'standard'
+                    style = 'width: 20vw;'>
+      <mat-label>Password</mat-label>
+      <!--suppress HtmlFormInputWithoutLabel -->
+      <input [(ngModel)] = 'password' autocomplete matInput
+             minlength = '6' name = 'password'
+             password placeholder = '******' required type = 'password'>
+    </mat-form-field>
+
+    <br>
+
+    <mat-slide-toggle [(ngModel)] = 'adminAccount' color = 'warn'
+                      name = 'isAdmin'>Admin Privileges?
+    </mat-slide-toggle>
+
+    <br>
+    <br>
+    <div>
+      <button [disabled] = '!signUpForm.valid'
+              color = 'primary'
+              mat-raised-button
+              style = 'width: 9vw;'
+              type = 'submit'>
+        Sign Up
+      </button>
+      &nbsp;
+      <button color = 'accent'
+              mat-raised-button
+              routerLink = '/login'
+              style = 'width: 9vw;'
+              type = 'button'>
+        Back
+      </button>
+    </div>
+  </form>
+</div>
+

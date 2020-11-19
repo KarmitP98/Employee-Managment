@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "employee-managment-f5252": {
+      "hosting": {
+        "EM": [
+          "employee-managment-f5252"
+        ]
+      }
+    }
+  }
+}
