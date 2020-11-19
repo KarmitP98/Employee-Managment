@@ -16,16 +16,14 @@ export class AuthGuard implements CanActivate, CanDeactivate<any> {
                state: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     return new Promise( resolve => {
-      var sub = this.afa.authState
-                    .subscribe( ( value ) => {
-                      if ( value ) {
-                        sub.unsubscribe();
-                        resolve( true );
-                      } else {
-                        sub.unsubscribe();
-                        resolve( this.router.navigate( [ "/login" ] ) );
-                      }
-                    } );
+      const sub = this.afa.authState
+                      .subscribe( ( value ) => {
+                        if ( value ) {
+                          resolve( true );
+                        } else {
+                          resolve( this.router.navigate( [ "/login" ] ) );
+                        }
+                      } );
     } );
 
   }
@@ -33,17 +31,15 @@ export class AuthGuard implements CanActivate, CanDeactivate<any> {
   canDeactivate( component: any, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     return new Promise( resolve => {
-      var sub = this.afa.authState
-                    .subscribe( ( value ) => {
-                      if ( value ) {
-                        sub.unsubscribe();
-                        resolve( this.router.navigate( [ "/", value.uid ] ) );
-                      } else {
-                        sub.unsubscribe();
-                        resolve( true );
-                      }
+      const sub = this.afa.authState
+                      .subscribe( ( value ) => {
+                        if ( value ) {
+                          resolve( this.router.navigate( [ "/", value.uid ] ) );
+                        } else {
+                          resolve( true );
+                        }
 
-                    } );
+                      } );
     } );
 
   }

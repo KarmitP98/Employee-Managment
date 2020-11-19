@@ -5,7 +5,6 @@ import { LeaveService } from "../../../../services/leave.service";
 import { Subscription } from "rxjs";
 import { LeaveModel } from "../../../../model/models.model";
 import { ActivatedRoute } from "@angular/router";
-import { LogoService } from "../../../../services/logo.service";
 
 @Component( {
               selector: "app-leave-req",
@@ -20,8 +19,7 @@ export class LeaveReqComponent implements OnInit, OnDestroy {
 
   constructor( private userService: UserService,
                private leaveService: LeaveService,
-               private route: ActivatedRoute,
-               public logoService: LogoService ) {
+               private route: ActivatedRoute ) {
 
   }
 

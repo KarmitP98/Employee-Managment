@@ -18,3 +18,21 @@ body {
   height: 100px;
   width: 100px;
 }
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.logout_btn {
+  color: red;
+
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

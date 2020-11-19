@@ -6,10 +6,9 @@ import { BehaviorSubject } from "rxjs";
              } )
 export class ThemeService {
 
-  theme: BehaviorSubject<string>;
+  theme: BehaviorSubject<string> = new BehaviorSubject<string>( "" );
 
   constructor() {
-    this.theme = new BehaviorSubject<string>( "" );
   }
 
   changeTheme( s: string ): void {

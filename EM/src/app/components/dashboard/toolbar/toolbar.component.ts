@@ -27,8 +27,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const uId = this.route.snapshot.params['uId'];
-    this.userSub = this.userService.fetchUser( 'uId', '==', uId )
+    const uId = this.route.snapshot.params["uId"];
+    this.userSub = this.userService.fetchUser( "uId", "==", uId )
                        .valueChanges()
                        .subscribe( value => {
                          if ( value?.length > 0 ) {
@@ -45,7 +45,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open( ProfileComponent, {
       position: null,
       hasBackdrop: true,
-      role: 'dialog',
+      role: "dialog",
       data: this.user.uId
     } );
 

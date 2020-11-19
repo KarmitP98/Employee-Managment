@@ -11,7 +11,6 @@ import { SignUpComponent } from "./components/sign-up/sign-up.component";
 import { ThemeChangerComponent } from "./components/theme-changer/theme-changer.component";
 import { ToolbarComponent } from "./components/dashboard/toolbar/toolbar.component";
 import { HomeComponent } from "./components/dashboard/home/home.component";
-import { LeavesComponent } from "./components/dashboard/leaves/leaves.component";
 import { TimeSheetComponent } from "./components/dashboard/time-sheet/time-sheet.component";
 import { ProfileComponent } from "./components/dashboard/profile/profile.component";
 import { EditProfileComponent } from "./components/dashboard/profile/edit-profile/edit-profile.component";
@@ -38,6 +37,12 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { HttpClientModule } from "@angular/common/http";
 import { MatCardModule } from "@angular/material/card";
 import { IonicModule } from "@ionic/angular";
+import { MatNativeDateModule } from "@angular/material/core";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { LeaveTableComponent } from "./components/dashboard/admin/leave-req/leave-table/leave-table.component";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatBadgeModule } from "@angular/material/badge";
 
 @NgModule( {
              declarations: [
@@ -48,7 +53,6 @@ import { IonicModule } from "@ionic/angular";
                ThemeChangerComponent,
                ToolbarComponent,
                HomeComponent,
-               LeavesComponent,
                TimeSheetComponent,
                ProfileComponent,
                EditProfileComponent,
@@ -56,7 +60,8 @@ import { IonicModule } from "@ionic/angular";
                TimeReqComponent,
                UsersComponent,
                AdminComponent,
-               AnnualLeaveComponent
+               AnnualLeaveComponent,
+               LeaveTableComponent
              ],
              imports: [
                BrowserModule,
@@ -74,6 +79,7 @@ import { IonicModule } from "@ionic/angular";
                MatFormFieldModule,
                MatSelectModule,
                MatDatepickerModule,
+               MatNativeDateModule,
                MatSlideToggleModule,
                MatInputModule,
                MatSnackBarModule,
@@ -82,9 +88,13 @@ import { IonicModule } from "@ionic/angular";
                  .forRoot( {
                              siteKey: "6LezHN8ZAAAAAJAlbO7gddSj9oFg7Mi_wqYZocQS"
                            } ),
-               MatCardModule
+               MatCardModule,
+               MatTableModule,
+               MatPaginatorModule,
+               MatExpansionModule,
+               MatBadgeModule
              ],
-             providers: [],
+             providers: [ MatDatepickerModule ],
              bootstrap: [ AppComponent ],
              exports: []
            } )

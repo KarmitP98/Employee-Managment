@@ -1,17 +1,17 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { HomeComponent } from "../components/dashboard/home/home.component";
 import { AuthGuard } from "../guards/auth.guard";
+import { LoginGuard } from "../guards/login.guard";
+import { AdminComponent } from "../components/dashboard/admin/admin.component";
+import { LeaveReqComponent } from "../components/dashboard/admin/leave-req/leave-req.component";
+import { HomeComponent } from "../components/dashboard/home/home.component";
+import { TimeReqComponent } from "../components/dashboard/admin/time-req/time-req.component";
+import { AnnualLeaveComponent } from "../components/dashboard/annual-leave/annual-leave.component";
+import { TimeSheetComponent } from "../components/dashboard/time-sheet/time-sheet.component";
+import { UsersComponent } from "../components/dashboard/admin/users/users.component";
 import { LoginComponent } from "../components/login/login.component";
 import { SignUpComponent } from "../components/sign-up/sign-up.component";
-import { LoginGuard } from "../guards/login.guard";
-import { LeaveReqComponent } from "../components/dashboard/admin/leave-req/leave-req.component";
-import { TimeReqComponent } from "../components/dashboard/admin/time-req/time-req.component";
-import { TimeSheetComponent } from "../components/dashboard/time-sheet/time-sheet.component";
 import { DashboardComponent } from "../components/dashboard/dashboard.component";
-import { UsersComponent } from "../components/dashboard/admin/users/users.component";
-import { AdminComponent } from "../components/dashboard/admin/admin.component";
-import { AnnualLeaveComponent } from "../components/dashboard/annual-leave/annual-leave.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },

@@ -4,8 +4,8 @@ import { UserService } from "../../services/user.service";
 import { NgForm } from "@angular/forms";
 import firebase from "firebase";
 import { COMPANY_NAME } from "../../shared/constants";
-import Timestamp = firebase.firestore.Timestamp;
 import { loadTrigger } from "../../shared/animations";
+import Timestamp = firebase.firestore.Timestamp;
 
 @Component( {
               selector: "app-sign-up",

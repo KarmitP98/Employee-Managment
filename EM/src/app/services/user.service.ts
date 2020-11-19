@@ -5,8 +5,8 @@ import { BehaviorSubject } from "rxjs";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import firebase from "firebase";
-import Timestamp = firebase.firestore.Timestamp;
 import { UserModel } from "../model/models.model";
+import Timestamp = firebase.firestore.Timestamp;
 
 @Injectable( {
                providedIn: "root"

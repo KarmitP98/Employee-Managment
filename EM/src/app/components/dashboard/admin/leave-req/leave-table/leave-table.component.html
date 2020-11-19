@@ -7,9 +7,7 @@
       <mat-panel-title>{{req.uName}}'s Leave Request</mat-panel-title>
       <mat-panel-description class = 'text-left'>From:
         {{req.startDate.toDate() | date}} to
-        {{req.endDate.toDate() | date}}
-                                                 &nbsp;&nbsp;
-                                                 Days: {{DaysBetween(req.startDate.toDate(), req.endDate.toDate())}}
+        {{req.endDate.toDate() | date}}&nbsp;&nbsp;Days: {{DaysBetween(req.startDate.toDate(), req.endDate.toDate())}}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <div class = 'text-left'>
