@@ -4,7 +4,6 @@ import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./routes/app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatGridListModule } from "@angular/material/grid-list";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { LoginComponent } from "./components/login/login.component";
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
@@ -18,30 +17,14 @@ import { LeaveReqComponent } from "./components/dashboard/admin/leave-req/leave-
 import { TimeReqComponent } from "./components/dashboard/admin/time-req/time-req.component";
 import { UsersComponent } from "./components/dashboard/admin/users/users.component";
 import { AngularFireModule } from "@angular/fire";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatMenuModule } from "@angular/material/menu";
-import { MatIconModule } from "@angular/material/icon";
-import { MatButtonModule } from "@angular/material/button";
-import { FormsModule } from "@angular/forms";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatSelectModule } from "@angular/material/select";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatSlideToggleModule } from "@angular/material/slide-toggle";
-import { MatInputModule } from "@angular/material/input";
 import { AdminComponent } from "./components/dashboard/admin/admin.component";
 import { AnnualLeaveComponent } from "./components/dashboard/annual-leave/annual-leave.component";
 import { environment } from "../environments/environment.prod";
 import { RecaptchaModule } from "angular-google-recaptcha";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { HttpClientModule } from "@angular/common/http";
-import { MatCardModule } from "@angular/material/card";
-import { MatNativeDateModule } from "@angular/material/core";
-import { MatTableModule } from "@angular/material/table";
-import { MatPaginatorModule } from "@angular/material/paginator";
 import { LeaveTableComponent } from "./components/dashboard/admin/leave-req/leave-table/leave-table.component";
-import { MatExpansionModule } from "@angular/material/expansion";
-import { MatBadgeModule } from "@angular/material/badge";
+import { AngularMaterialModule } from "./modules/angular-material/angular-material.module";
 
 @NgModule( {
              declarations: [
@@ -67,30 +50,9 @@ import { MatBadgeModule } from "@angular/material/badge";
                AppRoutingModule,
                BrowserAnimationsModule,
                HttpClientModule,
-               MatGridListModule,
                AngularFireModule.initializeApp( environment.firebase ),
-               MatProgressSpinnerModule,
-               MatMenuModule,
-               MatIconModule,
-               MatButtonModule,
-               FormsModule,
-               MatToolbarModule,
-               MatFormFieldModule,
-               MatSelectModule,
-               MatDatepickerModule,
-               MatNativeDateModule,
-               MatSlideToggleModule,
-               MatInputModule,
-               MatSnackBarModule,
-               RecaptchaModule
-                 .forRoot( {
-                             siteKey: "6LezHN8ZAAAAAJAlbO7gddSj9oFg7Mi_wqYZocQS"
-                           } ),
-               MatCardModule,
-               MatTableModule,
-               MatPaginatorModule,
-               MatExpansionModule,
-               MatBadgeModule
+               RecaptchaModule.forRoot( { siteKey: "6LezHN8ZAAAAAJAlbO7gddSj9oFg7Mi_wqYZocQS" } ),
+               AngularMaterialModule
              ],
              providers: [ MatDatepickerModule ],
              bootstrap: [ AppComponent ],

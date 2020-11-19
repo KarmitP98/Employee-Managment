@@ -18,12 +18,11 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   companyName = COMPANY_NAME;
   user: UserModel;
   userSub: Subscription;
-  selected: string = "home";
+  selected: string;
 
   constructor( private userService: UserService,
                private route: ActivatedRoute,
                private dialog: MatDialog ) {
-
   }
 
   ngOnInit() {
