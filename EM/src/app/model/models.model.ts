@@ -69,3 +69,9 @@ export class RequestModel {
   rType: string;
   rStatus: string;
 }
+
+export class ActionModel {
+  from: string;
+  to: string;
+  date: Timestamp;
+}

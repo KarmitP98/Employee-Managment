@@ -40,7 +40,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+      this.userService.pageLoaded();
   }
 
   ngOnDestroy(): void {

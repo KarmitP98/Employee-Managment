@@ -1,7 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AuthGuard } from "../guards/auth.guard";
 import { LoginGuard } from "../guards/login.guard";
+import { LoginComponent } from "../components/login/login.component";
+import { SignUpComponent } from "../components/sign-up/sign-up.component";
 import { AdminComponent } from "../components/dashboard/admin/admin.component";
 import { LeaveReqComponent } from "../components/dashboard/admin/leave-req/leave-req.component";
 import { HomeComponent } from "../components/dashboard/home/home.component";
@@ -9,11 +10,10 @@ import { TimeReqComponent } from "../components/dashboard/admin/time-req/time-re
 import { AnnualLeaveComponent } from "../components/dashboard/annual-leave/annual-leave.component";
 import { TimeSheetComponent } from "../components/dashboard/time-sheet/time-sheet.component";
 import { UsersComponent } from "../components/dashboard/admin/users/users.component";
-import { LoginComponent } from "../components/login/login.component";
-import { SignUpComponent } from "../components/sign-up/sign-up.component";
+import { AuthGuard } from "../guards/auth.guard";
 import { DashboardComponent } from "../components/dashboard/dashboard.component";
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "login", component: LoginComponent, canActivate: [ LoginGuard ] },
   { path: "signUp", component: SignUpComponent, canActivate: [ LoginGuard ] },

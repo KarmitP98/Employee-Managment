@@ -5,6 +5,9 @@ import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { LogoService } from "../../services/logo.service";
+import { LoggerService } from "../../services/logger.service";
+import firebase from "firebase";
+import Timestamp = firebase.firestore.Timestamp;
 
 @Component( {
               selector: "app-login",
@@ -23,7 +26,8 @@ export class LoginComponent implements OnInit {
   constructor( private userService: UserService,
                private router: Router,
                private snackBar: MatSnackBar,
-               public logoService: LogoService ) {}
+               public logoService: LogoService,
+               private loggerService: LoggerService ) {}
 
   ngOnInit() {
   }
@@ -49,4 +53,11 @@ export class LoginComponent implements OnInit {
     } );
   }
 
+  test( b: boolean ): void {
+    if ( b ) {
+      this.loggerService.actionStarted( { date: Timestamp.now(), from: "Login", to: "Login" } );
+    } else {
+      this.loggerService.actionCompleted();
+    }
+  }
 }

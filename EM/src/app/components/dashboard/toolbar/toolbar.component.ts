@@ -6,6 +6,8 @@ import { Subscription } from "rxjs";
 import { COMPANY_NAME } from "../../../shared/constants";
 import { UserModel } from "../../../model/models.model";
 import { ProfileComponent } from "../profile/profile.component";
+import firebase from "firebase";
+import Timestamp = firebase.firestore.Timestamp;
 
 @Component( {
               selector: "app-toolbar",
@@ -53,6 +55,10 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         this.userService.updateUser( result );
       }
     } );
+  }
+
+  pageClicked( to: string ) {
+    this.userService.pageLoadingStarted( { date: Timestamp.now(), from: "Somewhere", to } );
   }
 
   logOut(): void {

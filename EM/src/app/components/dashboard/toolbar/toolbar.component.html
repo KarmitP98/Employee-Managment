@@ -3,21 +3,21 @@
     {{companyName}}
   </mat-card-title>
 
-  <button (click) = 'selected = "home"'
+  <button (click) = 'selected = "home"; pageClicked("home")'
           [color] = 'selected === "home"?"accent":"primary"'
           mat-flat-button
           routerLink = 'home'>
     Home
   </button>
   &nbsp;
-  <button (click) = 'selected = "leave"'
+  <button (click) = 'selected = "leave"; pageClicked("leave")'
           [color] = 'selected === "leave"?"accent":"primary"'
           mat-flat-button
           routerLink = 'leave'>
     Leaves
   </button>
   &nbsp;
-  <button (click) = 'selected = "admin"'
+  <button (click) = 'selected = "admin"; pageClicked("admin")'
           *ngIf = 'user.uLevel !== 1'
           [color] = 'selected === "admin"?"accent":"primary"'
           mat-flat-button

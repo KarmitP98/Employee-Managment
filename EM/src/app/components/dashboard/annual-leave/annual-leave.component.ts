@@ -51,6 +51,9 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit() {
+
+    this.userService.pageLoaded();
+
     const uId = this.route.snapshot.parent.params["uId"];
 
     this.uSub = this.userService.fetchUser( "uId", "==", uId )

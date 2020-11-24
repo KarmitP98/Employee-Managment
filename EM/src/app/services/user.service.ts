@@ -5,7 +5,8 @@ import { BehaviorSubject } from "rxjs";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import firebase from "firebase";
-import { UserModel } from "../model/models.model";
+import { ActionModel, UserModel } from "../model/models.model";
+import { LoggerService } from "./logger.service";
 import Timestamp = firebase.firestore.Timestamp;
 
 @Injectable( {
@@ -18,23 +19,27 @@ export class UserService {
   constructor( private afa: AngularFireAuth,
                private afs: AngularFirestore,
                private router: Router,
-               private snackBar: MatSnackBar ) {}
+               private snackBar: MatSnackBar,
+               private loggerService: LoggerService ) {}
 
   public loginWithEmailandPassword( email, password ) {
 
     this.loadingSubject.next( true );
-
     this.afa.signInWithEmailAndPassword( email, password )
         .then( ( value ) => {
-          var d = Timestamp.now();
-          sessionStorage.setItem( "Login", JSON.stringify( d ) );
+
+          // Start Error checking
+          this.loggerService.actionStarted( { date: Timestamp.now(), from: "Login", to: "Home" } );
+
+          // Check if the routes has the route we need
+          // if ( routes.some( route => route.component === DashboardComponent ) ) {
           this.router.navigate( [ "/" + value.user.uid ] );
+          // }
           this.loadingSubject.next( false );
         } )
         .catch( ( err ) => {
           this.showToast( err.message, 3000 );
         } );
-
   }
 
   public loginWithProvider( provider: string ) {
@@ -154,4 +159,14 @@ export class UserService {
         .doc( user.uId )
         .delete();
   }
+
+  public pageLoadingStarted( action: ActionModel ) {
+    this.loggerService.actionStarted( action );
+  }
+
+  public pageLoaded() {
+    // Clear Error
+    this.loggerService.actionCompleted();
+  }
+
 }

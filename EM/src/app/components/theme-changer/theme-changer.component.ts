@@ -18,7 +18,7 @@ export class ThemeChangerComponent implements OnInit {
   value = 100;
 
   @Input( "xPos" ) xPos?;
-  @Input( "yPos" ) yPos?;
+  @Input( "yPos" ) yPos? = "below";
 
   constructor( public themeService: ThemeService ) { }
 

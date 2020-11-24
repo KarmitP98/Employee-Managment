@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                private dialog: MatDialog ) { }
 
   ngOnInit() {
+    this.userService.pageLoaded();
   }
 
   ngOnDestroy(): void {

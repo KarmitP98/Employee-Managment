@@ -1,8 +1,9 @@
 <mat-toolbar>
   <span class = 'example-spacer'></span>
-  <app-theme-changer class = 'text-right' xPos = 'before'></app-theme-changer>
+  <app-theme-changer [xPos] = '"before"' class = 'text-right'></app-theme-changer>
 </mat-toolbar>
-
+<button (click) = 'test(true)' color = 'primary' mat-raised-button>Open</button><br>
+<button (click) = 'test(false)' color = 'warn' mat-raised-button>Close</button>
 <div class = 'text-center'>
   <img alt = 'Company Image'
        class = 'company_logo'
