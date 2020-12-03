@@ -12,6 +12,9 @@ import { TimeSheetComponent } from "../components/dashboard/time-sheet/time-shee
 import { UsersComponent } from "../components/dashboard/admin/users/users.component";
 import { AuthGuard } from "../guards/auth.guard";
 import { DashboardComponent } from "../components/dashboard/dashboard.component";
+import { LogsComponent } from "../components/logs/logs.component";
+import firebase from "firebase";
+import Auth = firebase.auth.Auth;
 
 export const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
@@ -32,7 +35,8 @@ export const routes: Routes = [
           { path: "leave-req", component: LeaveReqComponent },
           { path: "users", component: UsersComponent }
         ]
-      } ]
+      },
+      { path: "logs", component: LogsComponent, canActivate: [ AuthGuard ] } ]
   }
   ,
   { path: "**", redirectTo: "" }

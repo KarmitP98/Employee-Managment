@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { AngularFirestore } from "@angular/fire/firestore";
-import { ActionModel } from "../model/models.model";
+import { ActionModel, LogModel } from "../model/models.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable( {
@@ -15,10 +15,14 @@ export class LoggerService {
   constructor( private afs: AngularFirestore,
                private snackBar: MatSnackBar ) { }
 
-  public log( log ) {
-    this.afs.collection( "logs" )
-        .doc( "1" )
-        .set( log );
+  public log( log: LogModel ) {
+    this.afs.collection<LogModel>( "logs" )
+        .add( log );
+  }
+
+  public fetchLogs() {
+    return this.afs.collection<LogModel>( "logs" )
+               .valueChanges();
   }
 
   public actionStarted( action?: ActionModel ) {

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "../../../services/user.service";
 import { Subscription } from "rxjs";
 import { COMPANY_NAME } from "../../../shared/constants";
@@ -8,6 +8,7 @@ import { UserModel } from "../../../model/models.model";
 import { ProfileComponent } from "../profile/profile.component";
 import firebase from "firebase";
 import Timestamp = firebase.firestore.Timestamp;
+import { LoggerService } from "../../../services/logger.service";
 
 @Component( {
               selector: "app-toolbar",
@@ -23,8 +24,10 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   selected: string;
 
   constructor( private userService: UserService,
+               public loggerService: LoggerService,
                private route: ActivatedRoute,
-               private dialog: MatDialog ) {
+               private dialog: MatDialog,
+               public router: Router ) {
   }
 
   ngOnInit() {
@@ -58,7 +61,15 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   }
 
   pageClicked( to: string ) {
-    this.userService.pageLoadingStarted( { date: Timestamp.now(), from: "Somewhere", to } );
+
+    this.router.navigate( [ to ], { relativeTo: this.route } )
+        .then( () => {this.loggerService.log( { time: Timestamp.now(), data: to.toUpperCase() + " page loaded!" } );} )
+        .catch( ( err ) => {
+          console.log(err);
+          this.loggerService.log( { time: Timestamp.now(), data: to.toUpperCase() + " page does not exist!", error: "Error404" } );
+        } );
+
+    // this.userService.pageLoadingStarted( { date: Timestamp.now(), from: "Somewhere", to } );
   }
 
   logOut(): void {

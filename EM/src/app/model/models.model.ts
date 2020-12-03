@@ -75,3 +75,9 @@ export class ActionModel {
   to: string;
   date: Timestamp;
 }
+
+export class LogModel {
+  time: Timestamp;
+  data: string;
+  error?:string;
+}

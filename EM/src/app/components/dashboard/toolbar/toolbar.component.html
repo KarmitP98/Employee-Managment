@@ -5,15 +5,13 @@
 
   <button (click) = 'selected = "home"; pageClicked("home")'
           [color] = 'selected === "home"?"accent":"primary"'
-          mat-flat-button
-          routerLink = 'home'>
+          mat-flat-button>
     Home
   </button>
   &nbsp;
   <button (click) = 'selected = "leave"; pageClicked("leave")'
           [color] = 'selected === "leave"?"accent":"primary"'
-          mat-flat-button
-          routerLink = 'leave'>
+          mat-flat-button>
     Leaves
   </button>
   &nbsp;
@@ -23,6 +21,18 @@
           mat-flat-button
           routerLink = 'admin'>
     Admin
+  </button>
+  &nbsp;
+  <button (click) = 'selected = "error"; pageClicked("error")'
+          [color] = 'selected === "leave"?"accent":"primary"'
+          mat-flat-button>
+    Error
+  </button>
+  &nbsp;
+  <button (click) = 'selected = "logs"; pageClicked("logs")'
+          [color] = 'selected === "leave"?"accent":"primary"'
+          mat-flat-button>
+    Logs
   </button>
   <span class = 'example-spacer'></span>
 

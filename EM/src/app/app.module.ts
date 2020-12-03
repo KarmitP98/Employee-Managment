@@ -25,6 +25,8 @@ import { RecaptchaModule } from "angular-google-recaptcha";
 import { HttpClientModule } from "@angular/common/http";
 import { LeaveTableComponent } from "./components/dashboard/admin/leave-req/leave-table/leave-table.component";
 import { AngularMaterialModule } from "./modules/angular-material/angular-material.module";
+import { LogsComponent } from './components/logs/logs.component';
+import { MatListModule } from "@angular/material/list";
 
 @NgModule( {
              declarations: [
@@ -43,17 +45,19 @@ import { AngularMaterialModule } from "./modules/angular-material/angular-materi
                UsersComponent,
                AdminComponent,
                AnnualLeaveComponent,
-               LeaveTableComponent
+               LeaveTableComponent,
+               LogsComponent
              ],
-             imports: [
-               BrowserModule,
-               AppRoutingModule,
-               BrowserAnimationsModule,
-               HttpClientModule,
-               AngularFireModule.initializeApp( environment.firebase ),
-               RecaptchaModule.forRoot( { siteKey: "6LezHN8ZAAAAAJAlbO7gddSj9oFg7Mi_wqYZocQS" } ),
-               AngularMaterialModule
-             ],
+               imports: [
+                   BrowserModule,
+                   AppRoutingModule,
+                   BrowserAnimationsModule,
+                   HttpClientModule,
+                   AngularFireModule.initializeApp( environment.firebase ),
+                   RecaptchaModule.forRoot( { siteKey: "6LezHN8ZAAAAAJAlbO7gddSj9oFg7Mi_wqYZocQS" } ),
+                   AngularMaterialModule,
+                   MatListModule
+               ],
              providers: [ MatDatepickerModule ],
              bootstrap: [ AppComponent ],
              exports: []
