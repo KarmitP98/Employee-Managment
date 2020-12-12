@@ -44,7 +44,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       position: null,
       hasBackdrop: true,
       role: "dialog",
-      width: "20%",
       data: user.uId
     } );
 

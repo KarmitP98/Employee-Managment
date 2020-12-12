@@ -4,6 +4,9 @@ import { UserService } from "../../../services/user.service";
 import { WorklogService } from "../../../services/worklog.service";
 import { LeaveService } from "../../../services/leave.service";
 import { MatDialog } from "@angular/material/dialog";
+import { LoggerService } from "../../../services/logger.service";
+import firebase from "firebase";
+import Timestamp = firebase.firestore.Timestamp;
 
 @Component( {
               selector: "app-home",
@@ -47,10 +50,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor( private userService: UserService,
                private timeSheetService: WorklogService,
                private leaveService: LeaveService,
-               private dialog: MatDialog ) { }
+               private dialog: MatDialog,
+               private loggerService: LoggerService ) { }
 
   ngOnInit() {
-    this.userService.pageLoaded();
+    this.loggerService.log( { data: "Home Page loaded!", time: Timestamp.now() } );
+    // this.userService.pageLoaded();
   }
 
   ngOnDestroy(): void {

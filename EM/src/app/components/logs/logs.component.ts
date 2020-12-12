@@ -18,7 +18,7 @@ export class LogsComponent implements OnInit, OnDestroy {
     this.logSub = this.loggerService.fetchLogs()
                       .subscribe( value => {
                         if ( value?.length > 0 ) {
-                          this.logs = value;
+                          this.logs = value.sort( ( a, b ) => a.time > b.time ? -1 : 1 );
                         }
                       } );
   }

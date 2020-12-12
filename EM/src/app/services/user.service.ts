@@ -121,6 +121,7 @@ export class UserService {
         .catch( err => {
           console.log( err.message );
           console.log( err.errorCode );
+          this.loggerService.log( { data: "User cannot sign out!", time: Timestamp.now(), error: "Auth Service Un-responsive" } );
         } );
   }
 

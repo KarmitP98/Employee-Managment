@@ -30,16 +30,19 @@ export class LoginComponent implements OnInit {
                private loggerService: LoggerService ) {}
 
   ngOnInit() {
+    this.loggerService.log( { data: "Login Page Loaded!", time: Timestamp.now() } );
   }
 
   ngOnDestroy(): void {
   }
 
   onSubmit(): void {
+    this.loggerService.log( { data: "User Requested Login with Email & Password", time: Timestamp.now() } );
     this.userService.loginWithEmailandPassword( this.email, this.password );
   }
 
   loginWith( provider: string ): void {
+    this.loggerService.log( { data: "User Requested Login with provider", time: Timestamp.now() } );
     this.userService.loginWithProvider( provider );
   }
 
@@ -47,17 +50,4 @@ export class LoginComponent implements OnInit {
     console.log( $event );
   }
 
-  private showError( error: string ): void {
-    this.snackBar.open( error, "Close", {
-      duration: 2000
-    } );
-  }
-
-  test( b: boolean ): void {
-    if ( b ) {
-      this.loggerService.actionStarted( { date: Timestamp.now(), from: "Login", to: "Login" } );
-    } else {
-      this.loggerService.actionCompleted();
-    }
-  }
 }

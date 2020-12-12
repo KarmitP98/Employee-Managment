@@ -9,6 +9,7 @@ import { UserService } from "../../../services/user.service";
 import { ActivatedRoute } from "@angular/router";
 import { LeaveService } from "../../../services/leave.service";
 import { Subscription } from "rxjs";
+import { LoggerService } from "../../../services/logger.service";
 import Timestamp = firebase.firestore.Timestamp;
 
 @Component( {
@@ -42,7 +43,8 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
 
   constructor( public userService: UserService,
                private route: ActivatedRoute,
-               private leaveService: LeaveService ) { }
+               private leaveService: LeaveService,
+               private loggerService: LoggerService ) { }
 
   myFilter = ( d: Date | null ): boolean => {
     const day = (d || new Date()).getDay();
@@ -56,13 +58,25 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
 
     const uId = this.route.snapshot.parent.params["uId"];
 
+    this.loggerService.log( {
+                              data: "User data request. ID: " + uId,
+                              time: Timestamp.now()
+                            } );
+
     this.uSub = this.userService.fetchUser( "uId", "==", uId )
                     .valueChanges()
                     .subscribe( ( value ) => {
                       if ( value?.length > 0 ) {
                         this.user = value[0];
+                      } else {
+                        this.loggerService.log( {
+                                                  data: "No data returned!",
+                                                  time: Timestamp.now(),
+                                                  error: "Database Timeout!"
+                                                } );
                       }
                     } );
+
 
     this.lSub = this.leaveService.fetchLeave( "uId", "==", uId )
                     .valueChanges()
@@ -96,6 +110,7 @@ export class AnnualLeaveComponent implements OnInit, OnDestroy {
     };
 
     this.leaveService.addLeave( leave );
+
 
     this.resetForm();
 

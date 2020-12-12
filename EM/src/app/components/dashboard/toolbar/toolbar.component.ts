@@ -7,8 +7,8 @@ import { COMPANY_NAME } from "../../../shared/constants";
 import { UserModel } from "../../../model/models.model";
 import { ProfileComponent } from "../profile/profile.component";
 import firebase from "firebase";
-import Timestamp = firebase.firestore.Timestamp;
 import { LoggerService } from "../../../services/logger.service";
+import Timestamp = firebase.firestore.Timestamp;
 
 @Component( {
               selector: "app-toolbar",
@@ -32,13 +32,27 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const uId = this.route.snapshot.params["uId"];
+    this.loggerService.log( {
+                              data: "User data request. ID: " + uId,
+                              time: Timestamp.now()
+                            } );
+
     this.userSub = this.userService.fetchUser( "uId", "==", uId )
                        .valueChanges()
                        .subscribe( value => {
                          if ( value?.length > 0 ) {
                            this.user = value[0];
+                         } else {
+                           this.loggerService.log( {
+                                                     data: "No data returned!",
+                                                     time: Timestamp.now(),
+                                                     error: "Database Timeout!"
+                                                   } );
                          }
                        } );
+
+
+    this.loggerService.log( { data: "Toolbar Loaded!", time: Timestamp.now() } );
   }
 
   ngOnDestroy(): void {
@@ -63,9 +77,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   pageClicked( to: string ) {
 
     this.router.navigate( [ to ], { relativeTo: this.route } )
-        .then( () => {this.loggerService.log( { time: Timestamp.now(), data: to.toUpperCase() + " page loaded!" } );} )
+      // .then( () => {this.loggerService.log( { time: Timestamp.now(), data: to.toUpperCase() + " page loaded!" } );} )
         .catch( ( err ) => {
-          console.log(err);
+          console.log( err );
           this.loggerService.log( { time: Timestamp.now(), data: to.toUpperCase() + " page does not exist!", error: "Error404" } );
         } );
 

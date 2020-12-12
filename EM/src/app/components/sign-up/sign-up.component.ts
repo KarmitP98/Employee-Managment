@@ -5,6 +5,7 @@ import { NgForm } from "@angular/forms";
 import firebase from "firebase";
 import { COMPANY_NAME } from "../../shared/constants";
 import { loadTrigger } from "../../shared/animations";
+import { LoggerService } from "../../services/logger.service";
 import Timestamp = firebase.firestore.Timestamp;
 
 @Component( {
@@ -33,12 +34,15 @@ export class SignUpComponent implements OnInit {
   public selectedFile: File;
 
   constructor( private userService: UserService,
-               private afst: AngularFireStorage ) { }
+               private afst: AngularFireStorage,
+               private ls: LoggerService ) { }
 
   ngOnInit() {
+    this.ls.log( { data: "Sign up page loaded!", time: Timestamp.now() } );
   }
 
   onSignUp(): void {
+    this.ls.log( { data: "User requested Sign Up!", time: Timestamp.now() } );
     this.userService.signUpWithEmail( {
                                         uId: "temp",
                                         uDOB: this.DOB,

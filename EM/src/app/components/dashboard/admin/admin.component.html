@@ -1,18 +1,16 @@
 <div [@load] class = 'text-center'>
 
   <hr>
-  <button (click) = 'selected = "time"'
-          [color] = 'selected === "time" ? "primary" : "accent"'
-          class = 'w-25'
-          disabled
-          mat-raised-button
-          routerLink = 'time-req'
-          routerLinkActive = 'selected'>
-    Work Logs
-  </button>
-  &nbsp;&nbsp;
-  <button (click) = 'selected = "leave"'
-          [color] = 'selected === "leave" ? "primary" : "accent"'
+  <!--  <button color='accent'-->
+  <!--          class = 'w-25'-->
+  <!--          disabled-->
+  <!--          mat-raised-button-->
+  <!--          routerLink = 'time-req'-->
+  <!--          routerLinkActive = 'selected'>-->
+  <!--    Work Logs-->
+  <!--  </button>-->
+  <!--  &nbsp;&nbsp;-->
+  <button color = 'accent'
           class = 'w-25'
           mat-raised-button
           routerLink = 'leave-req'
@@ -20,8 +18,7 @@
     Leave Requests
   </button>
   &nbsp;&nbsp;
-  <button (click) = 'selected = "users"'
-          [color] = 'selected === "users" ? "primary" : "accent"'
+  <button color = 'accent'
           class = 'w-25'
           mat-raised-button
           routerLink = 'users'

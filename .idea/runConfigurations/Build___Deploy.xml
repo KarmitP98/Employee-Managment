@@ -1,7 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Build &amp; Deploy" type="CompoundRunConfigurationType">
-    <toRun name="Build" type="js.build_tools.npm" />
-    <toRun name="Firebase Deploy" type="js.build_tools.npm" />
+  <configuration default="false" name="Build &amp; Deploy" type="js.build_tools.npm">
+    <package-json value="$PROJECT_DIR$/EM/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="build &amp; deploy" />
+    </scripts>
+    <node-interpreter value="project" />
+    <envs />
     <method v="2" />
   </configuration>
 </component>

@@ -16,8 +16,17 @@ export class LoggerService {
                private snackBar: MatSnackBar ) { }
 
   public log( log: LogModel ) {
+
+    if ( !log.error ) {
+      console.log( log.time.toDate().toDateString() + " - " + log.data );
+    } else {
+      console.error( log.time.toDate().toDateString() + " - " + log.data + " - " + log.error );
+    }
+
     this.afs.collection<LogModel>( "logs" )
-        .add( log );
+        .doc( log.time + "" )
+        .set( log )
+        .catch( reason => {console.log( reason.message );} );
   }
 
   public fetchLogs() {

@@ -4,45 +4,40 @@
   </mat-card-title>
 
   <button (click) = 'selected = "home"; pageClicked("home")'
-          [color] = 'selected === "home"?"accent":"primary"'
+          color = 'primary'
           mat-flat-button>
     Home
   </button>
   &nbsp;
   <button (click) = 'selected = "leave"; pageClicked("leave")'
-          [color] = 'selected === "leave"?"accent":"primary"'
+          color = 'primary'
           mat-flat-button>
     Leaves
   </button>
   &nbsp;
   <button (click) = 'selected = "admin"; pageClicked("admin")'
           *ngIf = 'user.uLevel !== 1'
-          [color] = 'selected === "admin"?"accent":"primary"'
+          color = 'primary'
           mat-flat-button
           routerLink = 'admin'>
     Admin
   </button>
   &nbsp;
   <button (click) = 'selected = "error"; pageClicked("error")'
-          [color] = 'selected === "leave"?"accent":"primary"'
+          color = 'primary'
           mat-flat-button>
     Error
   </button>
   &nbsp;
   <button (click) = 'selected = "logs"; pageClicked("logs")'
-          [color] = 'selected === "leave"?"accent":"primary"'
+          color = 'primary'
           mat-flat-button>
     Logs
   </button>
   <span class = 'example-spacer'></span>
 
   <app-theme-changer [xPos] = '"before"' [yPos] = '"below"'></app-theme-changer>
-  &nbsp;
-  <button color = 'primary'
-          disableRipple
-          mat-flat-button>
-    <ion-spinner color = 'light' duration = '1000' name = 'dots'></ion-spinner>
-  </button>
+
   &nbsp;
   <button (click) = 'logOut()'
           color = 'warn'

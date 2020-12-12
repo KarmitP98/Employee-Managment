@@ -25,8 +25,11 @@ import { RecaptchaModule } from "angular-google-recaptcha";
 import { HttpClientModule } from "@angular/common/http";
 import { LeaveTableComponent } from "./components/dashboard/admin/leave-req/leave-table/leave-table.component";
 import { AngularMaterialModule } from "./modules/angular-material/angular-material.module";
-import { LogsComponent } from './components/logs/logs.component';
+import { LogsComponent } from "./components/logs/logs.component";
 import { MatListModule } from "@angular/material/list";
+import { VisionComponent } from "./components/dashboard/home/vision/vision.component";
+import { NewsComponent } from "./components/dashboard/home/news/news.component";
+import { ErrorComponent } from "./components/dashboard/error/error.component";
 
 @NgModule( {
              declarations: [
@@ -46,7 +49,10 @@ import { MatListModule } from "@angular/material/list";
                AdminComponent,
                AnnualLeaveComponent,
                LeaveTableComponent,
-               LogsComponent
+               LogsComponent,
+               VisionComponent,
+               NewsComponent,
+               ErrorComponent
              ],
                imports: [
                    BrowserModule,

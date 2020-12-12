@@ -1,6 +1,14 @@
-<mat-list>
-  <mat-list-item *ngFor='let log of logs'>
-    {{log.time.toDate() | date}} :: {{log.data | titlecase}}
-  </mat-list-item>
-</mat-list>
-Logs
+<div class = 'text-center'>
+  <br><br>
+  <h1>Log View Component</h1>
+  <hr>
+  <mat-list *ngIf = 'logs'>
+    <mat-list-item *ngFor = 'let log of logs;let i = index'>
+      <p [style] = 'log.error?.length > 0 ? "color: red; font-weight: bold":""'>{{(i + 1)}}
+        . {{log.time.toDate() | date: 'dd MMM, yyyy HH:MM:SS.ss'}} :: {{log.data | titlecase}}
+        <span *ngIf = 'log.error?.length'>-- Error Type: {{log.error}}</span>
+      </p>
+    </mat-list-item>
+  </mat-list>
+
+</div>

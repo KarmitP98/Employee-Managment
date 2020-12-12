@@ -13,8 +13,7 @@ import { UsersComponent } from "../components/dashboard/admin/users/users.compon
 import { AuthGuard } from "../guards/auth.guard";
 import { DashboardComponent } from "../components/dashboard/dashboard.component";
 import { LogsComponent } from "../components/logs/logs.component";
-import firebase from "firebase";
-import Auth = firebase.auth.Auth;
+import { ErrorComponent } from "../components/dashboard/error/error.component";
 
 export const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
@@ -36,7 +35,8 @@ export const routes: Routes = [
           { path: "users", component: UsersComponent }
         ]
       },
-      { path: "logs", component: LogsComponent, canActivate: [ AuthGuard ] } ]
+      { path: "logs", component: LogsComponent, canActivate: [ AuthGuard ] },
+      { path: "**", component: ErrorComponent, canActivate: [ AuthGuard ] } ]
   }
   ,
   { path: "**", redirectTo: "" }
